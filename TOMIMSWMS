@@ -835,29 +835,26 @@ CONSTRAINT [PK_Impresion_productos_barras] PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER VIEW [dbo].[VW_Recepcion]
+alter table impresion_productos_barras add IdImpresora integer
+
+'CM: agregué Cantidad_Presentacion en VW_MOVIMIENTOS.
+ALTER VIEW [dbo].[VW_Movimientos]
 AS
-SELECT        dbo.trans_re_enc.IdRecepcionEnc AS Código, dbo.propietarios.nombre_comercial AS Propietario, dbo.proveedor.nombre AS Proveedor, 
-                         dbo.bodega.nombre AS Bodega, dbo.trans_re_oc.IdOrdenCompraEnc AS NoOrdenCompra, 
-                         dbo.trans_oc_enc.No_Documento + ' ' + dbo.trans_oc_enc.Referencia AS No_DocumentoOC, dbo.trans_re_enc.fecha_recepcion AS Fecha, dbo.trans_re_enc.estado as Estado, 
-                         dbo.trans_re_tr.TipoTrans, dbo.trans_re_tr.Descripcion, dbo.bodega_muelles.nombre AS Muelle, dbo.trans_re_enc.activo as Activo, dbo.usuario.nombres AS Usuario_Agrego, 
-                         dbo.trans_re_enc.fec_agr AS Fecha_Agrego, dbo.trans_re_tr.IdTipoTransaccion, dbo.bodega.IdBodega
-FROM            dbo.usuario INNER JOIN
-                         dbo.propietarios INNER JOIN
-                         dbo.propietario_bodega ON dbo.propietarios.IdPropietario = dbo.propietario_bodega.IdPropietario INNER JOIN
-                         dbo.trans_re_tr INNER JOIN
-                         dbo.trans_re_enc ON dbo.trans_re_tr.IdTipoTransaccion = dbo.trans_re_enc.IdTipoTransaccion ON 
-                         dbo.propietario_bodega.IdPropietarioBodega = dbo.trans_re_enc.IdPropietarioBodega ON dbo.usuario.IdUsuario = dbo.trans_re_enc.user_agr INNER JOIN
-                         dbo.bodega ON dbo.propietario_bodega.IdBodega = dbo.bodega.IdBodega LEFT OUTER JOIN
-                         dbo.bodega_muelles INNER JOIN
-                         dbo.bodega AS bodega_1 ON dbo.bodega_muelles.IdBodega = bodega_1.IdBodega INNER JOIN
-                         dbo.proveedor_bodega ON bodega_1.IdBodega = dbo.proveedor_bodega.IdBodega INNER JOIN
-                         dbo.trans_re_oc INNER JOIN
-                         dbo.trans_oc_enc ON dbo.trans_re_oc.IdOrdenCompraEnc = dbo.trans_oc_enc.IdOrdenCompraEnc ON 
-                         dbo.proveedor_bodega.IdAsignacion = dbo.trans_oc_enc.IdProveedorBodega INNER JOIN
-                         dbo.proveedor ON dbo.proveedor_bodega.IdProveedor = dbo.proveedor.IdProveedor ON dbo.propietarios.IdPropietario = dbo.proveedor.IdPropietario AND 
-                         dbo.trans_re_enc.IdMuelle = dbo.bodega_muelles.IdMuelle AND dbo.trans_re_enc.IdRecepcionEnc = dbo.trans_re_oc.IdRecepcionEnc
+SELECT        pr.nombre_comercial AS Propietario, p.nombre AS Producto, pp.nombre AS Presentación, pe1.nombre AS [Estado Origen], pe2.nombre AS [Estado Destino], 
+                         u.Nombre AS [Unidad de Medida], m.cantidad, m.peso, m.lote, u1.descripcion AS Origen, u2.descripcion AS Destino, stt.Nombre AS [Tipo Tarea], m.IdBodegaOrigen, 
+                         m.fecha, p.IdProducto, p.codigo, p.codigo_barra, m.barra_pallet, m.fecha_vence, m.cantidad / pp.factor AS Cantidad_Presentacion
+FROM            dbo.trans_movimientos AS m LEFT OUTER JOIN
+                         dbo.propietario_bodega AS prb ON m.IdPropietarioBodega = prb.IdPropietarioBodega INNER JOIN
+                         dbo.propietarios AS pr ON prb.IdPropietario = pr.IdPropietario LEFT OUTER JOIN
+                         dbo.producto_bodega AS pb ON m.IdProductoBodega = pb.IdProductoBodega INNER JOIN
+                         dbo.producto AS p ON pb.IdProducto = p.IdProducto LEFT OUTER JOIN
+                         dbo.bodega_ubicacion AS u1 ON m.IdUbicacionOrigen = u1.IdUbicacion LEFT OUTER JOIN
+                         dbo.bodega_ubicacion AS u2 ON m.IdUbicacionDestino = u2.IdUbicacion LEFT OUTER JOIN
+                         dbo.producto_presentacion AS pp ON m.IdPresentacion = pp.IdPresentacion AND p.IdProducto = pp.IdProducto LEFT OUTER JOIN
+                         dbo.producto_estado AS pe1 ON m.IdEstadoOrigen = pe1.IdEstado AND pe1.IdPropietario = pr.IdPropietario LEFT OUTER JOIN
+                         dbo.producto_estado AS pe2 ON m.IdEstadoDestino = pe2.IdEstado AND pe2.IdPropietario = pr.IdPropietario LEFT OUTER JOIN
+                         dbo.unidad_medida AS u ON m.IdUnidadMedida = u.IdUnidadMedida AND u.IdPropietario = pr.IdPropietario LEFT OUTER JOIN
+                         dbo.sis_tipo_tarea AS stt ON m.IdTipoTarea = stt.IdTipoTarea
+GROUP BY pr.nombre_comercial, p.nombre, pp.nombre, pe1.nombre, pe2.nombre, u.Nombre, m.cantidad, m.peso, m.lote, u1.descripcion, u2.descripcion, stt.Nombre, 
+                         m.IdBodegaOrigen, m.fecha, p.IdProducto, p.codigo, p.codigo_barra, m.barra_pallet, m.fecha_vence, pp.IdPresentacion, pp.factor, m.cantidad / pp.factor
 GO
-
-
-
