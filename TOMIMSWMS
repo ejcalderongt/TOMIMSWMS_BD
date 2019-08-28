@@ -1626,3 +1626,90 @@ CONSTRAINT [PK_producto_kit_composicion] PRIMARY KEY CLUSTERED
 GO
 
 alter table producto_kit_composicion add IdBodega integer null
+
+
+ALTER TABLE BODEGA_SECTOR DROP CONSTRAINT FK_bodega_sector_bodega_area
+   ALTER TABLE BODEGA_AREA DROP CONSTRAINT PK_bodega_area_1
+   ALTER TABLE BODEGA_TRAMO DROP CONSTRAINT FK_bodega_tramo_bodega_sector
+   ALTER TABLE BODEGA_SECTOR DROP CONSTRAINT PK_bodega_sector_1
+   ALTER TABLE BODEGA_UBICACION DROP CONSTRAINT FK_bodega_ubicacion_bodega_tramo
+   ALTER TABLE BODEGA_TRAMO DROP CONSTRAINT PK_bodega_tramo_1
+     
+
+	 ALTER TABLE stock DROP CONSTRAINT FK_stock_bodega_ubicacion_rec
+	ALTER TABLE stock DROP CONSTRAINT FK_stock_bodega_ubicacion1
+	ALTER TABLE stock DROP CONSTRAINT FK_stock_bodega_ubicacion
+	ALTER TABLE producto_estado_ubic DROP CONSTRAINT FK_producto_estado_ubic_bodega_ubicacion
+	ALTER TABLE producto_rellenado DROP CONSTRAINT FK_producto_rellenado_bodega_ubicacion
+	ALTER TABLE regla_ubicacion DROP CONSTRAINT FK_regla_ubicacion_bodega_ubicacion
+	ALTER TABLE stock DROP CONSTRAINT FK_stock_bodega_ubicacion
+	ALTER TABLE stock DROP CONSTRAINT FK_stock_bodega_ubicacion1_rec
+	ALTER TABLE stock_hist DROP CONSTRAINT FK_stock_hist_bodega_ubicacion
+	ALTER TABLE stock_hist DROP CONSTRAINT FK_stock_hist_bodega_ubicacion_rec
+	ALTER TABLE stock_hist DROP CONSTRAINT FK_stock_hist_bodega_ubicacion1
+	ALTER TABLE stock_hist DROP CONSTRAINT FK_stock_hist_bodega_ubicacion1_rec
+	ALTER TABLE stock_rec DROP CONSTRAINT FK_stock_rec_bodega_ubicacion
+	ALTER TABLE stock_rec DROP CONSTRAINT FK_stock_rec_bodega_ubicacion1
+	ALTER TABLE trans_inv_reconteo DROP CONSTRAINT FK_trans_inv_reconteo_bodega_ubicacion
+	ALTER TABLE trans_inv_reconteo DROP CONSTRAINT FK_trans_inv_reconteo_bodega_ubicacion1
+	ALTER TABLE trans_movimientos DROP CONSTRAINT FK_trans_movimientos_bodega_ubicacion1
+	ALTER TABLE trans_movimientos DROP CONSTRAINT FK_trans_movimientos_bodega_ubicacion
+	ALTER TABLE trans_picking_enc DROP CONSTRAINT FK_trans_picking_enc_bodega_ubicacion
+	ALTER TABLE trans_picking_ubic DROP CONSTRAINT FK_trans_picking_ubic_bodega_ubicacion
+	ALTER TABLE trans_re_enc DROP CONSTRAINT FK_trans_re_enc_bodega_ubicacion
+	ALTER TABLE trans_ubic_hh_stock DROP CONSTRAINT FK_stock_ubic_hh_bodega_ubicacion
+	ALTER TABLE trans_ubic_hh_stock DROP CONSTRAINT FK_stock_ubic_hh_bodega_ubicacion_rec
+	ALTER TABLE trans_ubic_hh_stock DROP CONSTRAINT FK_stock_ubic_hh_bodega_ubicacion1
+	ALTER TABLE trans_ubic_hh_stock DROP CONSTRAINT FK_stock_ubic_hh_bodega_ubicacion1_rec
+	ALTER TABLE transacciones_log DROP CONSTRAINT FK_transacciones_log_bodega_ubicacion
+	ALTER TABLE BODEGA_UBICACION DROP CONSTRAINT PK_bodega_ubicacion_1
+
+   ALTER TABLE bodega_area
+   ADD CONSTRAINT PK_BodegaAreaId PRIMARY KEY CLUSTERED (IdArea, IdBodega);
+
+   ALTER TABLE bodega_sector ADD IdBodega int NOT NULL DEFAULT 0
+   
+   update bodega_sector set idbodega = 1 
+   where idarea in (select idarea from bodega_area where idbodega =1)
+
+   update bodega_sector set idbodega = 3
+   where idarea in (select idarea from bodega_area where idbodega =3)
+
+   update bodega_sector set idbodega = 4
+   where idarea in (select idarea from bodega_area where idbodega =4)
+   
+   update bodega_sector set idbodega = 5
+   where idarea in (select idarea from bodega_area where idbodega =5)
+
+   ALTER TABLE bodega_sector
+   ADD CONSTRAINT PK_BodegaSectorId PRIMARY KEY CLUSTERED (IdSector, IdArea, IdBodega);
+
+   ALTER TABLE bodega_tramo ADD IdArea int NOT NULL DEFAULT 0
+   ALTER TABLE bodega_tramo ADD IdBodega int NOT NULL DEFAULT 0
+
+	UPDATE bt
+	SET bt.IdBodega = bs.IdBodega,
+	bt.IdArea = bs.IdArea
+	FROM bodega_tramo bt
+	INNER JOIN bodega_sector bs	
+	ON bt.IdSector =  bs.IdSector;
+
+	ALTER TABLE bodega_tramo
+    ADD CONSTRAINT PK_BodegaTramoId PRIMARY KEY CLUSTERED (IdTramo, IdSector, IdArea, IdBodega);
+	
+    ALTER TABLE bodega_ubicacion ADD IdBodega int NOT NULL DEFAULT 0
+	ALTER TABLE bodega_ubicacion ADD IdArea int NOT NULL DEFAULT 0
+	ALTER TABLE bodega_ubicacion ADD IdSector int NOT NULL DEFAULT 0	
+	ALTER TABLE bodega_ubicacion ALTER COLUMN IdTramo int NOT NULL
+
+	UPDATE bu
+	SET bu.IdBodega = bt.IdBodega,
+	bu.IdArea = bt.IdArea,
+	bu.IdSector = bt.IdSector,
+	bu.IdTramo = bt.IdTramo
+	FROM bodega_ubicacion bu
+	INNER JOIN bodega_tramo bt
+	ON bt.IdTramo =  bt.IdTramo;
+
+	ALTER TABLE bodega_ubicacion
+    ADD CONSTRAINT PK_BodegaUbicacionId PRIMARY KEY CLUSTERED (IdUbicacion, IdTramo, IdSector, IdArea, IdBodega);
