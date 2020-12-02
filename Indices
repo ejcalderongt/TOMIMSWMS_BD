@@ -24,4 +24,6 @@ CREATE NONCLUSTERED INDEX NCLI_trans_movimientos_IdUnidadMedida_20200729
 ON [dbo].[trans_movimientos] ([IdUnidadMedida])
 INCLUDE ([IdProductoBodega])
 
-GO
+CREATE NONCLUSTERED INDEX NCLI_Stock_20200112_EJC
+ON [dbo].[stock] ([IdPropietarioBodega])
+INCLUDE ([IdBodega],[IdProductoBodega],[IdProductoEstado],[IdPresentacion],[IdUnidadMedida],[IdUbicacion],[IdUbicacion_anterior],[IdRecepcionEnc],[lote],[lic_plate],[serial],[cantidad],[fecha_ingreso],[fecha_vence],[añada],[peso],[atributo_variante_1])GO
