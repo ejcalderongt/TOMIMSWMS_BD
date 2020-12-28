@@ -1,0 +1,8 @@
+ALTER TABLE  stock_rec
+ADD pallet_no_estandar bit Default 0
+
+ALTER TABLE trans_re_det
+ADD pallet_no_estandar bit Default 0
+
+ALTER TABLE stock
+ADD pallet_no_estandar bit Default 0
