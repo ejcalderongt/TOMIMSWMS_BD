@@ -1,0 +1,7 @@
+alter table trans_oc_det
+add valor_aduana float default 0,
+valor_fob float default 0,
+valor_iva float default 0,
+valor_dai float default 0,
+valor_seguro float default 0,
+valor_flete float default 0
