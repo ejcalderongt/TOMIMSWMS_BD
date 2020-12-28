@@ -1,0 +1,7 @@
+alter table trans_oc_pol
+add codigo_poliza nvarchar(50),
+ticket nvarchar(50),
+numero_orden nvarchar(50),
+fecha_aceptacion date,
+fecha_llegada datetime,
+total_otros float
