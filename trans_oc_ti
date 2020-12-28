@@ -1,0 +1,1 @@
+alter table trans_oc_ti add control_poliza bit default 0
