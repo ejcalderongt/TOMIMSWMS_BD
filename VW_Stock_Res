@@ -10,7 +10,7 @@ SELECT        dbo.producto_bodega.IdBodega, dbo.bodega.codigo as Bodega, dbo.pro
                          dbo.producto.existencia_max AS existencia_max_umbas, dbo.producto.codigo_barra, dbo.producto.costo, dbo.producto_presentacion.MinimoExistencia AS existencia_min_pres, 
                          dbo.producto_presentacion.MaximoExistencia AS existencia_max_pres, dbo.stock.atributo_variante_1, dbo.bodega_ubicacion.IdUbicacion AS IdUbicacionActual, dbo.bodega_ubicacion.nivel AS Ubicacion_Nivel, 
                          dbo.bodega_ubicacion.indice_x AS Ubicacion_Indice_X, dbo.bodega_ubicacion.descripcion AS Ubicacion_Nombre, dbo.bodega_tramo.descripcion AS Ubicacion_Tramo, dbo.Nombre_Completo_Ubicacion(dbo.stock.IdUbicacion, 
-                         dbo.stock.idbodega) AS Nombre_Completo
+                         dbo.stock.idbodega) AS Nombre_Completo, ISNULL(dbo.stock.pallet_no_estandar, 0) AS pallet_no_estandar
 FROM            dbo.producto_estado INNER JOIN
                          dbo.unidad_medida INNER JOIN
                          dbo.propietarios INNER JOIN
@@ -35,4 +35,4 @@ GROUP BY dbo.propietarios.nombre_comercial, dbo.propietarios.IdPropietario, dbo.
                          dbo.indice_rotacion.Descripcion, dbo.producto.existencia_min, dbo.producto.existencia_max, dbo.producto.codigo_barra, dbo.producto.costo, dbo.producto_presentacion.MinimoExistencia, 
                          dbo.producto_presentacion.MaximoExistencia, dbo.stock.cantidad, dbo.stock.cantidad / dbo.producto_presentacion.factor, dbo.stock.atributo_variante_1, dbo.bodega_ubicacion.nivel, dbo.bodega_ubicacion.indice_x, 
                          dbo.bodega_ubicacion.descripcion, dbo.bodega_tramo.descripcion, dbo.bodega_tramo.descripcion, dbo.bodega_ubicacion.orientacion_pos, dbo.bodega_tramo.es_rack, dbo.bodega_tramo.descripcion, 
-                         dbo.bodega_tramo.IdBodega, dbo.bodega_tramo.IdTramo, dbo.stock.idbodega,dbo.bodega.codigo
+                         dbo.bodega_tramo.IdBodega, dbo.bodega_tramo.IdTramo, dbo.stock.idbodega,dbo.bodega.codigo, dbo.stock.pallet_no_estandar
