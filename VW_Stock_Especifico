@@ -111,7 +111,7 @@ GROUP BY dbo.propietarios.nombre_comercial, dbo.propietarios.IdPropietario, dbo.
      dbo.indice_rotacion.Descripcion, dbo.producto.existencia_min, dbo.producto.existencia_max, dbo.producto.codigo_barra, dbo.producto.costo, dbo.producto_presentacion.MinimoExistencia, 
      dbo.producto_presentacion.MaximoExistencia, dbo.stock.cantidad, dbo.stock.cantidad / dbo.producto_presentacion.factor, dbo.stock.atributo_variante_1, dbo.bodega_ubicacion.nivel, dbo.bodega_ubicacion.indice_x, 
      dbo.bodega_ubicacion.descripcion, dbo.bodega_tramo.descripcion, dbo.bodega_ubicacion.orientacion_pos, dbo.motivo_devolucion.Nombre, dbo.trans_oc_pol.NoPoliza, dbo.producto_clasificacion.IdClasificacion, 
-     dbo.producto_familia.IdFamilia, dbo.cliente_tiempos.Dias_Local, dbo.cliente_tiempos.Dias_Exterior, dbo.cliente_tiempos.IdCliente, dbo.stock.idbodega
+     dbo.producto_familia.IdFamilia, dbo.cliente_tiempos.Dias_Local, dbo.cliente_tiempos.Dias_Exterior, dbo.cliente_tiempos.IdCliente, dbo.stock.idbodega, dbo.bodega_tramo.es_rack
 GO
 
 
