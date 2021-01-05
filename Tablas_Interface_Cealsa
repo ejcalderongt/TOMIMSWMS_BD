@@ -1,0 +1,98 @@
+USE [IMS4MB_CEALSA_PRD]
+GO
+/****** Object:  Table [dbo].[i_nav_acuerdo]    Script Date: 4/01/2021 00:32:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[i_nav_acuerdo](
+	[IdAcuerdo] [int] NOT NULL,
+	[codigo_acuerdo] [nvarchar](50) NOT NULL,
+	[descripcion] [nvarchar](500) NOT NULL,
+	[tipo_cobro] [nvarchar](1) NOT NULL,
+	[cod_moneda] [int] NOT NULL,
+	[nom_moneda] [nvarchar](20) NOT NULL,
+ CONSTRAINT [PK_i_nav_acuerdo] PRIMARY KEY CLUSTERED 
+(
+	[IdAcuerdo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[i_nav_acuerdo_det]    Script Date: 4/01/2021 00:32:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[i_nav_acuerdo_det](
+	[IdContrato] [int] NOT NULL,
+	[IdServicio] [int] NOT NULL,
+	[correlativo] [int] NOT NULL,
+	[descripcion] [nvarchar](200) NOT NULL,
+	[numero_unidades] [numeric](15, 5) NOT NULL,
+	[dias_eventos] [int] NOT NULL,
+	[corre_cbcatalogoproductos] [int] NOT NULL,
+ CONSTRAINT [PK_i_nav_acuerdo_det] PRIMARY KEY CLUSTERED 
+(
+	[IdContrato] ASC,
+	[IdServicio] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[i_nav_acuerdo_enc]    Script Date: 4/01/2021 00:32:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[i_nav_acuerdo_enc](
+	[IdContrato] [int] NOT NULL,
+	[IdAcuerdo] [int] NOT NULL,
+	[IdCliente] [int] NOT NULL,
+ CONSTRAINT [PK_i_nav_acuerdo_enc] PRIMARY KEY CLUSTERED 
+(
+	[IdContrato] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[i_nav_cliente]    Script Date: 4/01/2021 00:32:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[i_nav_cliente](
+	[IdCliente] [int] NOT NULL,
+	[codigo_cliente] [nvarchar](50) NOT NULL,
+	[nombre_cliente] [nvarchar](120) NOT NULL,
+ CONSTRAINT [PK_i_nav_cliente] PRIMARY KEY CLUSTERED 
+(
+	[IdCliente] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[i_nav_servicio]    Script Date: 4/01/2021 00:32:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[i_nav_servicio](
+	[IdServicio] [int] NOT NULL,
+	[codigo_servicio] [nvarchar](50) NOT NULL,
+	[descripcion] [nvarchar](500) NOT NULL,
+	[nemonico] [nvarchar](10) NOT NULL,
+ CONSTRAINT [PK_i_nav_servicio] PRIMARY KEY CLUSTERED 
+(
+	[IdServicio] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[i_nav_servicio] ADD  CONSTRAINT [DF_i_nav_servicio_codigo_servicio]  DEFAULT ('') FOR [codigo_servicio]
+GO
+ALTER TABLE [dbo].[i_nav_acuerdo_enc]  WITH CHECK ADD  CONSTRAINT [FK_i_nav_acuerdo_enc_i_nav_acuerdo] FOREIGN KEY([IdAcuerdo])
+REFERENCES [dbo].[i_nav_acuerdo] ([IdAcuerdo])
+GO
+ALTER TABLE [dbo].[i_nav_acuerdo_enc] CHECK CONSTRAINT [FK_i_nav_acuerdo_enc_i_nav_acuerdo]
+GO
+ALTER TABLE [dbo].[i_nav_acuerdo_enc]  WITH CHECK ADD  CONSTRAINT [FK_i_nav_acuerdo_enc_i_nav_acuerdo_enc] FOREIGN KEY([IdCliente])
+REFERENCES [dbo].[i_nav_cliente] ([IdCliente])
+GO
+ALTER TABLE [dbo].[i_nav_acuerdo_enc] CHECK CONSTRAINT [FK_i_nav_acuerdo_enc_i_nav_acuerdo_enc]
+GO
