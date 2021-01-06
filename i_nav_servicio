@@ -1,0 +1,24 @@
+CREATE TABLE [dbo].[i_nav_servicio](
+	[IdServicio] [int] NOT NULL,
+	[codigo_servicio] [nvarchar](50) NOT NULL,
+	[descripcion] [nvarchar](500) NOT NULL,
+	[nemonico] [nvarchar](10) NOT NULL,
+	[codigo_rubro] [int] NULL,
+	[activo] [bit] NOT NULL,
+	[procesado_wms] [bit] NOT NULL,
+ CONSTRAINT [PK_i_nav_servicio] PRIMARY KEY CLUSTERED 
+(
+	[IdServicio] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[i_nav_servicio] ADD  CONSTRAINT [DF_i_nav_servicio_codigo_servicio]  DEFAULT ('') FOR [codigo_servicio]
+GO
+
+ALTER TABLE [dbo].[i_nav_servicio] ADD  CONSTRAINT [DF_i_nav_servicio_Activo]  DEFAULT ((1)) FOR [activo]
+GO
+
+ALTER TABLE [dbo].[i_nav_servicio] ADD  CONSTRAINT [DF_i_nav_servicio_procesado_wms]  DEFAULT ((0)) FOR [procesado_wms]
+GO
+
