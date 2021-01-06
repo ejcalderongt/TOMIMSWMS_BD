@@ -1,6 +1,8 @@
 CREATE TABLE [dbo].[tarifa_tipo_transaccion](
 	[IdTipoTransaccion] [int] NOT NULL,
+	[Codigo] [nvarchar](50) NULL,
 	[Nombre] [nvarchar](50) NULL,
+	[Activo] [bit] NULL,
  CONSTRAINT [PK_transaccion_tipo] PRIMARY KEY CLUSTERED 
 (
 	[IdTipoTransaccion] ASC
