@@ -1,0 +1,2 @@
+
+alter table propietarios add NIT nvarchar(50)
