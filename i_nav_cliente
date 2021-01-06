@@ -1,0 +1,16 @@
+CREATE TABLE [dbo].[i_nav_cliente](
+	[IdCliente] [int] NOT NULL,
+	[codigo_cliente] [nvarchar](50) NOT NULL,
+	[nombre_cliente] [nvarchar](120) NOT NULL,
+	[nit] [nvarchar](20) NULL,
+	[razon_social] [nvarchar](120) NULL,
+	[procesado_wms] [bit] NOT NULL,
+ CONSTRAINT [PK_i_nav_cliente] PRIMARY KEY CLUSTERED 
+(
+	[IdCliente] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[i_nav_cliente] ADD  CONSTRAINT [DF_i_nav_cliente_procesado_wms]  DEFAULT ((0)) FOR [procesado_wms]
+GO
