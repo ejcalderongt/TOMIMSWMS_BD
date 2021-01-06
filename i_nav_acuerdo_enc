@@ -1,0 +1,24 @@
+CREATE TABLE [dbo].[i_nav_acuerdo_enc](
+	[IdContrato] [int] NOT NULL,
+	[IdAcuerdo] [int] NOT NULL,
+	[IdCliente] [int] NOT NULL,
+ CONSTRAINT [PK_i_nav_acuerdo_enc] PRIMARY KEY CLUSTERED 
+(
+	[IdContrato] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[i_nav_acuerdo_enc]  WITH CHECK ADD  CONSTRAINT [FK_i_nav_acuerdo_enc_i_nav_acuerdo] FOREIGN KEY([IdAcuerdo])
+REFERENCES [dbo].[i_nav_acuerdo] ([IdAcuerdo])
+GO
+
+ALTER TABLE [dbo].[i_nav_acuerdo_enc] CHECK CONSTRAINT [FK_i_nav_acuerdo_enc_i_nav_acuerdo]
+GO
+
+ALTER TABLE [dbo].[i_nav_acuerdo_enc]  WITH CHECK ADD  CONSTRAINT [FK_i_nav_acuerdo_enc_i_nav_acuerdo_enc] FOREIGN KEY([IdCliente])
+REFERENCES [dbo].[i_nav_cliente] ([IdCliente])
+GO
+
+ALTER TABLE [dbo].[i_nav_acuerdo_enc] CHECK CONSTRAINT [FK_i_nav_acuerdo_enc_i_nav_acuerdo_enc]
+GO
