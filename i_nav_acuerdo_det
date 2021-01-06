@@ -1,0 +1,15 @@
+CREATE TABLE [dbo].[i_nav_acuerdo_det](
+	[IdContrato] [int] NOT NULL,
+	[IdServicio] [int] NOT NULL,
+	[correlativo] [int] NOT NULL,
+	[descripcion] [nvarchar](200) NOT NULL,
+	[numero_unidades] [numeric](15, 5) NOT NULL,
+	[dias_eventos] [int] NOT NULL,
+	[corre_cbcatalogoproductos] [int] NOT NULL,
+ CONSTRAINT [PK_i_nav_acuerdo_det] PRIMARY KEY CLUSTERED 
+(
+	[IdContrato] ASC,
+	[IdServicio] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
