@@ -1,3 +1,10 @@
+/****** Object:  Table [dbo].[i_nav_servicio]    Script Date: 6/01/2021 16:49:58 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 CREATE TABLE [dbo].[i_nav_servicio](
 	[IdServicio] [int] NOT NULL,
 	[codigo_servicio] [nvarchar](50) NOT NULL,
@@ -21,4 +28,3 @@ GO
 
 ALTER TABLE [dbo].[i_nav_servicio] ADD  CONSTRAINT [DF_i_nav_servicio_procesado_wms]  DEFAULT ((0)) FOR [procesado_wms]
 GO
-
