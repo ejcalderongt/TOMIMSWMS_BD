@@ -1,0 +1,25 @@
+/****** Object:  Table [dbo].[i_nav_unidad_medida]    Script Date: 7/01/2021 13:21:17 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[i_nav_unidad_medida](
+	[IdUnidadMedida] [int] IDENTITY(1,1) NOT NULL,
+	[codigo_unidad_medida] [nvarchar](20) NOT NULL,
+	[descripcion] [nvarchar](120) NOT NULL,
+	[tipo_rubro] [nvarchar](20) NOT NULL,
+	[tipo] [nvarchar](20) NOT NULL,
+	[procesado_wms] [bit] NOT NULL,
+ CONSTRAINT [PK_i_nav_unidad_medida] PRIMARY KEY CLUSTERED 
+(
+	[IdUnidadMedida] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[i_nav_unidad_medida] ADD  CONSTRAINT [DF_i_nav_unidad_medida_procesado_wms]  DEFAULT ((0)) FOR [procesado_wms]
+GO
+
+
