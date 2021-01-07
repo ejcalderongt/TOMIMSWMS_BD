@@ -1,6 +1,9 @@
 USE [IMS4MB_CEALSA_PRD]
 GO
 
+DROP TABLE [dbo].[i_nav_acuerdo_productos]
+GO
+
 DROP TABLE [dbo].[i_nav_servicio]
 GO
 
@@ -71,3 +74,78 @@ GO
 
 ALTER TABLE [dbo].[i_nav_cliente] ADD  CONSTRAINT [DF_i_nav_cliente_procesado_wms]  DEFAULT ((0)) FOR [procesado_wms]
 GO
+
+/****** Object:  Table [dbo].[i_nav_acuerdo]    Script Date: 7/01/2021 14:19:44 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[i_nav_acuerdo](
+	[IdAcuerdo] [int] NOT NULL,
+	[IdCliente] [int] NULL,
+	[codigo_acuerdo] [nvarchar](50) NOT NULL,
+	[descripcion] [nvarchar](500) NOT NULL,
+	[tipo_cobro] [nvarchar](1) NOT NULL,
+	[cod_moneda] [int] NOT NULL,
+	[nom_moneda] [nvarchar](20) NOT NULL,
+	[procesado_wms] [bit] NOT NULL,
+ CONSTRAINT [PK_i_nav_acuerdo] PRIMARY KEY CLUSTERED 
+(
+	[IdAcuerdo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[i_nav_acuerdo_det]    Script Date: 7/01/2021 14:20:02 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[i_nav_acuerdo_det](
+	[IdAcuerdoDet] [int] IDENTITY(1,1) NOT NULL,
+	[IdAcuerdo] [int] NOT NULL,
+	[IdServicio] [int] NOT NULL,
+	[correlativo] [int] NOT NULL,
+	[descripcion] [nvarchar](200) NOT NULL,
+	[numero_unidades] [numeric](15, 5) NOT NULL,
+	[dias_eventos] [int] NOT NULL,
+	[corre_cbcatalogoproductos] [int] NOT NULL,
+	[procesado_wms] [bit] NOT NULL,
+ CONSTRAINT [PK_i_nav_acuerdo_det_1] PRIMARY KEY CLUSTERED 
+(
+	[IdAcuerdoDet] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+USE [IMS4MB_CEALSA_PRD]
+GO
+
+/****** Object:  Table [dbo].[i_nav_unidad_medida]    Script Date: 7/01/2021 14:20:48 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[i_nav_unidad_medida](
+	[IdUnidadMedida] [int] IDENTITY(1,1) NOT NULL,
+	[codigo_unidad_medida] [nvarchar](20) NOT NULL,
+	[descripcion] [nvarchar](120) NOT NULL,
+	[tipo_rubro] [nvarchar](20) NOT NULL,
+	[tipo] [nvarchar](20) NOT NULL,
+	[procesado_wms] [bit] NOT NULL,
+ CONSTRAINT [PK_i_nav_unidad_medida] PRIMARY KEY CLUSTERED 
+(
+	[IdUnidadMedida] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[i_nav_unidad_medida] ADD  CONSTRAINT [DF_i_nav_unidad_medida_procesado_wms]  DEFAULT ((0)) FOR [procesado_wms]
+GO
+
