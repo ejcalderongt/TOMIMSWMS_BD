@@ -5,3 +5,6 @@ numero_orden nvarchar(50),
 fecha_aceptacion date,
 fecha_llegada datetime,
 total_otros float
+
+alter table trans_oc_pol add IdRegimen int null
+
