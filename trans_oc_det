@@ -6,3 +6,5 @@ valor_dai float default 0,
 valor_seguro float default 0,
 valor_flete float default 0,
 peso_neto float default 0
+
+alter table trans_oc_det add peso_bruto float default 0
