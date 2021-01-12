@@ -8,3 +8,5 @@ total_otros float
 
 alter table trans_oc_pol add IdRegimen int null
 
+
+alter table trans_oc_pol add peso_neto float default 0
