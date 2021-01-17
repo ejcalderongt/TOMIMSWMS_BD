@@ -1,0 +1,1 @@
+alter table i_nav_config_enc add IdProveedorProduccion int default 0
