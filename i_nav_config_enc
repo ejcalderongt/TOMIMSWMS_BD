@@ -1,1 +1,11 @@
 alter table i_nav_config_enc add codigo_proveedor_produccion nvarchar(50)
+
+ALTER TABLE i_nav_config_enc
+ADD idFamilia int NULL,
+	idclasificacion int NULL,
+	idMarca int NULL,
+	idTipoProducto int NULL,
+	control_lote bit NULL,
+	control_vencimiento bit NULL,
+	genera_lp bit NULL
+
