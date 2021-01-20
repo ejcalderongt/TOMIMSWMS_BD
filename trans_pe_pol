@@ -1,0 +1,40 @@
+CREATE TABLE [dbo].[trans_pe_pol](
+	[IdOrdenPedidoPol] [int] NOT NULL,
+	[IdOrdenPedidoEnc] [int] NOT NULL,
+	[bl_no] [varchar](50) NULL,
+	[NoPoliza] [nvarchar](50) NULL,
+	[pto_descarga] [nvarchar](50) NULL,
+	[viaje_no] [nvarchar](50) NULL,
+	[buque_no] [nvarchar](50) NULL,
+	[remitente] [nvarchar](50) NULL,
+	[fecha_abordaje] [datetime] NULL,
+	[destino] [nvarchar](50) NULL,
+	[dir_destino] [nvarchar](50) NULL,
+	[descripcion] [nvarchar](250) NULL,
+	[po_number] [nvarchar](50) NULL,
+	[cantidad] [int] NULL,
+	[piezas] [int] NULL,
+	[total_kgs] [float] NULL,
+	[cbm] [float] NULL,
+	[dua] [nvarchar](50) NULL,
+	[fecha_poliza] [datetime] NULL,
+	[pais_procede] [nvarchar](50) NULL,
+	[tipo_cambio] [float] NULL,
+	[total_valoraduana] [float] NULL,
+	[total_lineas] [int] NULL,
+	[total_bultos] [int] NULL,
+	[total_bultos_peso] [float] NULL,
+	[total_usd] [float] NULL,
+	[total_flete] [float] NULL,
+	[total_seguro] [float] NULL,
+	[user_agr] [nvarchar](50) NULL,
+	[fec_agr] [datetime] NULL,
+	[user_mod] [nvarchar](50) NULL,
+	[fec_mod] [datetime] NULL,
+ CONSTRAINT [PK_trans_pe_pol] PRIMARY KEY CLUSTERED 
+(
+	[IdOrdenPedidoPol] ASC,
+	[IdOrdenPedidoEnc] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
