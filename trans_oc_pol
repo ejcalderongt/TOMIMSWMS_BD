@@ -10,3 +10,12 @@ alter table trans_oc_pol add IdRegimen int null
 
 
 alter table trans_oc_pol add total_bultos_peso_neto float default 0
+
+ALTER TABLE trans_oc_pol
+ADD 
+clave_aduana VARCHAR(50) NULL, 
+nit_imp_exp VARCHAR(50) NULL,
+clase VARCHAR(50) NULL,
+mod_transporte VARCHAR(50) NULL,
+total_liquidar FLOAT NULL,
+total_general FLOAT NULL
