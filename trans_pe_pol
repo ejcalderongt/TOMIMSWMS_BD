@@ -38,3 +38,12 @@ CREATE TABLE [dbo].[trans_pe_pol](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+ALTER TABLE trans_pe_pol
+ADD 
+clave_aduana VARCHAR(50) NULL, 
+nit_imp_exp VARCHAR(50) NULL,
+clase VARCHAR(50) NULL,
+mod_transporte VARCHAR(50) NULL,
+total_liquidar FLOAT NULL,
+total_general FLOAT NULL
