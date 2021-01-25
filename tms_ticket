@@ -7,8 +7,8 @@ CREATE TABLE [dbo].[tms_ticket](
 	[IdVehiculo] [int] NULL,
 	[IdEmpresaTransporte] [int] NULL,
 	[Tipo_Operacion] [nvarchar](50) NULL,
-	[Fecha_Ingreso] [date] NULL,
-	[Fecha_Salida] [date] NULL,
+	[Fecha_Ingreso] [datetime] NULL,
+	[Fecha_Salida] [datetime] NULL,
 	[Estado] [nvarchar](50) NULL,
 	[No_Poliza] [nvarchar](50) NULL,
  CONSTRAINT [PK_tms_ticket] PRIMARY KEY CLUSTERED 
@@ -18,3 +18,30 @@ CREATE TABLE [dbo].[tms_ticket](
 ) ON [PRIMARY]
 GO
 
+ALTER TABLE [dbo].[tms_ticket]  WITH CHECK ADD  CONSTRAINT [FK_tms_ticket_empresa_transporte] FOREIGN KEY([IdEmpresaTransporte])
+REFERENCES [dbo].[empresa_transporte] ([IdEmpresaTransporte])
+GO
+
+ALTER TABLE [dbo].[tms_ticket] CHECK CONSTRAINT [FK_tms_ticket_empresa_transporte]
+GO
+
+ALTER TABLE [dbo].[tms_ticket]  WITH CHECK ADD  CONSTRAINT [FK_tms_ticket_empresa_transporte_pilotos] FOREIGN KEY([IdPiloto])
+REFERENCES [dbo].[empresa_transporte_pilotos] ([IdPiloto])
+GO
+
+ALTER TABLE [dbo].[tms_ticket] CHECK CONSTRAINT [FK_tms_ticket_empresa_transporte_pilotos]
+GO
+
+ALTER TABLE [dbo].[tms_ticket]  WITH CHECK ADD  CONSTRAINT [FK_tms_ticket_empresa_transporte_vehiculos] FOREIGN KEY([IdVehiculo])
+REFERENCES [dbo].[empresa_transporte_vehiculos] ([IdVehiculo])
+GO
+
+ALTER TABLE [dbo].[tms_ticket] CHECK CONSTRAINT [FK_tms_ticket_empresa_transporte_vehiculos]
+GO
+
+ALTER TABLE [dbo].[tms_ticket]  WITH CHECK ADD  CONSTRAINT [FK_tms_ticket_propietarios] FOREIGN KEY([IdPropietario])
+REFERENCES [dbo].[propietarios] ([IdPropietario])
+GO
+
+ALTER TABLE [dbo].[tms_ticket] CHECK CONSTRAINT [FK_tms_ticket_propietarios]
+GO
