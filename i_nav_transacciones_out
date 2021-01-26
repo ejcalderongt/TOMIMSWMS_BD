@@ -1,0 +1,2 @@
+alter table i_nav_transacciones_out add IdTipoDocumento int default 0
+alter table i_nav_transacciones_out add es_servicio bit default 0
