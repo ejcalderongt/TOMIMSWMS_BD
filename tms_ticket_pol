@@ -1,0 +1,30 @@
+CREATE TABLE [dbo].[tms_ticket_pol](
+	[IdOrdenTkmPol] [int] NOT NULL,
+	[IdOrdenTkmEnc] [int] NOT NULL,
+	[NoPoliza] [nvarchar](50) NULL,
+	[dua] [nvarchar](50) NULL,
+	[fecha_poliza] [datetime] NULL,
+	[pais_procede] [nvarchar](50) NULL,
+	[tipo_cambio] [float] NULL,
+	[total_valoraduana] [float] NULL,
+	[total_bultos_peso] [float] NULL,
+	[total_usd] [float] NULL,
+	[total_flete] [float] NULL,
+	[total_seguro] [float] NULL,
+	[user_agr] [nvarchar](50) NULL,
+	[fec_agr] [datetime] NULL,
+	[user_mod] [nvarchar](50) NULL,
+	[fec_mod] [datetime] NULL,
+	[clave_aduana] [varchar](50) NULL,
+	[nit_imp_exp] [varchar](50) NULL,
+	[clase] [varchar](50) NULL,
+	[mod_transporte] [varchar](50) NULL,
+	[total_liquidar] [float] NULL,
+	[total_general] [float] NULL,
+ CONSTRAINT [PK_tms_ticket_pol] PRIMARY KEY CLUSTERED 
+(
+	[IdOrdenTkmPol] ASC,
+	[IdOrdenTkmEnc] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
