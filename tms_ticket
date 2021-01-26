@@ -45,3 +45,12 @@ GO
 
 ALTER TABLE [dbo].[tms_ticket] CHECK CONSTRAINT [FK_tms_ticket_propietarios]
 GO
+
+
+alter table tms_ticket add No_Placa nvarchar(50), 
+No_Documento_Piloto nvarchar(150),
+Tipo_Documento_Piloto nvarchar(150),
+Nombres_Piloto nvarchar(150),
+Apellidos_Piloto nvarchar(150),
+No_TC nvarchar(50)
+
