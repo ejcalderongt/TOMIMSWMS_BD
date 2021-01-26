@@ -1,0 +1,25 @@
+/****** Object:  Table [dbo].[trans_oc_servicios]    Script Date: 25/01/2021 19:52:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[trans_pe_servicios](
+	[IdOrdenPedidoServicio] [int] NOT NULL,
+	[IdOrdenPedidoEnc] [int] NOT NULL,
+	[IdServicio] [int] NOT NULL,
+	[cantidad] [int] NULL,
+	[user_agr] [nvarchar](50) NULL,
+	[fec_agr] [datetime] NULL,
+	[user_mod] [nvarchar](50) NULL,
+	[fec_mod] [datetime] NULL,
+	[observacion] [nvarchar](150) NULL,
+ CONSTRAINT [PK_trans_pe_Serv] PRIMARY KEY CLUSTERED 
+(
+	[IdOrdenPedidoServicio] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
