@@ -1,6 +1,17 @@
+/****** Object:  Table [dbo].[tms_ticket_pol]    Script Date: 26/01/2021 20:01:54 ******/
+DROP TABLE [dbo].[tms_ticket_pol]
+GO
+
+/****** Object:  Table [dbo].[tms_ticket_pol]    Script Date: 26/01/2021 20:01:54 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 CREATE TABLE [dbo].[tms_ticket_pol](
-	[IdOrdenTkmPol] [int] NOT NULL,
-	[IdOrdenTkmEnc] [int] NOT NULL,
+	[IdTicket] [int] NOT NULL,
+	[IdOrdenTmsEnc] [int] NOT NULL,
 	[NoPoliza] [nvarchar](50) NULL,
 	[dua] [nvarchar](50) NULL,
 	[fecha_poliza] [datetime] NULL,
@@ -23,8 +34,8 @@ CREATE TABLE [dbo].[tms_ticket_pol](
 	[total_general] [float] NULL,
  CONSTRAINT [PK_tms_ticket_pol] PRIMARY KEY CLUSTERED 
 (
-	[IdOrdenTkmPol] ASC,
-	[IdOrdenTkmEnc] ASC
+	[IdTicket] ASC,
+	[IdOrdenTmsEnc] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
