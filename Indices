@@ -27,3 +27,7 @@ INCLUDE ([IdProductoBodega])
 CREATE NONCLUSTERED INDEX NCLI_Stock_20200112_EJC
 ON [dbo].[stock] ([IdPropietarioBodega])
 INCLUDE ([IdBodega],[IdProductoBodega],[IdProductoEstado],[IdPresentacion],[IdUnidadMedida],[IdUbicacion],[IdUbicacion_anterior],[IdRecepcionEnc],[lote],[lic_plate],[serial],[cantidad],[fecha_ingreso],[fecha_vence],[añada],[peso],[atributo_variante_1])GO
+
+CREATE NONCLUSTERED INDEX NCLI_Bodega_Ubicacion_EJC20210128
+ON [dbo].[bodega_ubicacion] ([activo],[ubicacion_picking])
+INCLUDE ([IdTramo],[descripcion],[nivel],[indice_x],[codigo_barra],[bloqueada],[acepta_pallet],[IdArea],[IdSector])
