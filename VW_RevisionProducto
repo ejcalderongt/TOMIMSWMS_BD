@@ -1,0 +1,22 @@
+ALTER VIEW [dbo].[VW_RevisionProducto]
+AS
+SELECT DISTINCT 
+                         p.codigo as Codigo, p.nombre AS Producto, pp.nombre AS Presentación, est.nombre AS Estado, u.descripcion AS Ubicación, pr.Minimo AS Mínimo, pr.Maximo AS Máximo, SUM(s.cantidad) AS Disponible, s.IdPropietarioBodega, 
+                         pro.IdPropietario, pb.IdBodega, pb.IdProductoBodega, pp.IdPresentacion, u.IdUbicacion, s.IdProductoEstado, um.IdUnidadMedida, pp.factor
+FROM            dbo.producto_presentacion AS pp INNER JOIN
+                         dbo.producto AS p ON pp.IdProducto = p.IdProducto INNER JOIN
+                         dbo.producto_bodega AS pb ON p.IdProducto = pb.IdProducto INNER JOIN
+                         dbo.stock AS s ON pb.IdProductoBodega = s.IdProductoBodega AND pp.IdPresentacion = s.IdPresentacion INNER JOIN
+                         dbo.producto_rellenado AS pr ON pp.IdPresentacion = pr.IdPresentacion AND pb.IdProductoBodega = pr.IdProductoBodega INNER JOIN
+                         dbo.bodega_ubicacion AS u ON u.IdUbicacion = pr.IdUbicacion AND pr.IdBodega = u.IdBodega INNER JOIN
+                         dbo.propietarios AS pro ON p.IdPropietario = pro.IdPropietario INNER JOIN
+                         dbo.producto_estado AS est ON est.IdEstado = s.IdProductoEstado INNER JOIN
+                         dbo.unidad_medida AS um ON s.IdUnidadMedida = um.IdUnidadMedida
+WHERE        (u.IdUbicacion NOT IN
+                             (SELECT        IdUbicacion
+                               FROM            dbo.transacciones_log
+                               WHERE        (IdProductoBodega = pb.IdProductoBodega) AND (IdPresentacion = pp.IdPresentacion) AND (IdProductoEstado = s.IdProductoEstado) AND (IdUnidadMedida = s.IdUnidadMedida) AND (fec_agr = GETDATE())))
+GROUP BY p.codigo, p.nombre, pp.nombre, est.nombre, u.descripcion, pr.Minimo, pr.Maximo, s.IdPropietarioBodega, pb.IdProductoBodega, pp.IdPresentacion, u.IdUbicacion, s.IdProductoEstado, um.IdUnidadMedida, pro.IdPropietario, 
+                         pb.IdBodega, pp.factor
+HAVING        (SUM(s.cantidad) <= pr.Minimo) AND (pr.Minimo > 0)
+GO
