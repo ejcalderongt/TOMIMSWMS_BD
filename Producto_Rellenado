@@ -1,0 +1,1 @@
+ALTER TABLE PRODUCTO_RELLENADO ADD IdUnidadMedidaBasica INT, IdBodega INT, IdProductoBodega INT
