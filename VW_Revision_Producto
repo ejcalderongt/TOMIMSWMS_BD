@@ -1,0 +1,23 @@
+ALTER VIEW [dbo].[VW_Revision_Producto]
+AS
+SELECT        dbo.producto_rellenado.IdRellenado, dbo.producto_rellenado.IdBodega, dbo.producto_rellenado.IdProductoBodega, dbo.producto_bodega.IdProducto, dbo.producto.codigo, dbo.producto.nombre, 
+                         dbo.producto_rellenado.IdUnidadMedidaBasica, dbo.unidad_medida.Nombre AS UmBas, dbo.producto_rellenado.IdPresentacion, dbo.producto_presentacion.nombre AS Presentacion, dbo.producto_rellenado.Minimo, 
+                         dbo.producto_rellenado.Maximo, dbo.producto_rellenado.IdProductoEstado, dbo.producto_estado.nombre AS Estado, SUM(ISNULL(dbo.stock.cantidad, 0)) AS StockUMBas, SUM(ISNULL(dbo.stock_res.cantidad, 0)) 
+                         AS ReservadoUmBas, SUM(ISNULL(dbo.stock.cantidad, 0)) - SUM(ISNULL(dbo.stock_res.cantidad, 0)) AS DisponibleUMBas, dbo.producto_presentacion.factor AS Factor, 
+                         SUM(ISNULL(dbo.stock.cantidad / dbo.producto_presentacion.factor, 0)) AS StockPres, SUM(ISNULL(dbo.stock_res.cantidad / dbo.producto_presentacion.factor, 0)) AS ReservadoPres, 
+                         SUM(ISNULL(dbo.stock.cantidad / dbo.producto_presentacion.factor, 0)) - SUM(ISNULL(dbo.stock_res.cantidad / dbo.producto_presentacion.factor, 0)) AS DisponiblePres,
+						 dbo.Nombre_Completo_Ubicacion(producto_rellenado.IdUbicacion,producto_rellenado.IdBodega) as Ubicacion
+FROM            dbo.stock_res INNER JOIN
+                         dbo.stock ON dbo.stock_res.IdStock = dbo.stock.IdStock RIGHT OUTER JOIN
+                         dbo.unidad_medida INNER JOIN
+                         dbo.producto_rellenado INNER JOIN
+                         dbo.producto_bodega INNER JOIN
+                         dbo.producto ON dbo.producto_bodega.IdProducto = dbo.producto.IdProducto ON dbo.producto_rellenado.IdProductoBodega = dbo.producto_bodega.IdProductoBodega AND 
+                         dbo.producto_rellenado.IdBodega = dbo.producto_bodega.IdBodega ON dbo.unidad_medida.IdUnidadMedida = dbo.producto_rellenado.IdUnidadMedidaBasica INNER JOIN
+                         dbo.producto_estado ON dbo.producto_rellenado.IdProductoEstado = dbo.producto_estado.IdEstado ON dbo.stock.IdUnidadMedida = dbo.producto_rellenado.IdUnidadMedidaBasica AND 
+                         dbo.stock.IdProductoBodega = dbo.producto_rellenado.IdProductoBodega AND dbo.stock.IdBodega = dbo.producto_rellenado.IdBodega AND dbo.stock.IdProductoEstado = dbo.producto_rellenado.IdProductoEstado AND 
+                         dbo.stock.IdPresentacion = dbo.producto_rellenado.IdPresentacion AND dbo.stock.IdUbicacion = dbo.producto_rellenado.IdUbicacion LEFT OUTER JOIN
+                         dbo.producto_presentacion ON dbo.producto_rellenado.IdPresentacion = dbo.producto_presentacion.IdPresentacion
+GROUP BY dbo.producto_rellenado.IdRellenado, dbo.producto_rellenado.IdBodega, dbo.producto_rellenado.IdProductoBodega, dbo.producto_bodega.IdProducto, dbo.producto.codigo, dbo.producto.nombre, 
+                         dbo.producto_rellenado.IdUnidadMedidaBasica, dbo.unidad_medida.Nombre, dbo.producto_rellenado.IdPresentacion, dbo.producto_presentacion.nombre, dbo.producto_rellenado.Minimo, dbo.producto_rellenado.Maximo, 
+                         dbo.producto_rellenado.IdProductoEstado, dbo.producto_estado.nombre, dbo.producto_presentacion.factor, producto_rellenado.IdBodega, producto_rellenado.IdUbicacion
