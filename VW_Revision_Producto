@@ -15,7 +15,7 @@ FROM            dbo.propietario_bodega INNER JOIN
                          dbo.producto ON dbo.producto_bodega.IdProducto = dbo.producto.IdProducto ON dbo.producto_rellenado.IdProductoBodega = dbo.producto_bodega.IdProductoBodega AND 
                          dbo.producto_rellenado.IdBodega = dbo.producto_bodega.IdBodega ON dbo.unidad_medida.IdUnidadMedida = dbo.producto_rellenado.IdUnidadMedidaBasica INNER JOIN
                          dbo.producto_estado ON dbo.producto_rellenado.IdProductoEstado = dbo.producto_estado.IdEstado ON dbo.propietarios.IdPropietario = dbo.producto.IdPropietario ON 
-                         dbo.propietario_bodega.IdPropietario = dbo.propietarios.IdPropietario LEFT OUTER JOIN
+                         dbo.propietario_bodega.IdPropietario = dbo.propietarios.IdPropietario AND dbo.propietario_bodega.IdBodega = dbo.producto_bodega.IdBodega LEFT OUTER JOIN
                          dbo.stock_res INNER JOIN
                          dbo.stock ON dbo.stock_res.IdStock = dbo.stock.IdStock ON dbo.producto_rellenado.IdUnidadMedidaBasica = dbo.stock.IdUnidadMedida AND dbo.producto_rellenado.IdProductoBodega = dbo.stock.IdProductoBodega AND 
                          dbo.producto_rellenado.IdBodega = dbo.stock.IdBodega AND dbo.producto_rellenado.IdProductoEstado = dbo.stock.IdProductoEstado AND dbo.producto_rellenado.IdPresentacion = dbo.stock.IdPresentacion AND 
