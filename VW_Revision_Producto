@@ -6,7 +6,8 @@ SELECT        dbo.producto_rellenado.IdRellenado, dbo.producto_rellenado.IdBodeg
                          AS ReservadoUmBas, SUM(ISNULL(dbo.stock.cantidad, 0)) - SUM(ISNULL(dbo.stock_res.cantidad, 0)) AS DisponibleUMBas, dbo.producto_presentacion.factor, SUM(ISNULL(dbo.stock.cantidad / dbo.producto_presentacion.factor, 
                          0)) AS StockPres, SUM(ISNULL(dbo.stock_res.cantidad / dbo.producto_presentacion.factor, 0)) AS ReservadoPres, SUM(ISNULL(dbo.stock.cantidad / dbo.producto_presentacion.factor, 0)) 
                          - SUM(ISNULL(dbo.stock_res.cantidad / dbo.producto_presentacion.factor, 0)) AS DisponiblePres, dbo.Nombre_Completo_Ubicacion(dbo.producto_rellenado.IdUbicacion, dbo.producto_rellenado.IdBodega) AS Ubicacion, 
-                         dbo.propietario_bodega.IdPropietarioBodega, dbo.producto_rellenado.IdUbicacion, dbo.producto_rellenado.IdTipoAccion, dbo.producto_rellenado.Activo
+                         dbo.propietario_bodega.IdPropietarioBodega, dbo.producto_rellenado.IdUbicacion, dbo.producto_rellenado.IdTipoAccion, dbo.producto_rellenado.Activo, dbo.producto.IdPropietario, 
+                         dbo.propietarios.nombre_comercial AS Nombre_Propietario
 FROM            dbo.propietario_bodega INNER JOIN
                          dbo.propietarios INNER JOIN
                          dbo.unidad_medida INNER JOIN
@@ -24,4 +25,4 @@ FROM            dbo.propietario_bodega INNER JOIN
 GROUP BY dbo.producto_rellenado.IdRellenado, dbo.producto_rellenado.IdBodega, dbo.producto_rellenado.IdProductoBodega, dbo.producto_bodega.IdProducto, dbo.producto.codigo, dbo.producto.nombre, 
                          dbo.producto_rellenado.IdUnidadMedidaBasica, dbo.unidad_medida.Nombre, dbo.producto_rellenado.IdPresentacion, dbo.producto_presentacion.nombre, dbo.producto_rellenado.Minimo, dbo.producto_rellenado.Maximo, 
                          dbo.producto_rellenado.IdProductoEstado, dbo.producto_estado.nombre, dbo.producto_presentacion.factor, dbo.producto_rellenado.IdBodega, dbo.producto_rellenado.IdUbicacion, dbo.propietario_bodega.IdPropietarioBodega, 
-                         dbo.producto_rellenado.IdTipoAccion, dbo.producto_rellenado.Activo
+                         dbo.producto_rellenado.IdTipoAccion, dbo.producto_rellenado.Activo, dbo.producto.IdPropietario, dbo.propietarios.nombre_comercial
