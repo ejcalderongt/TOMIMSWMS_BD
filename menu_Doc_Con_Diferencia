@@ -1,0 +1,2 @@
+insert into menu_sistema values ('2.3.1.3','Documentos con diferencia','cmdDocConDiferencias','4','2.3.1',0)
+insert into menu_rol values((select Max(IdMenuRol)+1 FROM menu_rol), '2.3.1.3',1,'Erik C.', GETDATE(),'Erik C',GETDATE(),1,1)
