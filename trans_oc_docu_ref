@@ -1,0 +1,44 @@
+/*
+   domingo, 7 de febrero de 202109:03:23
+   User: sa
+   Server: PROGRAX\SQLEXPRESS
+   Database: IMS4MB_BYB_QA
+   Application: 
+*/
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.trans_oc_docu_ref
+	(
+	IdDocumentoRef int NOT NULL,
+	Codigo nvarchar(50) NULL,
+	Nombre nvarchar(50) NULL,
+	Descripcion nvarchar(150) NULL,
+	FechaDocumento datetime NULL,
+	FechaAsignacion datetime NULL,
+	FechaAgregado datetime NULL,
+	Asignado bit NULL,
+	Activo bit NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.trans_oc_docu_ref ADD CONSTRAINT
+	PK_trans_oc_docu_ref PRIMARY KEY CLUSTERED 
+	(
+	IdDocumentoRef
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.trans_oc_docu_ref SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+select Has_Perms_By_Name(N'dbo.trans_oc_docu_ref', 'Object', 'ALTER') as ALT_Per, Has_Perms_By_Name(N'dbo.trans_oc_docu_ref', 'Object', 'VIEW DEFINITION') as View_def_Per, Has_Perms_By_Name(N'dbo.trans_oc_docu_ref', 'Object', 'CONTROL') as Contr_Per 
