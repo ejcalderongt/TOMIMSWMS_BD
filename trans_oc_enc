@@ -1,1 +1,2 @@
 alter table trans_oc_enc add no_ticket_tms nvarchar(50)
+alter table trans_oc_enc add IdDocumentoRef int
