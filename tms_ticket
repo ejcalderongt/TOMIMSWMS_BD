@@ -52,5 +52,7 @@ No_Documento_Piloto nvarchar(150),
 Tipo_Documento_Piloto nvarchar(150),
 Nombres_Piloto nvarchar(150),
 Apellidos_Piloto nvarchar(150),
-No_TC nvarchar(50)
+No_TC nvarchar(50),
+fecha_procesado datetime
+
 
