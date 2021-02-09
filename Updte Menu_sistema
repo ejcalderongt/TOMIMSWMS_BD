@@ -6,5 +6,5 @@ insert into menu_sistema
 values('3.6.1.1','Doc PE con diferencias','cmdDocPeConDiferencias',4,'3.6.1',0)
 
 insert into menu_rol
-values ('3.6.1.1',1,'Erik Calderón',Getdate(),'DTS',GetDate(),1,1)
+values ((select max(idmenurol)+1 from menu_rol),'3.6.1.1',1,'Erik Calderón',Getdate(),'DTS',GetDate(),1,1)
 
