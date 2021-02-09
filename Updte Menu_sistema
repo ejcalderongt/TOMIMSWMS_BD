@@ -1,0 +1,10 @@
+UPDATE menu_sistema
+set nombre_lgco ='mnuRepSalidaRapido'
+where IdMenu='3.6.1'
+
+insert into menu_sistema 
+values('3.6.1.1','Doc PE con diferencias','cmdDocPeConDiferencias',4,'3.6.1',0)
+
+insert into menu_rol
+values ('3.6.1.1',1,'Erik Calderón',Getdate(),'DTS',GetDate(),1,1)
+
