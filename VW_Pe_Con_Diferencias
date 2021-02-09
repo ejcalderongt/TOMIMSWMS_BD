@@ -1,0 +1,14 @@
+create view VW_Pe_Con_Diferencias as
+select  enc.no_documento as ORDENPEDIDO,det.codigo_producto,det.nombre_producto,det.Cantidad,det.cant_despachada,
+CASE WHEN ISNULL(DET.IdPresentacion, 0) = 0 THEN um.Nombre ELSE pr.nombre END AS UM,
+				DET.cant_despachada - DET.cantidad AS DIFERENCIA,enc.IdPropietarioBodega,dbo.bodega.nombre_comercial AS BODEGA, PROP.nombre_comercial AS PROPIETARIO,ENC.IdTipoPedido, 
+				TIPO.Descripcion AS NOMBRE_PEDIDO,det.IdProductoBodega,det.IdPresentacion,det.IdUnidadMedidaBasica,enc.estado,ENC.activo,ENC.Fecha_Pedido,PROP.IdPropietario,enc.IdBodega
+from trans_pe_enc enc inner join trans_pe_det det on enc.IdPedidoEnc = det.IdPedidoEnc
+				 		INNER JOIN
+                         dbo.trans_pe_tipo AS TIPO ON ENC.IdTipoPedido = TIPO.IdTipoPedido INNER JOIN
+                         dbo.propietario_bodega AS PROP_BD ON ENC.IdPropietarioBodega = PROP_BD.IdPropietarioBodega INNER JOIN
+                         dbo.bodega ON PROP_BD.IdBodega = dbo.bodega.IdBodega INNER JOIN
+                         dbo.propietarios AS PROP ON PROP_BD.IdPropietario = PROP.IdPropietario INNER JOIN
+                         dbo.unidad_medida AS um ON um.IdUnidadMedida = DET.IdUnidadMedidaBasica LEFT OUTER JOIN
+                         dbo.producto_presentacion AS pr ON DET.IdPresentacion = pr.IdPresentacion
+WHERE  enc.activo = 1 and estado <>'Anulado'
