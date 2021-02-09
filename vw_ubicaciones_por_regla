@@ -1,28 +1,24 @@
 ALTER VIEW [dbo].[vw_ubicaciones_por_regla]
 AS
-SELECT        dbo.regla_ubic_enc.IdReglaUbicacionEnc, dbo.bodega_ubicacion.IdUbicacion, dbo.bodega_ubicacion.descripcion, dbo.bodega_ubicacion.ancho, dbo.bodega_ubicacion.largo, dbo.bodega_ubicacion.alto, 
-dbo.bodega_ubicacion.IdTramo, dbo.bodega_ubicacion.indice_x, dbo.bodega_ubicacion.nivel, dbo.bodega_ubicacion.IdIndiceRotacion, dbo.bodega_ubicacion.IdTipoRotacion, dbo.bodega_ubicacion.dañado, 
-dbo.bodega_ubicacion.activo, dbo.bodega_ubicacion.bloqueada, dbo.bodega_ubicacion.acepta_pallet, dbo.bodega_area.IdBodega, dbo.regla_ubic_det_prop.IdPropietarioBodega, 
-dbo.regla_ubic_det_prop.Activo AS regla_ubic_det_prop_Activo, dbo.propietario_bodega.IdPropietario, dbo.regla_ubic_det_ir.IdIndiceRotacion AS IdIndiceRotacionRegla, 
-dbo.regla_ubic_det_tr.IdTipoRotacion AS IdTipoRotacionRegla, dbo.regla_ubic_det_tp.IdTipoProducto, dbo.regla_ubic_det_tp.Activo AS regla_ubic_det_tp_Activo, dbo.regla_ubic_det_pe.IdEstado, 
-dbo.regla_ubic_det_pe.Activo AS regla_ubic_det_pe_Activo, dbo.regla_ubic_det_pp.IdPresentacion,
-CASE WHEN bodega_tramo.es_rack = 1 THEN 'R' + RIGHT('00' + SUBSTRING(bodega_tramo.descripcion, 2, iif(CHARINDEX('-', bodega_tramo.descripcion, 0) < 0, 1, CHARINDEX('-', bodega_tramo.descripcion, 0) - 2)), 2) 
-                  + ' - ' + 'C' + RIGHT('00' + CONVERT(NVARCHAR(10), bodega_ubicacion.indice_x), 2) + ' - ' + 'T' + SUBSTRING(bodega_tramo.descripcion, iif(CHARINDEX('-', bodega_tramo.descripcion, 0) < 0, 0, CHARINDEX('-', bodega_tramo.descripcion, 0) + 1), 1) 
-                  + ' - ' + 'N' + RIGHT('00' + CONVERT(NVARCHAR(10), bodega_ubicacion.nivel), 2) + ' - ' + 'Pos' + bodega_ubicacion.orientacion_pos + ' - ' + '#' + CONVERT(NVARCHAR(10), bodega_ubicacion.IdUbicacion) ELSE bodega_tramo.descripcion END AS Nombre_Completo
-FROM            dbo.regla_ubic_det_tp INNER JOIN
-dbo.bodega_ubicacion INNER JOIN
-dbo.bodega_tramo ON dbo.bodega_ubicacion.IdTramo = dbo.bodega_tramo.IdTramo AND dbo.bodega_ubicacion.IdSector = dbo.bodega_tramo.IdSector AND 
-dbo.bodega_ubicacion.IdBodega = dbo.bodega_tramo.IdBodega INNER JOIN
-dbo.bodega_sector ON dbo.bodega_tramo.IdSector = dbo.bodega_sector.IdSector AND dbo.bodega_tramo.IdArea = dbo.bodega_sector.IdArea AND dbo.bodega_tramo.IdBodega = dbo.bodega_sector.IdBodega INNER JOIN
-dbo.bodega_area ON dbo.bodega_sector.IdArea = dbo.bodega_area.IdArea AND dbo.bodega_sector.IdBodega = dbo.bodega_area.IdBodega INNER JOIN
-dbo.regla_ubicacion ON dbo.bodega_ubicacion.IdUbicacion = dbo.regla_ubicacion.IdUbicacion AND dbo.bodega_ubicacion.IdBodega = dbo.regla_ubicacion.IdBodega INNER JOIN
-dbo.regla_ubic_enc ON dbo.regla_ubicacion.IdReglaUbicacionEnc = dbo.regla_ubic_enc.IdReglaUbicacionEnc ON dbo.regla_ubic_det_tp.IdReglaUbicacionEnc = dbo.regla_ubic_enc.IdReglaUbicacionEnc LEFT OUTER JOIN
-dbo.regla_ubic_det_pp ON dbo.regla_ubic_enc.IdReglaUbicacionEnc = dbo.regla_ubic_det_pp.IdReglaUbicacionEnc LEFT OUTER JOIN
-dbo.regla_ubic_det_pe ON dbo.regla_ubic_enc.IdReglaUbicacionEnc = dbo.regla_ubic_det_pe.IdReglaUbicacionEnc LEFT OUTER JOIN
-dbo.propietario_bodega INNER JOIN
-dbo.regla_ubic_det_prop ON dbo.propietario_bodega.IdPropietarioBodega = dbo.regla_ubic_det_prop.IdPropietarioBodega ON 
-dbo.regla_ubic_enc.IdReglaUbicacionEnc = dbo.regla_ubic_det_prop.IdReglaUbicacionEnc LEFT OUTER JOIN
-dbo.regla_ubic_det_tr ON dbo.regla_ubic_enc.IdReglaUbicacionEnc = dbo.regla_ubic_det_tr.IdReglaUbicacionEnc AND dbo.bodega_ubicacion.IdTipoRotacion = dbo.regla_ubic_det_tr.IdTipoRotacion LEFT OUTER JOIN
-dbo.regla_ubic_det_ir ON dbo.regla_ubic_enc.IdReglaUbicacionEnc = dbo.regla_ubic_det_ir.IdReglaUbicacionEnc AND dbo.bodega_ubicacion.IdIndiceRotacion = dbo.regla_ubic_det_ir.IdIndiceRotacion
+SELECT regla_ubic_enc.IdReglaUbicacionEnc, bodega_ubicacion.IdUbicacion, bodega_ubicacion.descripcion, bodega_ubicacion.ancho, bodega_ubicacion.largo, bodega_ubicacion.alto, 
+bodega_ubicacion.IdTramo, bodega_ubicacion.indice_x, bodega_ubicacion.nivel, bodega_ubicacion.IdIndiceRotacion, bodega_ubicacion.IdTipoRotacion, bodega_ubicacion.dañado, 
+bodega_ubicacion.activo, bodega_ubicacion.bloqueada, bodega_ubicacion.acepta_pallet, bodega_area.IdBodega, regla_ubic_det_prop.IdPropietarioBodega, 
+regla_ubic_det_prop.Activo AS regla_ubic_det_prop_Activo, propietario_bodega.IdPropietario, regla_ubic_det_ir.IdIndiceRotacion AS IdIndiceRotacionRegla, 
+regla_ubic_det_tr.IdTipoRotacion AS IdTipoRotacionRegla, regla_ubic_det_tp.IdTipoProducto, regla_ubic_det_tp.Activo AS regla_ubic_det_tp_Activo, regla_ubic_det_pe.IdEstado, 
+regla_ubic_det_pe.Activo AS regla_ubic_det_pe_Activo, regla_ubic_det_pp.IdPresentacion, Nombre_Completo_Ubicacion(bodega_ubicacion.IdUbicacion,bodega_ubicacion.IdBodega) as Nombre_Completo
+FROM regla_ubic_det_tp INNER JOIN
+bodega_ubicacion INNER JOIN
+bodega_tramo ON bodega_ubicacion.IdTramo = bodega_tramo.IdTramo AND bodega_ubicacion.IdSector = bodega_tramo.IdSector AND 
+bodega_ubicacion.IdBodega = bodega_tramo.IdBodega INNER JOIN
+bodega_sector ON bodega_tramo.IdSector = bodega_sector.IdSector AND bodega_tramo.IdArea = bodega_sector.IdArea AND bodega_tramo.IdBodega = bodega_sector.IdBodega INNER JOIN
+bodega_area ON bodega_sector.IdArea = bodega_area.IdArea AND bodega_sector.IdBodega = bodega_area.IdBodega INNER JOIN
+regla_ubicacion ON bodega_ubicacion.IdUbicacion = regla_ubicacion.IdUbicacion AND bodega_ubicacion.IdBodega = regla_ubicacion.IdBodega INNER JOIN
+regla_ubic_enc ON regla_ubicacion.IdReglaUbicacionEnc = regla_ubic_enc.IdReglaUbicacionEnc ON regla_ubic_det_tp.IdReglaUbicacionEnc = regla_ubic_enc.IdReglaUbicacionEnc LEFT OUTER JOIN
+regla_ubic_det_pp ON regla_ubic_enc.IdReglaUbicacionEnc = regla_ubic_det_pp.IdReglaUbicacionEnc LEFT OUTER JOIN
+regla_ubic_det_pe ON regla_ubic_enc.IdReglaUbicacionEnc = regla_ubic_det_pe.IdReglaUbicacionEnc LEFT OUTER JOIN
+propietario_bodega INNER JOIN
+regla_ubic_det_prop ON propietario_bodega.IdPropietarioBodega = regla_ubic_det_prop.IdPropietarioBodega ON 
+regla_ubic_enc.IdReglaUbicacionEnc = regla_ubic_det_prop.IdReglaUbicacionEnc LEFT OUTER JOIN
+regla_ubic_det_tr ON regla_ubic_enc.IdReglaUbicacionEnc = regla_ubic_det_tr.IdReglaUbicacionEnc AND bodega_ubicacion.IdTipoRotacion = regla_ubic_det_tr.IdTipoRotacion LEFT OUTER JOIN
+regla_ubic_det_ir ON regla_ubic_enc.IdReglaUbicacionEnc = regla_ubic_det_ir.IdReglaUbicacionEnc AND bodega_ubicacion.IdIndiceRotacion = regla_ubic_det_ir.IdIndiceRotacion
 GO
-
