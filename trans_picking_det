@@ -1,3 +1,6 @@
 ALTER TABLE trans_picking_det 
 ADD codigo NVARCHAR(25), 
 nombre NVARCHAR(100)
+
+alter table trans_picking_det alter column nombre nvarchar(150)
+
