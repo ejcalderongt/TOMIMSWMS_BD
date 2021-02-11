@@ -26,3 +26,21 @@ WHERE        (TIPO.activo = 1) AND (ESTADO.IdEstadoOC <> 5)
 GO
 
 
+/******************************************************************************************/
+
+
+ALTER VIEW VW_Doc_Con_Diferencias AS
+SELECT        ENC.No_Documento AS ORDENCOMPRA, DET.codigo_producto, DET.nombre_producto, DET.cantidad, DET.cantidad_recibida, CASE WHEN ISNULL(DET.IdPresentacion, 0) = 0 THEN um.Nombre ELSE pr.nombre END AS PRESENTACION, 
+                         DET.cantidad_recibida - DET.cantidad AS DIFERENCIA, ENC.IdPropietarioBodega, dbo.bodega.nombre_comercial AS BODEGA, PROP.nombre_comercial AS PROPIETARIO, ENC.IdProveedorBodega, ENC.IdTipoIngresoOC, 
+                         TIPO.Nombre AS NOMBRE_INGRESOOC, DET.IdProductoBodega, DET.IdPresentacion, DET.IdUnidadMedidaBasica, um.Nombre as UMBas, ESTADO.Nombre AS ESTADO, DET.activo, ENC.Fecha_Creacion, PROP.IdPropietario, 
+                         dbo.bodega.IdBodega
+FROM            dbo.trans_oc_enc AS ENC INNER JOIN
+                         dbo.trans_oc_det AS DET ON ENC.IdOrdenCompraEnc = DET.IdOrdenCompraEnc INNER JOIN
+                         dbo.trans_oc_ti AS TIPO ON ENC.IdTipoIngresoOC = TIPO.IdTipoIngresoOC INNER JOIN
+                         dbo.propietario_bodega AS PROP_BD ON ENC.IdPropietarioBodega = PROP_BD.IdPropietarioBodega INNER JOIN
+                         dbo.trans_oc_estado AS ESTADO ON ENC.IdEstadoOC = ESTADO.IdEstadoOC INNER JOIN
+                         dbo.bodega ON PROP_BD.IdBodega = dbo.bodega.IdBodega INNER JOIN
+                         dbo.propietarios AS PROP ON PROP_BD.IdPropietario = PROP.IdPropietario INNER JOIN
+                         dbo.unidad_medida AS um ON um.IdUnidadMedida = DET.IdUnidadMedidaBasica LEFT OUTER JOIN
+                         dbo.producto_presentacion AS pr ON DET.IdPresentacion = pr.IdPresentacion
+WHERE        (TIPO.activo = 1) AND (ESTADO.IdEstadoOC <> 5)
