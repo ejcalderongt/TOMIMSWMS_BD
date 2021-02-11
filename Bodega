@@ -1,3 +1,7 @@
 '#EJC20201121
 ALTER TABLE BODEGA ADD Cuenta_Ingreso_Mercancias nvarchar(50) default 0
 ALTER TABLE BODEGA ADD Cuenta_Egreso_Mercancias nvarchar(50) default 0
+
+
+'#CKFK 20210210
+ALTER TABLE bodega ADD notificacion_voz bit NOT NULL DEFAULT 0
