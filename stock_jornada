@@ -1,47 +1,59 @@
-/****** Object:  Table [dbo].[stock_jornada]    Script Date: 12/02/2021 09:21:25 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE TABLE [dbo].[stock_jornada](
 	[IdStockJornada] [int] NOT NULL,
-	[IdJornada] [int] NOT NULL,
-	[Fecha] [int] NOT NULL,
-	[IdStock] [int] NOT NULL,
-	[IdBodega] [int] NOT NULL,
-	[IdPropietarioBodega] [int] NOT NULL,
-	[IdProductoBodega] [int] NOT NULL,
+	[IdJornadaSistema] [int] NULL,
+	[Fecha] [date] NULL,
+	[IdBodega] [int] NULL,
+	[IdStock] [int] NULL,
+	[IdPropietarioBodega] [int] NULL,
+	[IdProductoBodega] [int] NULL,
 	[IdProductoEstado] [int] NULL,
 	[IdPresentacion] [int] NULL,
 	[IdUnidadMedida] [int] NULL,
-	[IdUbicacion] [int] NOT NULL,
+	[IdUbicacion] [int] NULL,
 	[IdUbicacion_anterior] [int] NULL,
 	[IdRecepcionEnc] [int] NULL,
 	[IdRecepcionDet] [int] NULL,
 	[IdPedidoEnc] [int] NULL,
 	[IdPickingEnc] [int] NULL,
 	[IdDespachoEnc] [int] NULL,
-	[lote] [nvarchar](50) NOT NULL,
+	[lote] [nvarchar](50) NULL,
 	[lic_plate] [nvarchar](50) NULL,
 	[serial] [nvarchar](50) NULL,
-	[cantidad] [float] NOT NULL,
+	[cantidad] [float] NULL,
 	[fecha_ingreso] [datetime] NULL,
 	[fecha_vence] [datetime] NULL,
 	[uds_lic_plate] [float] NULL,
 	[no_bulto] [int] NULL,
 	[fecha_manufactura] [datetime] NULL,
 	[añada] [int] NULL,
-	[user_agr] [nvarchar](50) NOT NULL,
-	[fec_agr] [datetime] NOT NULL,
-	[user_mod] [nvarchar](50) NOT NULL,
-	[fec_mod] [datetime] NOT NULL,
-	[activo] [bit] NOT NULL,
+	[user_agr] [nvarchar](50) NULL,
+	[fec_agr] [datetime] NULL,
+	[user_mod] [nvarchar](50) NULL,
+	[fec_mod] [datetime] NULL,
+	[activo] [bit] NULL,
 	[peso] [float] NULL,
 	[temperatura] [float] NULL,
 	[atributo_variante_1] [nvarchar](25) NULL,
 	[pallet_no_estandar] [bit] NULL,
+	[Propietario] [nvarchar](100) NULL,
+	[Proveedor] [nvarchar](100) NULL,
+	[Bodega] [nvarchar](50) NULL,
+	[IdOrdenCompraEnc] [int] NULL,
+	[No_DocumentoOC] [nvarchar](30) NULL,
+	[No_DocumentoRec] [nvarchar](50) NULL,
+	[ReferenciaOC] [nvarchar](100) NULL,
+	[Fecha_Recepcion] [datetime] NULL,
+	[TipoTrans] [nvarchar](25) NULL,
+	[Fecha_Agrego] [datetime] NULL,
+	[codigo_producto] [nvarchar](50) NULL,
+	[codigo_barra_producto] [nvarchar](35) NULL,
+	[nombre_producto] [nvarchar](100) NULL,
+	[existencia] [float] NULL,
+	[nom_umBas] [nvarchar](50) NULL,
+	[nom_estado_producto] [nvarchar](50) NULL,
+	[nom_presentacion_producto] [nvarchar](50) NULL,
+	[ubicacion_origen] [nvarchar](200) NULL,
+	[no_poliza] [nvarchar](50) NULL,
 	[valor_aduana] [float] NULL,
 	[valor_fob] [float] NULL,
 	[valor_iva] [float] NULL,
@@ -49,150 +61,13 @@ CREATE TABLE [dbo].[stock_jornada](
 	[valor_seguro] [float] NULL,
 	[valor_flete] [float] NULL,
 	[peso_neto] [float] NULL,
-	[peso_bruto] [float] NULL,
- CONSTRAINT [PK_stock_jornada_1] PRIMARY KEY CLUSTERED 
+	[numero_orden] [nvarchar](50) NULL,
+	[codigo_regimen] [nvarchar](20) NULL,
+	[nombre_regimen] [nvarchar](500) NULL,
+	[dias_vencimiento_regimen] [int] NULL,
+ CONSTRAINT [PK_stock_jornada] PRIMARY KEY CLUSTERED 
 (
 	[IdStockJornada] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_lote]  DEFAULT ('') FOR [lote]
-GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_cantidad]  DEFAULT ((0)) FOR [cantidad]
-GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_fecha_ingreso]  DEFAULT (getdate()) FOR [fecha_ingreso]
-GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_fecha_vence]  DEFAULT (getdate()) FOR [fecha_vence]
-GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_peso]  DEFAULT ((0)) FOR [peso]
-GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_temperatura]  DEFAULT ((0)) FOR [temperatura]
-GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF__stock_jor__palle__371E63F3]  DEFAULT ((0)) FOR [pallet_no_estandar]
-GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_valor_aduana]  DEFAULT ((0)) FOR [valor_aduana]
-GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_valor_fob]  DEFAULT ((0)) FOR [valor_fob]
-GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_valor_iva]  DEFAULT ((0)) FOR [valor_iva]
-GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_valor_dai]  DEFAULT ((0)) FOR [valor_dai]
-GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_valor_seguro]  DEFAULT ((0)) FOR [valor_seguro]
-GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_valor_flete]  DEFAULT ((0)) FOR [valor_flete]
-GO
-
-ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_peso_bruto]  DEFAULT ((0)) FOR [peso_bruto]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH CHECK ADD  CONSTRAINT [FK_stock_jornada_producto_bodega] FOREIGN KEY([IdProductoBodega])
-REFERENCES [dbo].[producto_bodega] ([IdProductoBodega])
-GO
-
-ALTER TABLE [dbo].[stock_jornada] CHECK CONSTRAINT [FK_stock_jornada_producto_bodega]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH CHECK ADD  CONSTRAINT [FK_stock_jornada_producto_bodega_rec] FOREIGN KEY([IdProductoBodega])
-REFERENCES [dbo].[producto_bodega] ([IdProductoBodega])
-GO
-
-ALTER TABLE [dbo].[stock_jornada] CHECK CONSTRAINT [FK_stock_jornada_producto_bodega_rec]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH CHECK ADD  CONSTRAINT [FK_stock_jornada_producto_estado] FOREIGN KEY([IdProductoEstado])
-REFERENCES [dbo].[producto_estado] ([IdEstado])
-GO
-
-ALTER TABLE [dbo].[stock_jornada] CHECK CONSTRAINT [FK_stock_jornada_producto_estado]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH CHECK ADD  CONSTRAINT [FK_stock_jornada_producto_estado_rec] FOREIGN KEY([IdProductoEstado])
-REFERENCES [dbo].[producto_estado] ([IdEstado])
-GO
-
-ALTER TABLE [dbo].[stock_jornada] CHECK CONSTRAINT [FK_stock_jornada_producto_estado_rec]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH CHECK ADD  CONSTRAINT [FK_stock_jornada_producto_presentacion] FOREIGN KEY([IdPresentacion])
-REFERENCES [dbo].[producto_presentacion] ([IdPresentacion])
-GO
-
-ALTER TABLE [dbo].[stock_jornada] CHECK CONSTRAINT [FK_stock_jornada_producto_presentacion]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH CHECK ADD  CONSTRAINT [FK_stock_jornada_producto_presentacion_rec] FOREIGN KEY([IdPresentacion])
-REFERENCES [dbo].[producto_presentacion] ([IdPresentacion])
-GO
-
-ALTER TABLE [dbo].[stock_jornada] CHECK CONSTRAINT [FK_stock_jornada_producto_presentacion_rec]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH CHECK ADD  CONSTRAINT [FK_stock_jornada_propietario_bodega] FOREIGN KEY([IdPropietarioBodega])
-REFERENCES [dbo].[propietario_bodega] ([IdPropietarioBodega])
-GO
-
-ALTER TABLE [dbo].[stock_jornada] CHECK CONSTRAINT [FK_stock_jornada_propietario_bodega]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH CHECK ADD  CONSTRAINT [FK_stock_jornada_propietario_bodega_rec] FOREIGN KEY([IdPropietarioBodega])
-REFERENCES [dbo].[propietario_bodega] ([IdPropietarioBodega])
-GO
-
-ALTER TABLE [dbo].[stock_jornada] CHECK CONSTRAINT [FK_stock_jornada_propietario_bodega_rec]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH CHECK ADD  CONSTRAINT [FK_stock_jornada_trans_pe_enc] FOREIGN KEY([IdPedidoEnc])
-REFERENCES [dbo].[trans_pe_enc] ([IdPedidoEnc])
-GO
-
-ALTER TABLE [dbo].[stock_jornada] CHECK CONSTRAINT [FK_stock_jornada_trans_pe_enc]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH CHECK ADD  CONSTRAINT [FK_stock_jornada_trans_pe_enc_rec] FOREIGN KEY([IdPedidoEnc])
-REFERENCES [dbo].[trans_pe_enc] ([IdPedidoEnc])
-GO
-
-ALTER TABLE [dbo].[stock_jornada] CHECK CONSTRAINT [FK_stock_jornada_trans_pe_enc_rec]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH CHECK ADD  CONSTRAINT [FK_stock_jornada_trans_re_det] FOREIGN KEY([IdRecepcionDet], [IdRecepcionEnc])
-REFERENCES [dbo].[trans_re_det] ([IdRecepcionDet], [IdRecepcionEnc])
-GO
-
-ALTER TABLE [dbo].[stock_jornada] CHECK CONSTRAINT [FK_stock_jornada_trans_re_det]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH NOCHECK ADD  CONSTRAINT [FK_stock_jornada_unidad_medida] FOREIGN KEY([IdUnidadMedida])
-REFERENCES [dbo].[unidad_medida] ([IdUnidadMedida])
-GO
-
-ALTER TABLE [dbo].[stock_jornada] NOCHECK CONSTRAINT [FK_stock_jornada_unidad_medida]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH NOCHECK ADD  CONSTRAINT [FK_stock_jornada_unidad_medida_rec] FOREIGN KEY([IdUnidadMedida])
-REFERENCES [dbo].[unidad_medida] ([IdUnidadMedida])
-GO
-
-ALTER TABLE [dbo].[stock_jornada] NOCHECK CONSTRAINT [FK_stock_jornada_unidad_medida_rec]
-GO
-
-ALTER TABLE [dbo].[stock_jornada]  WITH CHECK ADD  CONSTRAINT [stock_jornada_NonNegative_20200115_EJC] CHECK  (([Cantidad]>(0)))
-GO
-
-ALTER TABLE [dbo].[stock_jornada] CHECK CONSTRAINT [stock_jornada_NonNegative_20200115_EJC]
-GO
-
