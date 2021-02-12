@@ -1,6 +1,3 @@
-USE [IMS4MB_BYB_QA]
-GO
-
 /****** Object:  Table [dbo].[stock_jornada]    Script Date: 12/02/2021 09:21:25 ******/
 SET ANSI_NULLS ON
 GO
@@ -9,10 +6,11 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[stock_jornada](
+	[IdStockJornada] [int] NOT NULL,
 	[IdJornada] [int] NOT NULL,
 	[Fecha] [int] NOT NULL,
-	[IdBodega] [int] NOT NULL,
 	[IdStock] [int] NOT NULL,
+	[IdBodega] [int] NOT NULL,
 	[IdPropietarioBodega] [int] NOT NULL,
 	[IdProductoBodega] [int] NOT NULL,
 	[IdProductoEstado] [int] NULL,
@@ -44,9 +42,17 @@ CREATE TABLE [dbo].[stock_jornada](
 	[temperatura] [float] NULL,
 	[atributo_variante_1] [nvarchar](25) NULL,
 	[pallet_no_estandar] [bit] NULL,
- CONSTRAINT [PK_stock_jornada] PRIMARY KEY CLUSTERED 
+	[valor_aduana] [float] NULL,
+	[valor_fob] [float] NULL,
+	[valor_iva] [float] NULL,
+	[valor_dai] [float] NULL,
+	[valor_seguro] [float] NULL,
+	[valor_flete] [float] NULL,
+	[peso_neto] [float] NULL,
+	[peso_bruto] [float] NULL,
+ CONSTRAINT [PK_stock_jornada_1] PRIMARY KEY CLUSTERED 
 (
-	[IdStock] ASC
+	[IdStockJornada] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -69,7 +75,28 @@ GO
 ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_temperatura]  DEFAULT ((0)) FOR [temperatura]
 GO
 
-ALTER TABLE [dbo].[stock_jornada] ADD  DEFAULT ((0)) FOR [pallet_no_estandar]
+ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF__stock_jor__palle__371E63F3]  DEFAULT ((0)) FOR [pallet_no_estandar]
+GO
+
+ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_valor_aduana]  DEFAULT ((0)) FOR [valor_aduana]
+GO
+
+ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_valor_fob]  DEFAULT ((0)) FOR [valor_fob]
+GO
+
+ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_valor_iva]  DEFAULT ((0)) FOR [valor_iva]
+GO
+
+ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_valor_dai]  DEFAULT ((0)) FOR [valor_dai]
+GO
+
+ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_valor_seguro]  DEFAULT ((0)) FOR [valor_seguro]
+GO
+
+ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_valor_flete]  DEFAULT ((0)) FOR [valor_flete]
+GO
+
+ALTER TABLE [dbo].[stock_jornada] ADD  CONSTRAINT [DF_stock_jornada_peso_bruto]  DEFAULT ((0)) FOR [peso_bruto]
 GO
 
 ALTER TABLE [dbo].[stock_jornada]  WITH CHECK ADD  CONSTRAINT [FK_stock_jornada_producto_bodega] FOREIGN KEY([IdProductoBodega])
@@ -168,3 +195,4 @@ GO
 
 ALTER TABLE [dbo].[stock_jornada] CHECK CONSTRAINT [stock_jornada_NonNegative_20200115_EJC]
 GO
+
