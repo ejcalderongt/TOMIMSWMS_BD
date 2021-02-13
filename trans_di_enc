@@ -1,0 +1,94 @@
+USE [IMS4MB_BYB_QA]
+GO
+
+/****** Object:  Table [dbo].[trans_di_enc]    Script Date: 13/02/2021 17:25:21 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[trans_di_enc](
+	[IdOrdenCompraEnc] [int] NOT NULL,
+	[IdTipoIngresoOC] [int] NULL,
+	[IdEstadoOC] [int] NULL,	
+	[Fecha_Creacion] [datetime] NULL,
+	[Hora_Creacion] [datetime] NULL,
+	[No_Documento] [nvarchar](30) NULL,
+	[User_Agr] [nvarchar](50) NULL,
+	[Fec_Agr] [datetime] NULL,
+	[User_Mod] [nvarchar](50) NULL,
+	[Fec_Mod] [datetime] NULL,
+	[Procedencia] [nvarchar](150) NULL,
+	[No_Marchamo] [nvarchar](50) NULL,
+	[Referencia] [nvarchar](100) NULL,
+	[Observacion] [text] NULL,
+	[Control_Poliza] [bit] NULL,
+	[Activo] [bit] NULL,
+	[Fecha_Recepcion] [datetime] NULL,
+	[Hora_Inicio_Recepcion] [datetime] NULL,
+	[Hora_Fin_Recepcion] [datetime] NULL,
+	[IdMuelleRecepcion] [int] NULL,
+	[Programar_Recepcion] [bit] NULL,
+	[IdMotivoAnulacionBodega] [int] NULL,
+	[Enviado_A_ERP] [bit] NULL,
+	[serie] [nvarchar](25) NULL,
+	[correlativo] [int] NULL,
+	[IdDespachoEnc] [int] NULL,
+	[No_Ticket_TMS] [nvarchar](50) NULL,
+	[IdNoDocumentoRef] [int] NULL
+ CONSTRAINT [PK_trans_di_enc] PRIMARY KEY CLUSTERED 
+(
+	[IdOrdenCompraEnc] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[trans_di_enc] ADD  CONSTRAINT [DF_trans_di_enc_hora_creacion]  DEFAULT (getdate()) FOR [Hora_Creacion]
+GO
+
+ALTER TABLE [dbo].[trans_di_enc] ADD  CONSTRAINT [DF_trans_di_enc_IdMotivoAnulacion]  DEFAULT ((0)) FOR [IdMotivoAnulacionBodega]
+GO
+
+ALTER TABLE [dbo].[trans_di_enc] ADD  DEFAULT ((0)) FOR [Enviado_A_ERP]
+GO
+
+--ALTER TABLE [dbo].[trans_di_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_di_enc_motivo_devolucion] FOREIGN KEY([IdMotivoDevolucion])
+--REFERENCES [dbo].[motivo_devolucion] ([IdMotivoDevolucion])
+--GO
+
+--ALTER TABLE [dbo].[trans_di_enc] CHECK CONSTRAINT [FK_trans_di_enc_motivo_devolucion]
+--GO
+
+--ALTER TABLE [dbo].[trans_di_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_di_enc_propietario_bodega] FOREIGN KEY([IdPropietarioBodega])
+--REFERENCES [dbo].[propietario_bodega] ([IdPropietarioBodega])
+--GO
+
+--ALTER TABLE [dbo].[trans_di_enc] CHECK CONSTRAINT [FK_trans_di_enc_propietario_bodega]
+--GO
+
+--ALTER TABLE [dbo].[trans_di_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_di_enc_proveedor] FOREIGN KEY([IdProveedorBodega])
+--REFERENCES [dbo].[proveedor_bodega] ([IdAsignacion])
+--GO
+
+--ALTER TABLE [dbo].[trans_di_enc] CHECK CONSTRAINT [FK_trans_di_enc_proveedor]
+--GO
+
+ALTER TABLE [dbo].[trans_di_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_di_enc_trans_oc_estado] FOREIGN KEY([IdEstadoOC])
+REFERENCES [dbo].[trans_oc_estado] ([IdEstadoOC])
+GO
+
+ALTER TABLE [dbo].[trans_di_enc] CHECK CONSTRAINT [FK_trans_di_enc_trans_oc_estado]
+GO
+
+ALTER TABLE [dbo].[trans_di_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_di_enc_trans_oc_ti] FOREIGN KEY([IdTipoIngresoOC])
+REFERENCES [dbo].[trans_oc_ti] ([IdTipoIngresoOC])
+GO
+
+ALTER TABLE [dbo].[trans_di_enc] CHECK CONSTRAINT [FK_trans_di_enc_trans_oc_ti]
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Marítimo, Terrestre, Aéreo' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'trans_di_enc', @level2type=N'COLUMN',@level2name=N'IdTipoIngresoOC'
+GO
+
+
