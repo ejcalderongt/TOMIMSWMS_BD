@@ -1,0 +1,123 @@
+/****** Object:  Table [dbo].[trans_di_det]    Script Date: 13/02/2021 17:31:09 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+begin transaction
+
+CREATE TABLE [dbo].[trans_di_det](
+	[IdTransDIEnc] [int] NOT NULL,
+	[IdTransDIDet] [int] NOT NULL,
+	[IdBodega] [int] NOT NULL,
+	[IdPropietario] [int] NOT NULL,
+	[IdProveedor] [int] NOT NULL,
+	[IdMotivoDevolucion] [int] NULL,
+	[IdAcuerdoComercial] [int] NULL,
+	[IdProducto] [int] NOT NULL,
+	[IdPresentacion] [int] NULL,
+	[IdUnidadMedidaBasica] [int] NULL,	
+	[No_Linea] [int] NULL,	
+	[codigo_producto] [nvarchar](50) NULL,
+	[nombre_producto] [nvarchar](100) NULL,
+	[nombre_presentacion] [nvarchar](50) NULL,
+	[nombre_unidad_medida_basica] [nvarchar](50) NULL,
+	[cantidad] [float] NULL,
+	[cantidad_recibida] [float] NULL,
+	[costo] [float] NULL,
+	[valor_aduana] [float] NULL,
+	[valor_fob] [float] NULL,
+	[valor_iva] [float] NULL,
+	[valor_dai] [float] NULL,
+	[valor_seguro] [float] NULL,
+	[valor_flete] [float] NULL,
+	[peso_bruto] [float] NULL,
+	[peso_neto] [float] NULL,	
+	[peso_recibido] [float] NULL,
+	[total_linea] [float] NULL,
+	[user_agr] [nvarchar](50) NOT NULL,
+	[fec_agr] [datetime] NOT NULL,
+	[user_mod] [nvarchar](50) NOT NULL,
+	[fec_mod] [datetime] NOT NULL,
+	[activo] [bit] NOT NULL,
+	
+ CONSTRAINT [PK_trans_di_det] PRIMARY KEY CLUSTERED 
+(
+	[IdTransDIDet] ASC,
+	[IdTransDIEnc] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[trans_di_det] ADD  DEFAULT ((0)) FOR [valor_aduana]
+GO
+
+ALTER TABLE [dbo].[trans_di_det] ADD  DEFAULT ((0)) FOR [valor_fob]
+GO
+
+ALTER TABLE [dbo].[trans_di_det] ADD  DEFAULT ((0)) FOR [valor_iva]
+GO
+
+ALTER TABLE [dbo].[trans_di_det] ADD  DEFAULT ((0)) FOR [valor_dai]
+GO
+
+ALTER TABLE [dbo].[trans_di_det] ADD  DEFAULT ((0)) FOR [valor_seguro]
+GO
+
+ALTER TABLE [dbo].[trans_di_det] ADD  DEFAULT ((0)) FOR [valor_flete]
+GO
+
+ALTER TABLE [dbo].[trans_di_det] ADD  DEFAULT ((0)) FOR [peso_bruto]
+GO
+
+ALTER TABLE [dbo].[trans_di_det]  WITH CHECK ADD  CONSTRAINT [FK_trans_di_det_motivo_devolucion] FOREIGN KEY([IdMotivoDevolucion])
+REFERENCES [dbo].[motivo_devolucion] ([IdMotivoDevolucion])
+GO
+
+ALTER TABLE [dbo].[trans_di_det] CHECK CONSTRAINT [FK_trans_di_det_motivo_devolucion]
+GO
+
+ALTER TABLE [dbo].[trans_di_det]  WITH CHECK ADD  CONSTRAINT [FK_trans_di_det_producto_bodega] FOREIGN KEY([IdProducto])
+REFERENCES [dbo].[producto_bodega] ([IdProductoBodega])
+GO
+
+ALTER TABLE [dbo].[trans_di_det] CHECK CONSTRAINT [FK_trans_di_det_producto_bodega]
+GO
+
+ALTER TABLE [dbo].[trans_di_det]  WITH CHECK ADD  CONSTRAINT [FK_trans_trans_di_det_producto_presentacion] FOREIGN KEY([IdPresentacion])
+REFERENCES [dbo].[producto_presentacion] ([IdPresentacion])
+GO
+
+ALTER TABLE [dbo].[trans_di_det] CHECK CONSTRAINT [FK_trans_trans_di_det_producto_presentacion]
+GO
+
+ALTER TABLE [dbo].[trans_di_det]  WITH CHECK ADD  CONSTRAINT [FK_trans_trans_di_det_trans_di_enc] FOREIGN KEY([IdTransDIEnc])
+REFERENCES [dbo].[trans_di_enc] ([IdTransDIEnc])
+GO
+
+ALTER TABLE [dbo].[trans_di_det] CHECK CONSTRAINT [FK_trans_trans_di_det_trans_di_enc]
+GO
+
+ALTER TABLE [dbo].[trans_di_det]  WITH NOCHECK ADD  CONSTRAINT [FK_trans_trans_di_det_unidad_medida] FOREIGN KEY([IdUnidadMedidaBasica])
+REFERENCES [dbo].[unidad_medida] ([IdUnidadMedida])
+GO
+
+ALTER TABLE [dbo].[trans_di_det] NOCHECK CONSTRAINT [FK_trans_trans_di_det_unidad_medida]
+GO
+
+ALTER TABLE [dbo].[trans_di_det]  WITH CHECK ADD  CONSTRAINT [FK_trans_di_det_propietario] FOREIGN KEY([IdPropietario])
+REFERENCES [dbo].[propietarios] ([IdPropietario])
+GO
+
+ALTER TABLE [dbo].[trans_di_det] CHECK CONSTRAINT [FK_trans_di_det_propietario]
+GO
+
+ALTER TABLE [dbo].[trans_di_det]  WITH CHECK ADD  CONSTRAINT [FK_trans_di_det_proveedor] FOREIGN KEY([IdProveedor])
+REFERENCES [dbo].[proveedor] ([IdProveedor])
+GO
+
+ALTER TABLE [dbo].[trans_di_det] CHECK CONSTRAINT [FK_trans_di_det_proveedor]
+GO
+
+commit transaction
