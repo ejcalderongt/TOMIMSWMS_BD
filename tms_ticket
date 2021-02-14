@@ -55,4 +55,6 @@ Apellidos_Piloto nvarchar(150),
 No_TC nvarchar(50),
 fecha_procesado datetime
 
+alter table tms_ticket add 
+fecha_asignado datetime
 
