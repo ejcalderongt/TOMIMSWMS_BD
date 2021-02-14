@@ -5,7 +5,7 @@ bodega_ubicacion.IdTramo, bodega_ubicacion.indice_x, bodega_ubicacion.nivel, bod
 bodega_ubicacion.activo, bodega_ubicacion.bloqueada, bodega_ubicacion.acepta_pallet, bodega_area.IdBodega, regla_ubic_det_prop.IdPropietarioBodega, 
 regla_ubic_det_prop.Activo AS regla_ubic_det_prop_Activo, propietario_bodega.IdPropietario, regla_ubic_det_ir.IdIndiceRotacion AS IdIndiceRotacionRegla, 
 regla_ubic_det_tr.IdTipoRotacion AS IdTipoRotacionRegla, regla_ubic_det_tp.IdTipoProducto, regla_ubic_det_tp.Activo AS regla_ubic_det_tp_Activo, regla_ubic_det_pe.IdEstado, 
-regla_ubic_det_pe.Activo AS regla_ubic_det_pe_Activo, regla_ubic_det_pp.IdPresentacion, Nombre_Completo_Ubicacion(bodega_ubicacion.IdUbicacion,bodega_ubicacion.IdBodega) as Nombre_Completo
+regla_ubic_det_pe.Activo AS regla_ubic_det_pe_Activo, regla_ubic_det_pp.IdPresentacion, dbo.Nombre_Completo_Ubicacion(bodega_ubicacion.IdUbicacion,bodega_ubicacion.IdBodega) as Nombre_Completo
 FROM regla_ubic_det_tp INNER JOIN
 bodega_ubicacion INNER JOIN
 bodega_tramo ON bodega_ubicacion.IdTramo = bodega_tramo.IdTramo AND bodega_ubicacion.IdSector = bodega_tramo.IdSector AND 
