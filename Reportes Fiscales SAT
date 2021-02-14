@@ -1,0 +1,8 @@
+
+ insert into menu_sistema  values('2.5','Fiscal','pgReporteFiscal',2,'2',0)
+ insert into menu_sistema  values('2.5.1','Fiscal menu','mnuRepFiscales',3,'2.5',0)
+ insert into menu_sistema  values('2.5.1.1','Cuentas de orden','cmdCtaOrden',4,'2.5.1',0)
+ insert into menu_sistema  values('2.5.1.2','Resumen historico general','cmdHistResGeneral',4,'2.5.1',0)
+ insert into menu_sistema  values('2.5.1.3','Resumen historico fiscal','cmdHistResFiscal',4,'2.5.1',0)
+ insert into menu_sistema  values('2.5.1.4','Mercaderia vencida','cmdMercaVencida',4,'2.5.1',0)
+ insert into menu_sistema  values('2.5.1.5','Resumen por cliente','cmdResumenCliente',4,'2.5.1',0)
