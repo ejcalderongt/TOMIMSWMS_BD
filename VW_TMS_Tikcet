@@ -33,6 +33,8 @@ FROM            dbo.empresa_transporte INNER JOIN
 /***************************************************************************************************************************/
 /***** GT 15022021 ACTUALIZACIÓN A LA VISTA PARA CARGAR LOS TICKETS REGISTRADOS EN TMS  *************************************/
 
+alter VIEW VW_TMS_Tikcet as
+
 SELECT        
 dbo.tms_ticket.IdTicket, dbo.tms_ticket.IdEmpresa, dbo.tms_ticket.IdPropietario, dbo.tms_ticket.IdUbicacionDestino, dbo.tms_ticket.IdPiloto, dbo.tms_ticket.IdVehiculo, dbo.tms_ticket.IdEmpresaTransporte, 
 dbo.tms_ticket.Tipo_Operacion, dbo.tms_ticket.Fecha_Ingreso, dbo.tms_ticket.Fecha_Salida, dbo.tms_ticket.Estado, dbo.tms_ticket.No_Poliza, 
