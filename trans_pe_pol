@@ -47,3 +47,13 @@ clase VARCHAR(50) NULL,
 mod_transporte VARCHAR(50) NULL,
 total_liquidar FLOAT NULL,
 total_general FLOAT NULL
+
+/*******************************************************************/
+/*GT 15022021 campos faltantes que estaban en wms pero no en sql **/
+
+alter table trans_pe_pol
+add codigo_poliza nvarchar(50) null, ticket nvarchar(50) null, numero_orden nvarchar(50) null, fecha_aceptacion datetime null, 
+fecha_llegada datetime null, total_otros float null, IdRegimen int null
+
+
+
