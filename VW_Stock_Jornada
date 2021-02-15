@@ -19,9 +19,8 @@ SELECT        stock.IdBodega, stock.IdStock, stock.IdPropietarioBodega, stock.Id
                          producto_estado.nombre AS Nom_Estado_Producto, producto_presentacion.nombre AS Presentacion_Producto, dbo.Nombre_Completo_Ubicacion(bodega_ubicacion.IdUbicacion, bodega_ubicacion.IdBodega) 
                          AS Ubicacion_Origen, trans_oc_pol.NoPoliza AS No_Poliza, trans_oc_det.valor_aduana, trans_oc_det.valor_fob, trans_oc_det.valor_iva, trans_oc_det.valor_dai, trans_oc_det.valor_seguro, 
                          trans_oc_det.valor_flete, trans_oc_det.peso_neto, trans_oc_pol.numero_orden, regimen_fiscal.codigo_regimen, regimen_fiscal.descripcion AS Nombre_Regimen, 
-                         regimen_fiscal.dias_vencimiento AS dias_vencimiento_regimen
-FROM            regimen_fiscal INNER JOIN
-                         trans_oc_pol ON regimen_fiscal.IdRegimen = trans_oc_pol.IdRegimen RIGHT OUTER JOIN
+                         regimen_fiscal.dias_vencimiento AS dias_vencimiento_regimen, trans_oc_enc.No_Ticket_TMS, tms_ticket.Fecha_Ingreso AS Fecha_Ticket_TMS
+FROM            tms_ticket RIGHT OUTER JOIN
                          bodega_tramo INNER JOIN
                          trans_re_det INNER JOIN
                          producto_bodega INNER JOIN
@@ -47,6 +46,8 @@ FROM            regimen_fiscal INNER JOIN
                          bodega_area ON bodega_sector.IdArea = bodega_area.IdArea AND bodega_sector.IdBodega = bodega_area.IdBodega ON bodega_tramo.IdSector = bodega_sector.IdSector AND 
                          bodega_tramo.IdBodega = bodega_sector.IdBodega AND bodega_tramo.IdArea = bodega_sector.IdArea INNER JOIN
                          trans_oc_det ON producto_bodega.IdProductoBodega = trans_oc_det.IdProductoBodega AND unidad_medida.IdUnidadMedida = trans_oc_det.IdUnidadMedidaBasica AND 
-                         trans_oc_enc.IdOrdenCompraEnc = trans_oc_det.IdOrdenCompraEnc ON trans_oc_pol.IdOrdenCompraEnc = trans_re_oc.IdOrdenCompraEnc LEFT OUTER JOIN
+                         trans_oc_enc.IdOrdenCompraEnc = trans_oc_det.IdOrdenCompraEnc ON tms_ticket.IdTicket = trans_oc_enc.No_Ticket_TMS LEFT OUTER JOIN
+                         regimen_fiscal INNER JOIN
+                         trans_oc_pol ON regimen_fiscal.IdRegimen = trans_oc_pol.IdRegimen ON trans_re_oc.IdOrdenCompraEnc = trans_oc_pol.IdOrdenCompraEnc LEFT OUTER JOIN
                          producto_presentacion ON trans_oc_det.IdPresentacion = producto_presentacion.IdPresentacion AND trans_re_det.IdPresentacion = producto_presentacion.IdPresentacion AND 
                          producto.IdProducto = producto_presentacion.IdProducto
