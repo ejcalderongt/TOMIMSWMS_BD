@@ -14,7 +14,7 @@ SELECT        dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBode
                          dbo.stock.fec_mod, dbo.stock.activo, dbo.stock.peso, dbo.stock.temperatura, dbo.stock.atributo_variante_1, dbo.stock.pallet_no_estandar, dbo.propietarios.nombre_comercial AS Propietario, 
                          dbo.proveedor.nombre AS Proveedor, dbo.bodega.nombre AS Bodega, dbo.trans_re_oc.IdOrdenCompraEnc, dbo.trans_oc_enc.No_Documento AS No_DocumentoOC, dbo.trans_re_oc.no_docto AS No_DocumentoRec, 
                          dbo.trans_oc_enc.Referencia AS ReferenciaOC, dbo.trans_re_enc.fecha_recepcion, dbo.trans_re_tr.TipoTrans, dbo.trans_re_enc.fec_agr AS Fecha_Agrego, dbo.producto.codigo AS Codigo_Producto, 
-                         dbo.producto.codigo_barra AS Barra_Producto, dbo.producto.nombre AS Nombre_Producto, 
+                         dbo.producto.codigo_barra AS Codigo_Barra_Producto, dbo.producto.nombre AS Nombre_Producto, 
                          CASE WHEN dbo.stock.IdPresentacion <> 0 THEN dbo.stock.cantidad / dbo.producto_presentacion.factor ELSE dbo.stock.cantidad END AS Existencia, dbo.unidad_medida.Nombre AS UM, 
                          dbo.producto_estado.nombre AS Estado_Producto, dbo.producto_presentacion.nombre AS Presentacion_Producto, dbo.Nombre_Completo_Ubicacion(dbo.bodega_ubicacion.IdUbicacion, dbo.bodega_ubicacion.IdBodega) 
                          AS Ubicacion_Origen, dbo.trans_oc_pol.NoPoliza, dbo.trans_oc_det.valor_aduana, dbo.trans_oc_det.valor_fob, dbo.trans_oc_det.valor_iva, dbo.trans_oc_det.valor_dai, dbo.trans_oc_det.valor_seguro, 
