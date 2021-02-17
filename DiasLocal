@@ -1,0 +1,33 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Carolina Fuentes
+-- Create date: 16-02-2021
+-- Description:	Función para obtener los días locales del cliente recibiendo los parámentros de IdCliente,IdFamilia, IdClasificacion
+-- =============================================
+CREATE FUNCTION DiasLocal
+(
+	-- Add the parameters for the function here
+	@IdCliente INT,
+	@IdFamilia INT, 
+	@IdClasificacion INT
+)
+RETURNS INT
+AS
+BEGIN
+	DECLARE @resultado INT
+	-- Declare the return variable here
+	
+	SELECT @resultado = t.Dias_Local
+	FROM cliente_tiempos t 
+	WHERE (t.IdCliente=@IdCliente) 
+	And t.IdClasificacion = @IdClasificacion
+	And t.IdFamilia = @IdFamilia
+
+	RETURN @resultado;
+
+END
+GO
+
