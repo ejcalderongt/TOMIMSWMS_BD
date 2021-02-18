@@ -6,3 +6,7 @@ valor_dai float default 0,
 valor_seguro float default 0,
 valor_flete float default 0,
 peso_neto float default 0
+
+--CKFK 20200218
+ALTER TABLE trans_oc_det
+ADD peso_bruto FLOAT DEFAULT 0
