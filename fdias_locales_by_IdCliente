@@ -1,0 +1,24 @@
+
+
+CREATE FUNCTION [dbo].[fdias_locales_by_IdCliente] 
+(
+	@IdCliente INT,
+	@IdFamilia INT,
+	@IdClasificacion INT
+)
+RETURNS NVARCHAR(250)
+AS
+BEGIN
+	
+	DECLARE @resultado int
+	-- Declare the return variable here
+	
+	SELECT @resultado = (select Dias_Local from cliente_tiempos 
+	WHERE (IdCliente=@IdCliente AND IdClasificacion = @IdClasificacion AND IdFamilia = @IdFamilia) )
+	
+	RETURN @resultado;
+
+END
+
+GO
+
