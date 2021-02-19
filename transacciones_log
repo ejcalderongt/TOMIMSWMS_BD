@@ -1,0 +1,1 @@
+EXEC sp_rename 'transacciones_log.cantidad', 'cantidad_reabasto', 'COLUMN';
