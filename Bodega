@@ -10,4 +10,4 @@ ALTER TABLE bodega ADD control_tarifa_servicios BIT NOT NULL DEFAULT 0
 
 --'#CKFK 20210219
 ALTER TABLE bodega
-ADD Id_Motivo_Ubic_Reabasto BIT NOT NULL DEFAULT 0
+ADD Id_Motivo_Ubic_Reabasto INT NULL
