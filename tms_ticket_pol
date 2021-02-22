@@ -12,6 +12,7 @@ GO
 CREATE TABLE [dbo].[tms_ticket_pol](
 	[IdTicket] [int] NOT NULL,
 	[IdOrdenTmsEnc] [int] NOT NULL,
+	[IdRegimen] [int] NOT NULL,
 	[NoPoliza] [nvarchar](50) NULL,
 	[dua] [nvarchar](50) NULL,
 	[fecha_poliza] [datetime] NULL,
@@ -32,6 +33,7 @@ CREATE TABLE [dbo].[tms_ticket_pol](
 	[mod_transporte] [varchar](50) NULL,
 	[total_liquidar] [float] NULL,
 	[total_general] [float] NULL,
+	[codigo_barra] [nvarchar](1000) NULL,
  CONSTRAINT [PK_tms_ticket_pol] PRIMARY KEY CLUSTERED 
 (
 	[IdTicket] ASC,
@@ -39,3 +41,6 @@ CREATE TABLE [dbo].[tms_ticket_pol](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+--#EJC20210222
+ALTER TABLE tms_ticket_pol ADD Codigo_Barra nvarchar(1000)
