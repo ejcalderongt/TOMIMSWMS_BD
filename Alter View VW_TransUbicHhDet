@@ -1,39 +1,53 @@
-/****** Object:  View [dbo].[VW_TransUbicHhDet]    Script Date: 4/01/2021 17:44:03 ******/
+/****** Object:  View [dbo].[VW_TransUbicHhDet]    Script Date: 22/02/2021 09:28:38 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
+
 ALTER VIEW [dbo].[VW_TransUbicHhDet]
 AS
-SELECT        dbo.trans_ubic_hh_det.IdTareaUbicacionEnc, dbo.trans_ubic_hh_det.IdTareaUbicacionDet, dbo.trans_ubic_hh_det.IdStock, dbo.producto.nombre, dbo.trans_ubic_hh_det.IdUbicacionDestino, bodega_ubicacion_1.descripcion, 
-                         dbo.trans_ubic_hh_det.IdEstadoOrigen, dbo.trans_ubic_hh_det.IdEstadoDestino, dbo.trans_ubic_hh_det.IdOperador, dbo.trans_ubic_hh_det.HoraInicio, dbo.trans_ubic_hh_det.HoraFin, dbo.trans_ubic_hh_det.Realizado, 
-                         dbo.trans_ubic_hh_det.cantidad, dbo.trans_ubic_hh_det.activo, dbo.operador.nombres, dbo.producto.codigo, dbo.producto.serializado, dbo.producto_estado.IdEstado, dbo.producto_estado.nombre AS NomEstado, 
-                         dbo.trans_ubic_hh_stock.añada, dbo.trans_ubic_hh_stock.lote, CONVERT(char(10), dbo.trans_ubic_hh_stock.fecha_ingreso, 120) AS fecha_ingreso, dbo.producto_presentacion.nombre AS Presentacion, 
-                         dbo.unidad_medida.Nombre AS UnidadMedida, dbo.trans_ubic_hh_stock.fecha_vence, dbo.trans_ubic_hh_stock.serial, dbo.producto.IdPropietario, dbo.propietarios.nombre_comercial, dbo.trans_ubic_hh_det.recibido, 
-                         dbo.producto.IdProducto, dbo.producto_bodega.IdProductoBodega, dbo.producto.IdUnidadMedidaBasica, dbo.trans_ubic_hh_det.estado, dbo.trans_ubic_hh_det.IdUbicacionOrigen, dbo.producto_presentacion.IdPresentacion, 
-                         bodega_ubicacion_1.nivel, bodega_ubicacion_1.indice_x, dbo.bodega_tramo.descripcion AS Tramo, dbo.bodega_tramo.IdBodega
-FROM            dbo.bodega_tramo INNER JOIN
-                         dbo.bodega_ubicacion AS bodega_ubicacion_1 ON dbo.bodega_tramo.IdTramo = bodega_ubicacion_1.IdTramo AND dbo.bodega_tramo.IdBodega = bodega_ubicacion_1.IdBodega INNER JOIN
-                         dbo.trans_ubic_hh_det ON bodega_ubicacion_1.IdUbicacion = dbo.trans_ubic_hh_det.IdUbicacionDestino INNER JOIN
-                         dbo.producto_bodega ON dbo.producto_bodega.IdBodega = bodega_ubicacion_1.IdBodega INNER JOIN
-                         dbo.trans_ubic_hh_stock ON dbo.producto_bodega.IdProductoBodega = dbo.trans_ubic_hh_stock.IdProductoBodega AND dbo.trans_ubic_hh_det.IdTareaUbicacionDet = dbo.trans_ubic_hh_stock.IdTareaUbicacionDet AND 
-                         dbo.trans_ubic_hh_det.IdStock = dbo.trans_ubic_hh_stock.IdStock INNER JOIN
+SELECT        dbo.trans_ubic_hh_det.IdTareaUbicacionEnc, dbo.trans_ubic_hh_det.IdTareaUbicacionDet, dbo.trans_ubic_hh_det.IdStock, dbo.producto.nombre, 
+                         dbo.trans_ubic_hh_det.IdUbicacionDestino, bodega_ubicacion.descripcion, dbo.trans_ubic_hh_det.IdEstadoOrigen, dbo.trans_ubic_hh_det.IdEstadoDestino, 
+                         dbo.trans_ubic_hh_det.IdOperador, dbo.trans_ubic_hh_det.HoraInicio, dbo.trans_ubic_hh_det.HoraFin, dbo.trans_ubic_hh_det.Realizado, 
+                         dbo.trans_ubic_hh_det.cantidad, dbo.trans_ubic_hh_det.activo, dbo.operador.nombres, dbo.producto.codigo, dbo.producto.serializado, 
+                         dbo.producto_estado.IdEstado, dbo.producto_estado.nombre AS NomEstado, dbo.trans_ubic_hh_stock.añada, dbo.trans_ubic_hh_stock.lote, CONVERT(char(10), 
+                         dbo.trans_ubic_hh_stock.fecha_ingreso, 120) AS fecha_ingreso, dbo.producto_presentacion.nombre AS Presentacion, dbo.unidad_medida.Nombre AS UnidadMedida,
+                          dbo.trans_ubic_hh_stock.fecha_vence, dbo.trans_ubic_hh_stock.serial, dbo.producto.IdPropietario, dbo.propietarios.nombre_comercial, 
+                         dbo.trans_ubic_hh_det.recibido, dbo.producto.IdProducto, dbo.producto_bodega.IdProductoBodega, dbo.producto.IdUnidadMedidaBasica, 
+                         dbo.trans_ubic_hh_det.estado, dbo.trans_ubic_hh_det.IdUbicacionOrigen, dbo.producto_presentacion.IdPresentacion, bodega_ubicacion.nivel, 
+                         bodega_ubicacion.indice_x, dbo.bodega_tramo.descripcion AS Tramo, dbo.bodega_tramo.IdBodega
+FROM            dbo.trans_ubic_hh_enc INNER JOIN
+                         dbo.trans_ubic_hh_det ON dbo.trans_ubic_hh_enc.IdTareaUbicacionEnc = dbo.trans_ubic_hh_det.IdTareaUbicacionEnc INNER JOIN
+                         dbo.trans_ubic_hh_stock ON dbo.trans_ubic_hh_enc.IdTareaUbicacionEnc = dbo.trans_ubic_hh_stock.IdTareaUbicacionEnc INNER JOIN
+                         dbo.stock ON dbo.trans_ubic_hh_det.IdStock = dbo.stock.IdStock AND dbo.trans_ubic_hh_stock.IdStock = dbo.stock.IdStock INNER JOIN
+                         dbo.bodega_ubicacion ON dbo.stock.IdUbicacion = dbo.bodega_ubicacion.IdUbicacion AND dbo.stock.IdBodega = dbo.bodega_ubicacion.IdBodega INNER JOIN
+                         dbo.bodega_tramo ON dbo.bodega_ubicacion.IdTramo = dbo.bodega_tramo.IdTramo AND dbo.bodega_ubicacion.IdBodega = dbo.bodega_tramo.IdBodega INNER JOIN
+                         dbo.producto_bodega ON dbo.trans_ubic_hh_stock.IdProductoBodega = dbo.producto_bodega.IdProductoBodega AND dbo.trans_ubic_hh_stock.IdProductoBodega = dbo.producto_bodega.IdProductoBodega AND 
+                         dbo.stock.IdProductoBodega = dbo.producto_bodega.IdProductoBodega AND dbo.stock.IdProductoBodega = dbo.producto_bodega.IdProductoBodega INNER JOIN
                          dbo.producto ON dbo.producto_bodega.IdProducto = dbo.producto.IdProducto INNER JOIN
-                         dbo.unidad_medida ON dbo.trans_ubic_hh_stock.IdUnidadMedida = dbo.unidad_medida.IdUnidadMedida AND dbo.trans_ubic_hh_stock.IdUnidadMedida = dbo.unidad_medida.IdUnidadMedida INNER JOIN
-                         dbo.propietarios ON dbo.producto.IdPropietario = dbo.propietarios.IdPropietario LEFT OUTER JOIN
-                         dbo.producto_estado ON dbo.producto_estado.IdEstado = dbo.trans_ubic_hh_stock.IdProductoEstado AND dbo.producto_estado.IdPropietario = dbo.propietarios.IdPropietario AND 
-                         dbo.producto_estado.IdPropietario = dbo.propietarios.IdPropietario LEFT OUTER JOIN
-                         dbo.producto_presentacion ON dbo.trans_ubic_hh_stock.IdPresentacion = dbo.producto_presentacion.IdPresentacion AND dbo.trans_ubic_hh_stock.IdPresentacion = dbo.producto_presentacion.IdPresentacion LEFT OUTER JOIN
+                         dbo.producto_estado ON dbo.trans_ubic_hh_stock.IdProductoEstado = dbo.producto_estado.IdEstado AND dbo.trans_ubic_hh_stock.IdProductoEstado = dbo.producto_estado.IdEstado AND 
+                         dbo.stock.IdProductoEstado = dbo.producto_estado.IdEstado AND dbo.stock.IdProductoEstado = dbo.producto_estado.IdEstado INNER JOIN
+                         dbo.propietarios ON dbo.producto.IdPropietario = dbo.propietarios.IdPropietario AND dbo.producto_estado.IdPropietario = dbo.propietarios.IdPropietario AND 
+                         dbo.producto_estado.IdPropietario = dbo.propietarios.IdPropietario INNER JOIN
+                         dbo.unidad_medida ON dbo.trans_ubic_hh_stock.IdUnidadMedida = dbo.unidad_medida.IdUnidadMedida AND dbo.trans_ubic_hh_stock.IdUnidadMedida = dbo.unidad_medida.IdUnidadMedida AND 
+                         dbo.stock.IdUnidadMedida = dbo.unidad_medida.IdUnidadMedida AND dbo.stock.IdUnidadMedida = dbo.unidad_medida.IdUnidadMedida AND dbo.producto.IdUnidadMedidaBasica = dbo.unidad_medida.IdUnidadMedida AND 
+                         dbo.propietarios.IdPropietario = dbo.unidad_medida.IdPropietario LEFT OUTER JOIN
+                         dbo.producto_presentacion ON dbo.trans_ubic_hh_stock.IdPresentacion = dbo.producto_presentacion.IdPresentacion AND dbo.trans_ubic_hh_stock.IdPresentacion = dbo.producto_presentacion.IdPresentacion AND 
+                         dbo.stock.IdPresentacion = dbo.producto_presentacion.IdPresentacion AND dbo.stock.IdPresentacion = dbo.producto_presentacion.IdPresentacion AND 
+                         dbo.producto.IdProducto = dbo.producto_presentacion.IdProducto LEFT OUTER JOIN
                          dbo.operador ON dbo.trans_ubic_hh_det.IdOperador = dbo.operador.IdOperador
-GROUP BY dbo.trans_ubic_hh_det.IdTareaUbicacionEnc, dbo.trans_ubic_hh_det.IdTareaUbicacionDet, dbo.trans_ubic_hh_det.IdStock, dbo.producto.nombre, dbo.trans_ubic_hh_det.IdUbicacionDestino, bodega_ubicacion_1.descripcion, 
-                         dbo.trans_ubic_hh_det.IdEstadoOrigen, dbo.trans_ubic_hh_det.IdEstadoDestino, dbo.trans_ubic_hh_det.IdOperador, dbo.trans_ubic_hh_det.HoraInicio, dbo.trans_ubic_hh_det.HoraFin, dbo.trans_ubic_hh_det.cantidad, 
-                         dbo.operador.nombres, dbo.producto.codigo, dbo.producto_estado.IdEstado, dbo.producto_estado.nombre, dbo.trans_ubic_hh_stock.añada, dbo.trans_ubic_hh_stock.lote, CONVERT(char(10), 
-                         dbo.trans_ubic_hh_stock.fecha_ingreso, 120), dbo.producto_presentacion.nombre, dbo.unidad_medida.Nombre, dbo.trans_ubic_hh_stock.fecha_vence, dbo.trans_ubic_hh_stock.serial, dbo.producto.IdPropietario, 
-                         dbo.propietarios.nombre_comercial, dbo.trans_ubic_hh_det.recibido, dbo.producto.IdProducto, dbo.producto_bodega.IdProductoBodega, dbo.producto.IdUnidadMedidaBasica, dbo.trans_ubic_hh_det.estado, 
-                         dbo.trans_ubic_hh_det.IdUbicacionOrigen, dbo.producto_presentacion.IdPresentacion, bodega_ubicacion_1.nivel, bodega_ubicacion_1.indice_x, dbo.bodega_tramo.descripcion, dbo.bodega_tramo.IdBodega, 
-                         dbo.trans_ubic_hh_det.Realizado, dbo.trans_ubic_hh_det.activo, dbo.producto.serializado
+GROUP BY dbo.trans_ubic_hh_det.IdTareaUbicacionEnc, dbo.trans_ubic_hh_det.IdTareaUbicacionDet, dbo.trans_ubic_hh_det.IdStock, dbo.producto.nombre, 
+                         dbo.trans_ubic_hh_det.IdUbicacionDestino, bodega_ubicacion.descripcion, dbo.trans_ubic_hh_det.IdEstadoOrigen, dbo.trans_ubic_hh_det.IdEstadoDestino, 
+                         dbo.trans_ubic_hh_det.IdOperador, dbo.trans_ubic_hh_det.HoraInicio, dbo.trans_ubic_hh_det.HoraFin, dbo.trans_ubic_hh_det.cantidad, dbo.operador.nombres, 
+                         dbo.producto.codigo, dbo.producto_estado.IdEstado, dbo.producto_estado.nombre, dbo.trans_ubic_hh_stock.añada, dbo.trans_ubic_hh_stock.lote, 
+                         CONVERT(char(10), dbo.trans_ubic_hh_stock.fecha_ingreso, 120), dbo.producto_presentacion.nombre, dbo.unidad_medida.Nombre, 
+                         dbo.trans_ubic_hh_stock.fecha_vence, dbo.trans_ubic_hh_stock.serial, dbo.producto.IdPropietario, dbo.propietarios.nombre_comercial, 
+                         dbo.trans_ubic_hh_det.recibido, dbo.producto.IdProducto, dbo.producto_bodega.IdProductoBodega, dbo.producto.IdUnidadMedidaBasica, 
+                         dbo.trans_ubic_hh_det.estado, dbo.trans_ubic_hh_det.IdUbicacionOrigen, dbo.producto_presentacion.IdPresentacion, bodega_ubicacion.nivel, 
+                         bodega_ubicacion.indice_x, dbo.bodega_tramo.descripcion, dbo.bodega_tramo.IdBodega, dbo.trans_ubic_hh_det.Realizado, dbo.trans_ubic_hh_det.activo, 
+                         dbo.producto.serializado
 GO
 
 
