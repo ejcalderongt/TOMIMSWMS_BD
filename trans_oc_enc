@@ -2,3 +2,4 @@ alter table trans_oc_enc add no_ticket_tms int
 alter table trans_oc_enc add IdNoDocumentoRef int
 alter table trans_oc_enc add idacuerdocomercial int null 
 alter table trans_oc_enc alter column No_Ticket_TMS int 
+ALTER TABLE trans_oc_enc ADD IdOperadorBodegaDefecto INT NULL
