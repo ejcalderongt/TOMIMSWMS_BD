@@ -11,3 +11,6 @@ ALTER TABLE bodega ADD control_tarifa_servicios BIT NOT NULL DEFAULT 0
 --'#CKFK 20210219
 ALTER TABLE bodega
 ADD Id_Motivo_Ubic_Reabasto INT NULL
+
+--#EJC20210222
+ALTER TABLE bodega ADD operador_defecto_en_documento_ingreso BIT DEFAULT 0 NULL
