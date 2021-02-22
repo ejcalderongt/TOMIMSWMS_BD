@@ -19,3 +19,5 @@ clase VARCHAR(50) NULL,
 mod_transporte VARCHAR(50) NULL,
 total_liquidar FLOAT NULL,
 total_general FLOAT NULL
+
+ALTER TABLE trans_oc_pol ADD Codigo_Barra nvarchar(1000)
