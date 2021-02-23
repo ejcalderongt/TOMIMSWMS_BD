@@ -1,1 +1,3 @@
 EXEC sp_rename 'transacciones_log.cantidad', 'cantidad_reabasto', 'COLUMN';
+
+ALTER TABLE transacciones_log ADD ubicacion_destino INT NULL
