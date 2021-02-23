@@ -1,1 +1,2 @@
 ALTER TABLE EMPRESA ADD minutos_timer_jornada_sistema float null default 30
+ALTER TABLE EMPRESA ADD hora_corte_jornada_sistema datetime null default '11:59:59'
