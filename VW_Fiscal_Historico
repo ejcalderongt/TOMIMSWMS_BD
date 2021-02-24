@@ -19,3 +19,27 @@ INNER JOIN propietarios PROP ON PROP_BOD.IdPropietario = PROP.IdPropietario
 INNER JOIN proveedor_bodega PROP_BD ON OC_ENC.IdProveedorBodega = PROP_BD.IdAsignacion
 INNER JOIN proveedor PR ON PROP_BD.IdProveedor = pr.IdProveedor
 and OC_ENC.Activo = 1
+
+
+/*********************************************************************************************************************************/
+ALTER VIEW VW_Fiscal_historico as
+
+SELECT OC_ENC.IdOrdenCompraEnc,OC_ENC.IdPropietarioBodega,pr.IdProveedor,
+OC_ENC.IdProveedorBodega,oc_enc.IdTipoIngresoOC,TIPO.Nombre as REGIMEN,
+PR.nombre CLIENTE,
+ISNULL(OC_POL.numero_orden, 'N/A') as NUMERO_ORDEN,ISNULL(OC_POL.codigo_poliza,'N/A') CODIGO_POLIZA,
+PROP.nombre_comercial MATERIAL_NAME,
+CAST(OC_ENC.Fecha_Creacion AS DATE) AS FECHA,
+OC_DET.nombre_producto SHORT_NAME,RE_DET.lic_plate AS LICENCIA ,OC_DET.cantidad CANTIDAD,'' as CIF ,OC_DET.valor_dai as DAI ,OC_DET.valor_iva AS IVA,OC_DET.total_linea TOTAL_VALOR
+from dbo.trans_oc_enc OC_ENC 
+INNER JOIN dbo.trans_oc_det OC_DET ON OC_ENC.IdOrdenCompraEnc=OC_DET.IdOrdenCompraEnc
+INNER JOIN dbo.trans_oc_ti TIPO ON OC_ENC.IdTipoIngresoOC=TIPO.IdTipoIngresoOC
+LEFT JOIN dbo.trans_oc_pol OC_POL ON OC_DET.IdOrdenCompraEnc = OC_POL.IdOrdenCompraEnc
+RIGHT JOIN dbo.trans_re_oc RE_OC ON RE_OC.IdOrdenCompraEnc = OC_ENC.IdOrdenCompraEnc
+RIGHT JOIN trans_re_enc RE_ENC ON RE_ENC.IdRecepcionEnc = RE_OC.IdRecepcionEnc
+RIGHT JOIN trans_re_det RE_DET ON RE_ENC.IdRecepcionEnc = RE_DET.IdRecepcionEnc
+INNER JOIN propietario_bodega PROP_BOD ON PROP_BOD.IdPropietarioBodega = OC_ENC.IdPropietarioBodega
+INNER JOIN propietarios PROP ON PROP_BOD.IdPropietario = PROP.IdPropietario
+INNER JOIN proveedor_bodega PROP_BD ON OC_ENC.IdProveedorBodega = PROP_BD.IdAsignacion
+INNER JOIN proveedor PR ON PROP_BD.IdProveedor = pr.IdProveedor
+and OC_ENC.Activo = 1
