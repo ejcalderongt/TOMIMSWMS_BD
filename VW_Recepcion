@@ -17,3 +17,29 @@ FROM            dbo.bodega_muelles RIGHT OUTER JOIN
                          dbo.trans_re_oc.IdRecepcionEnc = dbo.trans_re_enc.IdRecepcionEnc ON dbo.bodega_muelles.IdMuelle = dbo.trans_re_enc.IdMuelle
 GO
 
+/****** Object:  View [dbo].[VW_Recepcion]    Script Date: 26/02/2021 08:30:23 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER VIEW [dbo].[VW_Recepcion]
+AS
+SELECT        trans_re_enc.IdRecepcionEnc AS Código, propietarios.nombre_comercial AS Propietario, proveedor.nombre AS Proveedor, bodega.nombre AS Bodega, trans_re_oc.IdOrdenCompraEnc AS NoOrdenCompra, 
+                         trans_oc_enc.No_Documento + ' ' + trans_oc_enc.Referencia AS No_DocumentoOC, trans_re_enc.fecha_recepcion AS Fecha, trans_re_enc.estado, trans_re_tr.TipoTrans, trans_re_tr.Descripcion, 
+                         bodega_muelles.nombre AS Muelle, trans_re_enc.activo, usuario.nombres AS Usuario_Agrego, trans_re_enc.fec_agr AS Fecha_Agrego, trans_re_tr.IdTipoTransaccion, bodega.IdBodega
+FROM            bodega_muelles RIGHT OUTER JOIN
+                         trans_re_oc INNER JOIN
+                         trans_oc_enc ON trans_re_oc.IdOrdenCompraEnc = trans_oc_enc.IdOrdenCompraEnc INNER JOIN
+                         proveedor_bodega ON trans_oc_enc.IdProveedorBodega = proveedor_bodega.IdAsignacion INNER JOIN
+                         proveedor ON proveedor_bodega.IdProveedor = proveedor.IdProveedor INNER JOIN
+                         usuario INNER JOIN
+                         propietarios INNER JOIN
+                         propietario_bodega ON propietarios.IdPropietario = propietario_bodega.IdPropietario INNER JOIN
+                         trans_re_tr INNER JOIN
+                         trans_re_enc ON trans_re_tr.IdTipoTransaccion = trans_re_enc.IdTipoTransaccion ON propietario_bodega.IdPropietarioBodega = trans_re_enc.IdPropietarioBodega ON usuario.IdUsuario = trans_re_enc.user_agr INNER JOIN
+                         bodega ON propietario_bodega.IdBodega = bodega.IdBodega ON proveedor.IdPropietario = propietarios.IdPropietario AND trans_re_oc.IdRecepcionEnc = trans_re_enc.IdRecepcionEnc ON 
+                         bodega_muelles.IdMuelle = trans_re_enc.IdMuelle
+GO
+
