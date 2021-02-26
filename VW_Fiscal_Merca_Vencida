@@ -1,0 +1,31 @@
+CREATE VIEW VW_Fiscal_Merca_Vencida as
+Select 
+OC.IdOrdenCompraEnc,CAST(OC.Fecha_Creacion AS DATE) Fecha_Creacion,CAST(OC.Fecha_Recepcion AS DATE)Fecha_Recepcion,
+res.IdStock,res.IdProducto,res.codigo,res.nombre as material,
+res.IdPropietario,prop.nombre_comercial as nombre_cliente,res.IdProductoBodega,res.IdUnidadMedida,UM.Nombre,
+isnull(POL.numero_orden,'NA') numero_orden,isnull(POL.IdRegimen,0) Regimen,isnull(RF.codigo_regimen,'NA') codigo_regimen,isnull(POL.codigo_poliza,'NA') Poliza,
+isnull(res.IdPresentacion,'0') AS IdPresentacion,isnull(res.Presentacion,'ND') Presentacion,res.codigo_barra,
+isnull(res.Cantidad,0) cantidad_presentacion,
+isnull(res.CantidadSF,0) as cantidad_umbas, 
+isnull(res.CantidadReservada,0) as cantidad_reservada,
+isnull(res.CantidadSF,0)- isnull(res.CantidadReservada,0) as Disponible
+from 
+VW_Stock_Res res 
+INNER JOIN propietarios prop ON res.IdPropietario=prop.IdPropietario
+INNER JOIN stock ST on res.IdStock= ST.IdStock
+INNER JOIN trans_re_oc re ON ST.IdRecepcionEnc=re.IdRecepcionEnc
+INNER JOIN trans_oc_enc OC on re.IdOrdenCompraEnc=oc.IdOrdenCompraEnc
+INNER JOIN unidad_medida UM on res.IdUnidadMedida = UM.IdUnidadMedida
+LEFT JOIN trans_oc_pol POL on OC.IdOrdenCompraEnc = POL.IdOrdenCompraEnc
+LEFT JOIN regimen_fiscal RF on POL.IdRegimen = RF.IdRegimen
+WHERE res.IdBodega=5 and res.IdPropietario=2365
+group by 
+res.IdProducto,res.codigo,res.IdPropietario,res.IdPresentacion,
+res.Presentacion,res.codigo_barra,res.Cantidad,res.CantidadSF,
+res.CantidadReservada,res.IdProductoBodega,res.IdUnidadMedida,
+prop.IdPropietario,prop.nombre_comercial,res.nombre,res.IdStock,
+POL.numero_orden,POL.IdRegimen,POL.codigo_poliza,
+OC.IdOrdenCompraEnc,OC.Fecha_Creacion,OC.Fecha_Recepcion,
+RF.codigo_regimen,
+UM.Nombre
+
