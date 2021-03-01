@@ -1,0 +1,47 @@
+EXEC sp_rename 'trans_ubic_hh_det.IdOperador', 'IdOperadorBodega', 'COLUMN';
+
+ALTER TABLE [dbo].[trans_ubic_hh_det] ADD IdBodega int NULL
+
+ALTER TABLE [dbo].[trans_ubic_hh_det]  WITH CHECK ADD  CONSTRAINT [FK_trans_ubic_hh_det_operador_bodega] FOREIGN KEY([IdOperadorBodega])
+REFERENCES [dbo].[operador_bodega] ([IdOperadorBodega])
+GO
+
+ALTER TABLE [dbo].[trans_ubic_hh_det] CHECK CONSTRAINT [FK_trans_ubic_hh_det_operador_bodega]
+GO
+
+ALTER TABLE [dbo].[trans_ubic_hh_det]  WITH CHECK ADD  CONSTRAINT [FK_trans_ubic_hh_det_producto_estado_destino] FOREIGN KEY([IdEstadoDestino])
+REFERENCES [dbo].[producto_estado] ([IdEstado])
+GO
+
+ALTER TABLE [dbo].[trans_ubic_hh_det] CHECK CONSTRAINT [FK_trans_ubic_hh_det_producto_estado_destino]
+GO
+
+ALTER TABLE [dbo].[trans_ubic_hh_det]  WITH CHECK ADD  CONSTRAINT [FK_trans_ubic_hh_det_producto_estado_orig] FOREIGN KEY([IdEstadoOrigen])
+REFERENCES [dbo].[producto_estado] ([IdEstado])
+GO
+
+ALTER TABLE [dbo].[trans_ubic_hh_det] CHECK CONSTRAINT [FK_trans_ubic_hh_det_producto_estado_orig]
+GO
+
+ALTER TABLE [dbo].[trans_ubic_hh_det]  WITH CHECK ADD  CONSTRAINT [FK_trans_ubic_hh_det_trans_ubic_hh_enc] FOREIGN KEY([IdTareaUbicacionEnc])
+REFERENCES [dbo].[trans_ubic_hh_enc] ([IdTareaUbicacionEnc])
+GO
+
+ALTER TABLE [dbo].[trans_ubic_hh_det] CHECK CONSTRAINT [FK_trans_ubic_hh_det_trans_ubic_hh_enc]
+GO
+
+ALTER TABLE [dbo].[trans_ubic_hh_det]  WITH CHECK ADD  CONSTRAINT [FK_trans_ubic_hh_det_bodega_ubic_dest] FOREIGN KEY([IdUbicacionDestino], [IdBodega])
+REFERENCES [dbo].[bodega_ubicacion] ([IdUbicacion], [IdBodega])
+GO
+
+ALTER TABLE [dbo].[trans_ubic_hh_det] CHECK CONSTRAINT [FK_trans_ubic_hh_det_bodega_ubic_dest]
+GO
+
+ALTER TABLE [dbo].[trans_ubic_hh_det]  WITH CHECK ADD  CONSTRAINT [FK_trans_ubic_hh_det_bodega_ubic_orig] FOREIGN KEY([IdUbicacionOrigen], [IdBodega])
+REFERENCES [dbo].[bodega_ubicacion] ([IdUbicacion], [IdBodega])
+GO
+
+ALTER TABLE [dbo].[trans_ubic_hh_det] CHECK CONSTRAINT [FK_trans_ubic_hh_det_bodega_ubic_orig]
+GO
+
+
