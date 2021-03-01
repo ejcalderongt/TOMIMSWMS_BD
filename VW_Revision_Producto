@@ -1,3 +1,10 @@
+/****** Object:  View [dbo].[VW_Revision_Producto]    Script Date: 1/03/2021 14:45:24 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 ALTER VIEW [dbo].[VW_Revision_Producto]
 AS
 SELECT        dbo.producto_rellenado.IdRellenado, dbo.producto_rellenado.IdBodega, dbo.producto_rellenado.IdProductoBodega, dbo.producto_bodega.IdProducto, dbo.producto.codigo, dbo.producto.nombre, 
@@ -7,7 +14,8 @@ SELECT        dbo.producto_rellenado.IdRellenado, dbo.producto_rellenado.IdBodeg
                          0)) AS StockPres, SUM(ISNULL(dbo.stock_res.cantidad / dbo.producto_presentacion.factor, 0)) AS ReservadoPres, SUM(ISNULL(dbo.stock.cantidad / dbo.producto_presentacion.factor, 0)) 
                          - SUM(ISNULL(dbo.stock_res.cantidad / dbo.producto_presentacion.factor, 0)) AS DisponiblePres, dbo.Nombre_Completo_Ubicacion(dbo.producto_rellenado.IdUbicacion, dbo.producto_rellenado.IdBodega) AS Ubicacion, 
                          dbo.propietario_bodega.IdPropietarioBodega, dbo.producto_rellenado.IdUbicacion, dbo.producto_rellenado.IdTipoAccion, dbo.producto_rellenado.Activo, dbo.producto.IdPropietario, 
-                         dbo.propietarios.nombre_comercial AS Nombre_Propietario
+                         dbo.propietarios.nombre_comercial AS Nombre_Propietario, dbo.producto_rellenado.user_agr, dbo.producto_rellenado.fec_agr, dbo.producto_rellenado.user_mod, dbo.producto_rellenado.fec_mod, 
+                         dbo.producto_rellenado.IdUmBasAbastercerCon, dbo.producto_rellenado.IdPresentacionAbastercerCon
 FROM            dbo.propietario_bodega INNER JOIN
                          dbo.propietarios INNER JOIN
                          dbo.unidad_medida INNER JOIN
@@ -25,4 +33,8 @@ FROM            dbo.propietario_bodega INNER JOIN
 GROUP BY dbo.producto_rellenado.IdRellenado, dbo.producto_rellenado.IdBodega, dbo.producto_rellenado.IdProductoBodega, dbo.producto_bodega.IdProducto, dbo.producto.codigo, dbo.producto.nombre, 
                          dbo.producto_rellenado.IdUnidadMedidaBasica, dbo.unidad_medida.Nombre, dbo.producto_rellenado.IdPresentacion, dbo.producto_presentacion.nombre, dbo.producto_rellenado.Minimo, dbo.producto_rellenado.Maximo, 
                          dbo.producto_rellenado.IdProductoEstado, dbo.producto_estado.nombre, dbo.producto_presentacion.factor, dbo.producto_rellenado.IdBodega, dbo.producto_rellenado.IdUbicacion, dbo.propietario_bodega.IdPropietarioBodega, 
-                         dbo.producto_rellenado.IdTipoAccion, dbo.producto_rellenado.Activo, dbo.producto.IdPropietario, dbo.propietarios.nombre_comercial
+                         dbo.producto_rellenado.IdTipoAccion, dbo.producto_rellenado.Activo, dbo.producto.IdPropietario, dbo.propietarios.nombre_comercial, dbo.producto_rellenado.user_agr, dbo.producto_rellenado.fec_agr, 
+                         dbo.producto_rellenado.user_mod, dbo.producto_rellenado.fec_mod, dbo.producto_rellenado.IdUmBasAbastercerCon, dbo.producto_rellenado.IdPresentacionAbastercerCon
+GO
+
+
