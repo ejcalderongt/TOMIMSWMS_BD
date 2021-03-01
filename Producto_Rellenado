@@ -3,3 +3,7 @@ ALTER TABLE PRODUCTO_RELLENADO ADD IdUnidadMedidaBasica INT, IdBodega INT, IdPro
 --#EJC20210225:
 ALTER TABLE producto_rellenado ADD IdUmBasAbastercerCon INT NULL
 ALTER TABLE producto_rellenado ADD IdPresentacionAbastercerCon INT NULL
+
+--#EJC20210301:
+alter table producto_rellenado add IdPropietario int null
+
