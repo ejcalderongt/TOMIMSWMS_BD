@@ -1,4 +1,4 @@
-/****** Object:  View [dbo].[VW_TransUbicHhDet]    Script Date: 1/03/2021 12:16:19 ******/ CKFK
+/****** Object:  View [dbo].[VW_TransUbicHhDet]    Script Date: 1/03/2021 12:16:19 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -19,7 +19,8 @@ SELECT        dbo.trans_ubic_hh_det.IdTareaUbicacionEnc, dbo.trans_ubic_hh_det.I
                          bodega_ubicacion_1.indice_x, dbo.bodega_tramo.descripcion AS Tramo, dbo.bodega_tramo.IdBodega
 FROM            dbo.bodega_tramo INNER JOIN
                          dbo.bodega_ubicacion AS bodega_ubicacion_1 INNER JOIN
-                         dbo.trans_ubic_hh_det ON bodega_ubicacion_1.IdUbicacion = dbo.trans_ubic_hh_det.IdUbicacionDestino ON 
+                         dbo.trans_ubic_hh_det ON bodega_ubicacion_1.IdUbicacion = dbo.trans_ubic_hh_det.IdUbicacionDestino  AND 
+						                          bodega_ubicacion_1.IdBodega = dbo.trans_ubic_hh_det.IdBodega ON 
                          dbo.bodega_tramo.IdTramo = bodega_ubicacion_1.IdTramo AND dbo.bodega_tramo.IdBodega = bodega_ubicacion_1.IdBodega LEFT OUTER JOIN
                          dbo.producto_estado INNER JOIN
                          dbo.producto_bodega INNER JOIN
@@ -31,7 +32,11 @@ FROM            dbo.bodega_tramo INNER JOIN
                          dbo.propietarios ON dbo.producto.IdPropietario = dbo.propietarios.IdPropietario AND dbo.producto_estado.IdPropietario = dbo.propietarios.IdPropietario AND 
                          dbo.producto_estado.IdPropietario = dbo.propietarios.IdPropietario ON 
                          dbo.trans_ubic_hh_det.IdTareaUbicacionDet = dbo.trans_ubic_hh_stock.IdTareaUbicacionDet AND 
-                         dbo.trans_ubic_hh_det.IdStock = dbo.trans_ubic_hh_stock.IdStock LEFT OUTER JOIN
+                         dbo.trans_ubic_hh_det.IdStock = dbo.trans_ubic_hh_stock.IdStock 
+						 INNER JOIN
+                         dbo.bodega_ubicacion ON bodega_ubicacion.IdUbicacion = dbo.trans_ubic_hh_det.IdUbicacionOrigen  AND 
+						                          bodega_ubicacion.IdBodega = dbo.trans_ubic_hh_det.IdBodega
+						 LEFT OUTER JOIN
                          dbo.producto_presentacion ON dbo.trans_ubic_hh_stock.IdPresentacion = dbo.producto_presentacion.IdPresentacion AND 
                          dbo.trans_ubic_hh_stock.IdPresentacion = dbo.producto_presentacion.IdPresentacion LEFT OUTER JOIN
                          dbo.operador ON dbo.trans_ubic_hh_det.IdOperadorBodega = dbo.operador.IdOperador
