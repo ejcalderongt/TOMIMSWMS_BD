@@ -19,3 +19,27 @@ inner join propietario_bodega pb on oc_enc.IdPropietarioBodega = pb.IdPropietari
 inner join propietarios pr on pb.IdPropietario = pr.IdPropietario
 inner join producto po on oc_det.codigo_producto = po.codigo
 
+/*****************************************************************************************/
+
+ALTER view VW_Fiscal_CtasOrden as
+select 
+oc_enc.IdOrdenCompraEnc,
+oc_enc.Fecha_Creacion,
+pr.nombre_comercial,
+oc_enc.IdPropietarioBodega,
+pr.IdPropietario,
+oc_enc.IdTipoIngresoOC,
+oc_det.codigo_producto,
+oc_pol.codigo_poliza,
+po.codigo_barra,
+oc_det.cantidad_recibida,
+oc_det.valor_dai,
+oc_det.valor_iva,
+oc_det.valor_aduana
+from trans_oc_pol oc_pol 
+inner join trans_oc_det oc_det on oc_pol.IdOrdenCompraEnc=oc_det.IdOrdenCompraEnc
+inner join trans_oc_enc oc_enc on oc_det.IdOrdenCompraEnc = oc_enc.IdOrdenCompraEnc
+inner join propietario_bodega pb on oc_enc.IdPropietarioBodega = pb.IdPropietarioBodega
+inner join propietarios pr on pb.IdPropietario = pr.IdPropietario
+inner join producto po on oc_det.codigo_producto = po.codigo
+
