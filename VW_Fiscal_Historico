@@ -37,9 +37,15 @@ INNER JOIN dbo.trans_oc_ti TIPO ON OC_ENC.IdTipoIngresoOC=TIPO.IdTipoIngresoOC
 
 
 /************************************************************************************************/
-/******** 02032021 update para campo CIF  ******************************************************/
+/******** 03032021 update para campo CIF  ******************************************************/
 
-Alter view VW_Fiscal_historico as
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER view [dbo].[VW_Fiscal_historico] as
 
 SELECT        OC_ENC.IdOrdenCompraEnc, OC_ENC.IdPropietarioBodega, PR.IdProveedor, OC_ENC.IdProveedorBodega, OC_ENC.IdTipoIngresoOC, TIPO.Nombre AS REGIMEN, PR.nombre AS CLIENTE, ISNULL(OC_POL.numero_orden, 'N/A') 
                          AS NUMERO_ORDEN, ISNULL(OC_POL.codigo_poliza, 'N/A') AS CODIGO_POLIZA, PROP.nombre_comercial AS MATERIAL_NAME, CAST(OC_ENC.Fecha_Creacion AS DATE) AS FECHA, 
@@ -55,13 +61,10 @@ FROM            dbo.trans_oc_enc AS OC_ENC INNER JOIN
                          dbo.propietarios AS PROP ON PROP_BOD.IdPropietario = PROP.IdPropietario INNER JOIN
                          dbo.proveedor_bodega AS PROP_BD ON OC_ENC.IdProveedorBodega = PROP_BD.IdAsignacion INNER JOIN
                          dbo.proveedor AS PR ON PROP_BD.IdProveedor = PR.IdProveedor AND OC_ENC.Activo = 1
+GO
 
-LEFT JOIN dbo.trans_oc_pol OC_POL ON OC_DET.IdOrdenCompraEnc = OC_POL.IdOrdenCompraEnc
-RIGHT JOIN dbo.trans_re_oc RE_OC ON RE_OC.IdOrdenCompraEnc = OC_ENC.IdOrdenCompraEnc
-RIGHT JOIN trans_re_enc RE_ENC ON RE_ENC.IdRecepcionEnc = RE_OC.IdRecepcionEnc
-RIGHT JOIN trans_re_det RE_DET ON RE_ENC.IdRecepcionEnc = RE_DET.IdRecepcionEnc
-INNER JOIN propietario_bodega PROP_BOD ON PROP_BOD.IdPropietarioBodega = OC_ENC.IdPropietarioBodega
-INNER JOIN propietarios PROP ON PROP_BOD.IdPropietario = PROP.IdPropietario
-INNER JOIN proveedor_bodega PROP_BD ON OC_ENC.IdProveedorBodega = PROP_BD.IdAsignacion
-INNER JOIN proveedor PR ON PROP_BD.IdProveedor = pr.IdProveedor
-and OC_ENC.Activo = 1
+
+
+
+
+
