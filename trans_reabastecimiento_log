@@ -44,6 +44,10 @@ CREATE TABLE [dbo].[trans_reabastecimiento_log](
 	[IdOperadorBodega] [int] NULL,
 	[Procesado_HH] [bit] NULL,
 	[Fecha_Procesamiento_HH] [datetime] NULL,
+	[Stock_Ubicacion] [float] NULL,
+	[Cantidad_A_Ubicar] [float] NULL,
+	[Stock_Inferior] [float] NULL,
+	[Stock_Disponible] [float] NULL,
  CONSTRAINT [PK_trans_reabastecimiento_log] PRIMARY KEY CLUSTERED 
 (
 	[IdReabastecimientoLog] ASC
