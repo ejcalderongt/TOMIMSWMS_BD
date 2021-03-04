@@ -1,0 +1,2 @@
+--#CKFK 20210303
+ALTER TABLE stock_res ADD pallet_no_estandar BIT NULL
