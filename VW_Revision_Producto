@@ -1,14 +1,7 @@
-/****** Object:  View [dbo].[VW_Revision_Producto]    Script Date: 3/03/2021 21:55:14 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[VW_Revision_Producto]
 AS
 SELECT        dbo.producto_rellenado.IdRellenado, dbo.producto_rellenado.IdBodega, dbo.producto_rellenado.IdProductoBodega, dbo.producto_bodega.IdProducto, dbo.producto.codigo AS Codigo_Producto, 
-                         dbo.producto.nombre AS Nombre_Producto, dbo.producto_rellenado.IdUnidadMedidaBasica, dbo.unidad_medida.Nombre AS UmBas, dbo.producto_rellenado.IdPresentacion, dbo.producto_presentacion.nombre AS Presentacion, 
+                         dbo.producto.nombre AS Nombre_Producto, dbo.producto_rellenado.IdUnidadMedidaBasica, dbo.unidad_medida.Nombre AS NombreUmBas, dbo.producto_rellenado.IdPresentacion, dbo.producto_presentacion.nombre AS Presentacion, 
                          dbo.producto_rellenado.Minimo, dbo.producto_rellenado.Maximo, dbo.producto_rellenado.IdProductoEstado, dbo.producto_estado.nombre AS Estado, SUM(ISNULL(dbo.stock.cantidad, 0)) AS StockUMBas, 
                          SUM(ISNULL(dbo.stock_res.cantidad, 0)) AS ReservadoUmBas, SUM(ISNULL(dbo.stock.cantidad, 0)) - SUM(ISNULL(dbo.stock_res.cantidad, 0)) AS DisponibleUMBas, producto_presentacion_1.factor, 
                          SUM(ISNULL(dbo.stock.cantidad / producto_presentacion_1.factor, 0)) AS StockPres, SUM(ISNULL(dbo.stock_res.cantidad / producto_presentacion_1.factor, 0)) AS ReservadoPres, 
