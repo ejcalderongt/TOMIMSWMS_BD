@@ -1,3 +1,10 @@
+/****** Object:  Table [dbo].[trans_reabastecimiento_log]    Script Date: 3/03/2021 18:51:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 CREATE TABLE [dbo].[trans_reabastecimiento_log](
 	[IdReabastecimientoLog] [int] NOT NULL,
 	[IdRellenado] [int] NULL,
@@ -40,9 +47,22 @@ CREATE TABLE [dbo].[trans_reabastecimiento_log](
 	[Fecha_Procesamiento_BOF] [date] NULL,
 	[Hora_Procesamiento_BOF] [date] NULL,
 	[IdOperadorBodega] [int] NULL,
+	[Procesado_HH] [bit] NULL,
+	[Fecha_Procesamiento_HH] [datetime] NULL,
  CONSTRAINT [PK_trans_reabastecimiento_log] PRIMARY KEY CLUSTERED 
 (
 	[IdReabastecimientoLog] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+ALTER TABLE [dbo].[trans_reabastecimiento_log] ADD  CONSTRAINT [DF_trans_reabastecimiento_log_Enviado]  DEFAULT ((0)) FOR [Enviado]
+GO
+
+ALTER TABLE [dbo].[trans_reabastecimiento_log] ADD  CONSTRAINT [DF_trans_reabastecimiento_log_Cancelado]  DEFAULT ((0)) FOR [Cancelado]
+GO
+
+ALTER TABLE [dbo].[trans_reabastecimiento_log] ADD  CONSTRAINT [DF_trans_reabastecimiento_log_Procesado_HH]  DEFAULT ((0)) FOR [Procesado_HH]
+GO
+
+
