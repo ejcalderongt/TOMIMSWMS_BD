@@ -1,20 +1,13 @@
-/****** Object:  Table [dbo].[trans_reabastecimiento_log]    Script Date: 3/03/2021 18:51:19 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE TABLE [dbo].[trans_reabastecimiento_log](
 	[IdReabastecimientoLog] [int] NOT NULL,
 	[IdRellenado] [int] NULL,
 	[IdBodega] [int] NULL,
 	[IdProductoBodega] [int] NULL,
 	[IdProducto] [int] NULL,
-	[codigo] [nvarchar](50) NULL,
-	[nombre] [nvarchar](100) NULL,
+	[Codigo_Producto] [nvarchar](50) NULL,
+	[Nombre_Producto] [nvarchar](100) NULL,
 	[IdUnidadMedidaBasica] [int] NULL,
-	[UmBas] [nvarchar](50) NULL,
+	[NombreUmBas] [nvarchar](50) NULL,
 	[IdPresentacion] [int] NULL,
 	[Presentacion] [nvarchar](50) NULL,
 	[Minimo] [float] NULL,
@@ -44,6 +37,8 @@ CREATE TABLE [dbo].[trans_reabastecimiento_log](
 	[NombrePresentacionAbastecerCon] [nvarchar](50) NULL,
 	[Enviado] [bit] NULL,
 	[Cancelado] [bit] NULL,
+	[Fecha_Generacion_Inexistencia] [date] NULL,
+	[Hora_Generacion_Inexistencia] [datetime] NULL,
 	[Fecha_Procesamiento_BOF] [date] NULL,
 	[Hora_Procesamiento_BOF] [date] NULL,
 	[IdOperadorBodega] [int] NULL,
@@ -60,6 +55,9 @@ ALTER TABLE [dbo].[trans_reabastecimiento_log] ADD  CONSTRAINT [DF_trans_reabast
 GO
 
 ALTER TABLE [dbo].[trans_reabastecimiento_log] ADD  CONSTRAINT [DF_trans_reabastecimiento_log_Cancelado]  DEFAULT ((0)) FOR [Cancelado]
+GO
+
+ALTER TABLE [dbo].[trans_reabastecimiento_log] ADD  CONSTRAINT [DF_trans_reabastecimiento_log_Fecha_Generacion]  DEFAULT (getdate()) FOR [Fecha_Generacion_Inexistencia]
 GO
 
 ALTER TABLE [dbo].[trans_reabastecimiento_log] ADD  CONSTRAINT [DF_trans_reabastecimiento_log_Procesado_HH]  DEFAULT ((0)) FOR [Procesado_HH]
