@@ -5,7 +5,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[i_nav_acuerdo](
+CREATE TABLE [dbo].[i_nav_acuerdo_enc](
 	[IdAcuerdo] [int] NOT NULL,
 	[IdCliente] [int] NULL,
 	[codigo_acuerdo] [nvarchar](50) NOT NULL,
@@ -20,3 +20,5 @@ CREATE TABLE [dbo].[i_nav_acuerdo](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+
