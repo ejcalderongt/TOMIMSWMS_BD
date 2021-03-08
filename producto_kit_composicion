@@ -1,0 +1,18 @@
+CREATE TABLE [dbo].[producto_kit_composicion](
+	[IdProductoKitComposicion] [int] NOT NULL,
+	[IdProductoPadre] [int] NOT NULL,
+	[IdProductoHijo] [int] NOT NULL,
+	[IdUnidadMedidaBasicaPadre] [int] NULL,
+	[IdUnidadMedidaBasicaHijo] [int] NULL,
+	[Cantidad] [float] NULL,
+	[fecha_agr] [datetime] NULL,
+	[user_agr] [nvarchar](50) NULL,
+	[fecha_mod] [datetime] NULL,
+	[user_mod] [nvarchar](50) NULL,
+	[IdBodega] [int] NULL,
+ CONSTRAINT [PK_producto_kit_composicion] PRIMARY KEY CLUSTERED 
+(
+	[IdProductoKitComposicion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
