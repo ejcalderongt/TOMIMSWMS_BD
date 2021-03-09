@@ -1,0 +1,4 @@
+
+update menu_sistema set nombre_lgco='cmdCtas' where IdMenu='2.5.1.1'
+insert into menu_sistema values ('2.5.1.1.1','Cuentas de orden Detalle','cmdCtasOrden',5,'2.5.1.1',0)
+insert into menu_sistema values ('2.5.1.1.2','Cuentas de orden Poliza','cmdCtaOrdenPoliza',5,'2.5.1.1',0)
