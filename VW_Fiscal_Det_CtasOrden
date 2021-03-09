@@ -48,12 +48,5 @@ FROM            dbo.i_nav_transacciones_out AS nav INNER JOIN
 WHERE        (pr.activo = 1)
 
 
-oc_det.valor_iva,
-oc_det.valor_aduana
-from trans_oc_pol oc_pol 
-inner join trans_oc_det oc_det on oc_pol.IdOrdenCompraEnc=oc_det.IdOrdenCompraEnc
-inner join trans_oc_enc oc_enc on oc_det.IdOrdenCompraEnc = oc_enc.IdOrdenCompraEnc
-inner join propietario_bodega pb on oc_enc.IdPropietarioBodega = pb.IdPropietarioBodega
-inner join propietarios pr on pb.IdPropietario = pr.IdPropietario
-inner join producto po on oc_det.codigo_producto = po.codigo
+
 
