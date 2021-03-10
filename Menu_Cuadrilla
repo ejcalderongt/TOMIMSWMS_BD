@@ -1,5 +1,0 @@
-insert into menu_sistema values ('1.2.1.19', 'Tipo Cuadrilla', 'mnuTipoCuadrilla','4','1.2.1',0)
-insert into menu_sistema values ('1.2.1.20', 'Cuadrilla', 'mnuCuadrilla','4','1.2.1',0)
-
-insert into menu_rol values(677, '1.2.1.19',1,'Erik C.', GETDATE(),'Erik C',GETDATE(),1,1)
-insert into menu_rol values(678, '1.2.1.20',1,'Erik C.', GETDATE(),'Erik C',GETDATE(),1,1)
