@@ -1,2 +1,0 @@
-insert into [IMS4MB_CEALSA_QAS].[dbo].[menu_sistema] values('2.3.1.3', 'doc OC con diferencias','cmdDocConDiferencias',4,'2.3.1', 0)
-  insert into [IMS4MB_CEALSA_QAS].[dbo].[menu_rol] values('2.3.1.3',1,'Erik Calderón',getDate(),'DTS',getDate(),1,1)
