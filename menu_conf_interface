@@ -1,2 +1,0 @@
-insert into menu_sistema values ('7.2.2','Configuración Interface','mnuConfiguracionInt','3','7.2',0)
-insert into menu_rol values((select Max(IdMenuRol)+1 FROM menu_rol), '7.2.2',1,'Erik C.', GETDATE(),'Erik C',GETDATE(),1,1)
