@@ -33,6 +33,20 @@ FROM            dbo.i_nav_transacciones_out AS nav INNER JOIN
                          dbo.producto AS pd ON nav.codigo_producto = pd.codigo
 WHERE        (pr.activo = 1)
 
+/***********************************************************************************************/
+/******************** GT 11032021 update ******************************************************/
+
+Alter View VW_Fiscal_CtasOrden as
+SELECT        nav.IdTipoDocumento, nav.tipo_transaccion, nav.idordencompra, nav.idempresa, nav.idpropietario, pr.nombre_comercial, nav.idpropietariobodega, nav.unidad_medida, nav.cantidad_presentacion, 
+                         nav.Cantidad_Esperada AS cantidad, nav.fecha_recepcion, nav.codigo_producto, '' AS codigo_poliza,pd.codigo_barra, 
+						 isnull(nav.valor_dai,0)valor_dai, isnull(nav.valor_iva,0) valor_iva, isnull(nav.valor_aduana,0) valor_aduana
+FROM            dbo.i_nav_transacciones_out AS nav INNER JOIN
+                         dbo.propietarios AS pr ON nav.idpropietario = pr.IdPropietario INNER JOIN
+                         dbo.producto AS pd ON nav.codigo_producto = pd.codigo
+WHERE        (pr.activo = 1)
+
+
+
 
 
 
