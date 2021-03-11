@@ -1,2 +1,19 @@
 alter table i_nav_transacciones_out add IdTipoDocumento int default 0
 alter table i_nav_transacciones_out add es_servicio bit default 0
+
+
+/***********************************************************************/
+/** GT 11032021 campos de poliza y fecha despacho  ********************/
+
+alter table I_NAV_TRANSACCIONES_OUT
+add
+codigo_barra nvarchar(35) null, 
+valor_aduana float null ,
+valor_fob float null ,
+valor_iva float null ,
+valor_dai float null ,
+valor_seguro float null ,
+valor_flete float null ,
+peso_neto float null ,
+peso_bruto float null,
+fecha_despacho datetime null
