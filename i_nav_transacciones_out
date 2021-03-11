@@ -17,3 +17,10 @@ valor_flete float null ,
 peso_neto float null ,
 peso_bruto float null,
 fecha_despacho datetime null
+
+
+/*******************************************************/
+/**** GT update tipo fecha  ****************************/
+
+ALTER TABLE i_nav_transacciones_out
+ALTER COLUMN fecha_despacho date;
