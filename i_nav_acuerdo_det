@@ -9,7 +9,7 @@ CREATE TABLE [dbo].[i_nav_acuerdo_det](
 	[IdAcuerdoDet] [int] NOT NULL,
 	[IdAcuerdo] [int] NOT NULL,
 	[codigo_producto] [nvarchar](50) NOT NULL,
-	[servicio] [nvarchar](100) NOT NULL,
+	[servicio] [nvarchar](150) NOT NULL,
 	[cod_moneda] [int] NOT NULL,
 	[nemonico] [nvarchar](20) NOT NULL,
 	[corre_detalleacuerdo] int,
