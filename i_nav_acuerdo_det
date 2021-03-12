@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[i_nav_acuerdo_det](
 	[corre_detalleacuerdo] int,
 	[corre_catalogoproductos] int,
 	[unid_medida] int,
-	[nombre_unidad] [nvarchar](20) NOT NULL,
+	[nombre_unidad] [nvarchar](100) NOT NULL,
 	[procesado_wms] [bit] NOT NULL,
 	[estado] [nvarchar](1) NOT NULL,
  CONSTRAINT [PK_i_nav_acuerdoDet] PRIMARY KEY CLUSTERED 
