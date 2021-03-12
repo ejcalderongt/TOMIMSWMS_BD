@@ -2,3 +2,8 @@
 alter table propietarios add NIT nvarchar(50)
 ALTER TABLE propietarios ADD codigo_acceso nvarchar(50) NULL,
 clave_acceso nvarchar(50) NULL
+
+--#CKFK 20210312 Alter a la columna direccion
+ALTER TABLE propietarios ALTER COLUMN direccion NVARCHAR(250) NULL
+
+
