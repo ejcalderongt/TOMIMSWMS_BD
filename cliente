@@ -1,0 +1,4 @@
+/****** Object:  Index [IX_NITCliente]    Script Date: 12/03/2021 08:41:50 ******/
+DROP INDEX [IX_NITCliente] ON [dbo].[cliente]
+GO
+
