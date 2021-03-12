@@ -1,0 +1,2 @@
+#CKFK 20210312 Alter a la tabla 
+ALTER TABLE proveedor ALTER COLUMN contacto NVARCHAR(100) NULL
