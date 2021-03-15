@@ -1,0 +1,1 @@
+alter table trans_re_enc add IdBodega int
