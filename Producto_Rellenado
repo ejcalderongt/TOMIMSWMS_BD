@@ -7,3 +7,6 @@ ALTER TABLE producto_rellenado ADD IdPresentacionAbastercerCon INT NULL
 --#EJC20210301:
 alter table producto_rellenado add IdPropietario int null
 
+--#EJC20210225:
+ALTER TABLE producto_rellenado ADD NomPresentacionRellenarCon NVARCHAR(100) NULL
+ALTER TABLE producto_rellenado ADD NomUmBasAbastecerCon  NVARCHAR(100) NULL
