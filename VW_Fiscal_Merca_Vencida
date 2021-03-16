@@ -75,7 +75,7 @@ RF.dias_vencimiento
 
 
 
-/**************************Update peso y unidad_peso ***************************************************/
+/**************************Update 15032021 se agregó peso y unidad_peso ***************************************************/
 
 alter view VW_Fiscal_Merca_Vencida as
 SELECT        OC.IdOrdenCompraEnc, CAST(OC.Fecha_Creacion AS DATE) AS Fecha_Creacion, CAST(OC.Fecha_Recepcion AS DATE) AS Fecha_Recepcion, res.IdStock, res.IdProducto, res.codigo, res.nombre AS material, res.IdPropietario, 
