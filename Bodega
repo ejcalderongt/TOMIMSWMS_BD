@@ -14,3 +14,6 @@ ADD Id_Motivo_Ubic_Reabasto INT NULL
 
 --#EJC20210222
 ALTER TABLE bodega ADD operador_defecto_en_documento_ingreso BIT DEFAULT 0 NULL
+
+--#EJC20210316
+alter table bodega add es_bodega_fiscal bit default 0
