@@ -4,3 +4,5 @@ alter table trans_oc_ti add requerir_documento_ref bit default 0
 
 insert into trans_oc_ti values (6,'Orden de Producción',0,1,GETDATE(),1,GETDATE(),1,0,0)
 
+#EJC20210317: 
+ALTER TABLE TRANS_OC_TI ADD es_poliza_consolidada bit default 0
