@@ -88,4 +88,25 @@ FROM            dbo.trans_oc_enc AS OC_ENC INNER JOIN
 
 WHERE        (OC_ENC.Activo = 1)
 
+/****************************************** UPDATE 17032021 ***************************************************/
+
+SELECT        OC_ENC.IdOrdenCompraEnc, OC_ENC.IdPropietarioBodega, PROP.IdPropietario, PR.IdProveedor, OC_ENC.IdProveedorBodega, OC_ENC.IdTipoIngresoOC, TIPO.Nombre AS REGIMEN, PR.nombre AS CLIENTE, 
+                         ISNULL(OC_POL.numero_orden, N'N/A') AS NUMERO_ORDEN, ISNULL(OC_POL.codigo_poliza, N'N/A') AS CODIGO_POLIZA, PROP.nombre_comercial AS MATERIAL_NAME, CAST(OC_ENC.Fecha_Creacion AS DATE) AS FECHA, 
+                         OC_DET.nombre_producto AS SHORT_NAME, RE_DET.lic_plate AS LICENCIA, PRD.codigo_barra, OC_DET.cantidad_recibida AS Cantidad, OC_DET.valor_aduana AS CIF, OC_DET.valor_dai AS DAI, OC_DET.valor_iva AS IVA, 
+                         ISNULL(OC_DET.valor_aduana, 0) + ISNULL(OC_DET.valor_dai, 0) + ISNULL(OC_DET.valor_iva, 0) AS TOTAL_VALOR, dbo.Nombre_Completo_Ubicacion(RE_ENC.IdUbicacionRecepcion, PROP_BOD.IdBodega) AS ubicacion, 
+                         BD.es_bodega_fiscal, CASE WHEN BD.es_bodega_fiscal = 1 THEN 'Fiscal' WHEN BD.es_bodega_fiscal = 0 THEN 'General' END AS Bodega, BD.IdBodega, BD.nombre AS NOMBRE_BODEGA
+FROM            dbo.trans_oc_enc AS OC_ENC INNER JOIN
+                         dbo.trans_oc_det AS OC_DET ON OC_ENC.IdOrdenCompraEnc = OC_DET.IdOrdenCompraEnc INNER JOIN
+                         dbo.trans_oc_ti AS TIPO ON OC_ENC.IdTipoIngresoOC = TIPO.IdTipoIngresoOC LEFT OUTER JOIN
+                         dbo.trans_oc_pol AS OC_POL ON OC_DET.IdOrdenCompraEnc = OC_POL.IdOrdenCompraEnc RIGHT OUTER JOIN
+                         dbo.trans_re_oc AS RE_OC ON RE_OC.IdOrdenCompraEnc = OC_ENC.IdOrdenCompraEnc RIGHT OUTER JOIN
+                         dbo.trans_re_enc AS RE_ENC ON RE_ENC.IdRecepcionEnc = RE_OC.IdRecepcionEnc RIGHT OUTER JOIN
+                         dbo.trans_re_det AS RE_DET ON RE_ENC.IdRecepcionEnc = RE_DET.IdRecepcionEnc INNER JOIN
+                         dbo.propietario_bodega AS PROP_BOD ON PROP_BOD.IdPropietarioBodega = OC_ENC.IdPropietarioBodega INNER JOIN
+                         dbo.propietarios AS PROP ON PROP_BOD.IdPropietario = PROP.IdPropietario INNER JOIN
+                         dbo.proveedor_bodega AS PROP_BD ON OC_ENC.IdProveedorBodega = PROP_BD.IdAsignacion INNER JOIN
+                         dbo.proveedor AS PR ON PROP_BD.IdProveedor = PR.IdProveedor INNER JOIN
+                         dbo.producto AS PRD ON OC_DET.codigo_producto = PRD.codigo INNER JOIN
+                         dbo.bodega AS BD ON OC_ENC.IdBodega = BD.IdBodega
+WHERE        (OC_ENC.Activo = 1)
 
