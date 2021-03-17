@@ -10,3 +10,7 @@ peso_neto float default 0
 --CKFK 20200218
 ALTER TABLE trans_oc_det
 ADD peso_bruto FLOAT DEFAULT 0
+
+
+--#EJC20210317_1343PM
+ALTER TABLE TRANS_OC_DET ADD IdPropietarioBodega int
