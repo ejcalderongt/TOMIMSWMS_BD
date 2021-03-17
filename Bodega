@@ -17,3 +17,6 @@ ALTER TABLE bodega ADD operador_defecto_en_documento_ingreso BIT DEFAULT 0 NULL
 
 --#EJC20210316
 alter table bodega add es_bodega_fiscal bit default 0
+
+--#EJC20210316_1339PM
+ALTER TABLE BODEGA ADD habilitar_ingreso_consolidado BIT DEFAULT 0
