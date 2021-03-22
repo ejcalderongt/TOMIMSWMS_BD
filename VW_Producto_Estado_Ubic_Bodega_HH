@@ -1,11 +1,17 @@
+/****** Object:  View [dbo].[VW_Producto_Estado_Ubic_Bodega_HH]    Script Date: 21/03/2021 23:32:42 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 CREATE VIEW [dbo].[VW_Producto_Estado_Ubic_Bodega_HH]
 AS
-SELECT  ISNULL(pe.IdUbicacionDefecto,0) AS IdUbicacion,
-        e.IdEstado, 
-		ISNULL(pe.IdBodega, 0) AS IdBodega, 
-		CASE WHEN ISNULL(pe.IdUbicacionDefecto,0)=0 THEN 'N/D' ELSE dbo.Nombre_Completo_Ubicacion(pe.IdUbicacionDefecto, pe.IdBodega) END AS NombreUbic
-FROM  dbo.producto_estado AS e INNER JOIN
-      dbo.propietarios AS p ON e.IdPropietario = p.IdPropietario LEFT JOIN
-      dbo.producto_estado_ubic AS pe ON pe.IdEstado = e.IdEstado LEFT JOIN 
-      dbo.bodega_ubicacion AS u ON u.IdUbicacion = e.IdUbicacionDefecto AND pe.IdUbicacionDefecto = u.IdUbicacion
+SELECT        e.IdEstado, e.IdPropietario, e.nombre, e.IdUbicacionDefecto, e.utilizable, e.activo, e.user_agr, e.fec_agr, e.user_mod, e.fec_mod, e.dañado, e.codigo_bodega_erp, e.sistema, ISNULL(pe.IdUbicacionDefecto, 0) 
+                         AS IdUbicacionBodegaDefecto, ISNULL(pe.IdBodega, 0) AS IdBodega, CASE WHEN ISNULL(pe.IdUbicacionDefecto, 0) = 0 THEN 'N/D' ELSE dbo.Nombre_Completo_Ubicacion(pe.IdUbicacionDefecto, pe.IdBodega) 
+                         END AS NombreUbic
+FROM            dbo.producto_estado AS e INNER JOIN
+                         dbo.propietarios AS p ON e.IdPropietario = p.IdPropietario LEFT OUTER JOIN
+                         dbo.producto_estado_ubic AS pe ON pe.IdEstado = e.IdEstado LEFT OUTER JOIN
+                         dbo.bodega_ubicacion AS u ON u.IdUbicacion = e.IdUbicacionDefecto AND pe.IdUbicacionDefecto = u.IdUbicacion
 GO
