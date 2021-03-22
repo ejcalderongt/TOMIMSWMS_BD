@@ -1,4 +1,4 @@
-CREATE VIEW [dbo].[VW_ProductoEstadoUbicHH]
+CREATE VIEW [dbo].[VW_Producto_Estado_Ubic_Bodega_HH]
 AS
 SELECT  ISNULL(pe.IdUbicacionDefecto,0) AS IdUbicacion,
         e.IdEstado, 
