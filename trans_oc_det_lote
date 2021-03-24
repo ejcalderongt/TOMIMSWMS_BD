@@ -1,1 +1,4 @@
 alter table trans_oc_det_lote add lic_plate nvarchar(50)
+
+--#EJC20210324: Para que NAV (BYB) Manden la ubicación en donde se debe registrar en el ERP.
+ALTER TABLE TRANS_OC_DET_LOTE ADD Ubicacion nvarchar(50) 
