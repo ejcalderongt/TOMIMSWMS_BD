@@ -9,3 +9,13 @@ ALTER TABLE TRANS_OC_TI ADD es_poliza_consolidada bit default 0
 
 #EJC20210318_1059:
 INSERT INTO trans_oc_ti VALUES(7,'Ingreso consolidado',0,1,GETDATE(),1,GETDATE(),1,0,0,1)
+
+
+#EJC20210323: Lista detipo de documentos actuales.
+1	Ingreso
+2	Devolución
+3	Transferencia
+4	Transferencia WMS
+5	Poliza/DUCA
+6	Orden de Producción
+7	Ingreso consolidado
