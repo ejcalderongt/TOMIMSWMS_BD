@@ -110,3 +110,22 @@ FROM            dbo.trans_oc_enc AS OC_ENC INNER JOIN
                          dbo.bodega AS BD ON OC_ENC.IdBodega = BD.IdBodega
 WHERE        (OC_ENC.Activo = 1)
 
+/*****************UPDATE 25032021 ********************/
+
+Alter view VW_Fiscal_historico as
+select 
+sj.IdOrdenCompraEnc,sj.IdRecepcionEnc,sj.IdBodega,
+ CASE
+	WHEN bd.es_bodega_fiscal =1 THEN 'Fiscal'
+	WHEN bd.es_bodega_fiscal=0 THEN 'General'
+END as regimen,sj.no_poliza codigo_poliza,'' material_name,bd.es_bodega_fiscal,pr.IdPropietario,
+sj.Fecha,sj.IdPropietarioBodega,sj.Propietario cliente,sj.Bodega as nombre_bodega,sj.fecha_ingreso as fecha_inventario,sj.Fecha_Recepcion,sj.numero_orden,sj.nombre_producto short_name,
+sj.lic_plate licencia,sj.codigo_barra_producto codigo_barra,dbo.Nombre_Completo_Ubicacion(sj.IdUbicacion,sj.IdBodega) AS ubicacion,
+sj.IdUbicacion,sj.cantidad,sj.valor_aduana as cif,sj.valor_dai as dai,sj.valor_iva as iva,ISNULL(sj.valor_aduana,0) + ISNULL(sj.valor_dai,0) + ISNULL(sj.valor_iva,0) as TOTAL_VALOR
+from stock_jornada sj inner join
+jornada_sistema js on sj.Fecha = js.Fecha inner join
+dbo.bodega bd on sj.IdBodega=bd.IdBodega inner join
+dbo.propietario_bodega pb on sj.IdPropietarioBodega=pb.IdPropietarioBodega inner join
+dbo.propietarios pr on pb.IdPropietario = pr.IdPropietario
+
+
