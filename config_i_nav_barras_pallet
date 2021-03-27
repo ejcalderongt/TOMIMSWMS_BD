@@ -1,0 +1,7 @@
+Para que funcione la recepción de pallets es necesario configurar lo siguiente:
+1. En la tabla producto_presentacion la presentación del pallet debe tener como codigo de barra el codigo del producto
+2. En la tabla i_nav_barras_pallet el codigo de barra debe contener la bodega origen precedida por un 0, con esto inicia la barra del pallet
+3. El proveedor debe tener configurado su IdConfiguracion de la tabla Configuracion_barra_pallet
+4. En la tabla Configuracion_barra_pallet se debe definir la longitud de la bodega Origen, la longitud del codigo del producto, la longitud del LP, identificador del pallet
+5. En la tabla i_nav_config_enc se debe definir el IdProductoEstado, el cual debe existir y estar asignado en la bodega donde se va a recepcionar el pallet
+6. El producto del pallet debe pertenecer a una Orden de Compra para poderlo recepcionar
