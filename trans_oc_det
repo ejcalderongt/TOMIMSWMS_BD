@@ -17,3 +17,6 @@ ALTER TABLE TRANS_OC_DET ADD IdPropietarioBodega int
 
 --#EJC20210317_1630PM
 alter table trans_oc_det add nombre_propietario nvarchar(150)
+
+--#EJC20210403_1630PM
+ALTER TABLE TRANS_OC_DET ADD IdOrdenCompraDetPadre int NULL
