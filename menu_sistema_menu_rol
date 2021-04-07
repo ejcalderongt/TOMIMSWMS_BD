@@ -56,3 +56,10 @@ insert into menu_sistema values ('2.5.1.1.2','Cuentas de orden Poliza','cmdCtaOr
 
 insert into menu_rol values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'2.5.1.1.1',1,'Erik Calderón',getdate(),'DTS',getdate(),1,1)
 insert into menu_rol values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'2.5.1.1.2',1,'Erik Calderón',getdate(),'DTS',getdate(),1,1)
+
+--07-04-2021
+
+insert into menu_sistema values ('2.5.1.5','Inventario para Retroactivo','cmdMovimiento_Reporte',4,'2.5.1',0)
+insert into menu_rol values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'2.5.1.5',1,'Erik Calderón',getdate(),'DTS',getdate(),1,1)
+
+
