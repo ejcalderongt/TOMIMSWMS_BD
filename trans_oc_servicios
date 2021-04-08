@@ -1,21 +1,59 @@
-CREATE TABLE [dbo].[trans_oc_servicios](
-	[IdOrdenCompraServicio] [int] NOT NULL,
-	[IdOrdenCompraEnc] [int] NOT NULL,
-	[IdAcuerdo] [int] NOT NULL,
-	[IdAcuerdoDet] [int] NOT NULL,	
-	[cantidad] [int] NULL,
-	[user_agr] [nvarchar](50) NULL,
-	[fec_agr] [datetime] NULL,
-	[user_mod] [nvarchar](50) NULL,
-	[fec_mod] [datetime] NULL,
-	[observacion] [nvarchar](150) NULL,
- CONSTRAINT [PK_trans_oc_Serv] PRIMARY KEY CLUSTERED 
-(
-	[IdOrdenCompraServicio] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
+/*
+   jueves, 8 de abril de 202108:00:16
+   User: sa
+   Server: PROGRAX\SQLEXPRESS
+   Database: IMS4MB_BYB_QA
+   Application: 
+*/
 
---#EJC20210408_0750AM:
-EXEC sp_rename 'dbo.trans_oc_servicios.IdServicio', 'IdAcuerdoDet', 'COLUMN';
-alter table trans_oc_servicios add IdAcuerdo int
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.Tmp_trans_oc_servicios
+	(
+	IdOrdenCompraServicio int NOT NULL,
+	IdOrdenCompraEnc int NOT NULL,
+	IdAcuerdo int NULL,
+	IdAcuerdoDet int NOT NULL,
+	observacion nvarchar(150) NULL,
+	codigo_producto nvarchar(50) NULL,
+	nombre_servicio nvarchar(150) NULL,
+	unid_medida int NULL,
+	nombre_unidad nvarchar(50) NULL,
+	corre_detalleacuerdo int NULL,
+	corre_catalogoproductos int NULL,
+	cantidad int NULL,
+	user_agr nvarchar(50) NULL,
+	fec_agr datetime NULL,
+	user_mod nvarchar(50) NULL,
+	fec_mod datetime NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.Tmp_trans_oc_servicios SET (LOCK_ESCALATION = TABLE)
+GO
+IF EXISTS(SELECT * FROM dbo.trans_oc_servicios)
+	 EXEC('INSERT INTO dbo.Tmp_trans_oc_servicios (IdOrdenCompraServicio, IdOrdenCompraEnc, IdAcuerdo, IdAcuerdoDet, observacion, codigo_producto, nombre_servicio, unid_medida, nombre_unidad, corre_detalleacuerdo, corre_catalogoproductos, cantidad, user_agr, fec_agr, user_mod, fec_mod)
+		SELECT IdOrdenCompraServicio, IdOrdenCompraEnc, IdAcuerdo, IdAcuerdoDet, observacion, codigo_producto, nombre_servicio, unid_medida, nombre_unidad, corre_detalleacuerdo, corre_catalogoproductos, cantidad, user_agr, fec_agr, user_mod, fec_mod FROM dbo.trans_oc_servicios WITH (HOLDLOCK TABLOCKX)')
+GO
+DROP TABLE dbo.trans_oc_servicios
+GO
+EXECUTE sp_rename N'dbo.Tmp_trans_oc_servicios', N'trans_oc_servicios', 'OBJECT' 
+GO
+ALTER TABLE dbo.trans_oc_servicios ADD CONSTRAINT
+	PK_trans_oc_Serv PRIMARY KEY CLUSTERED 
+	(
+	IdOrdenCompraServicio
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+COMMIT
+select Has_Perms_By_Name(N'dbo.trans_oc_servicios', 'Object', 'ALTER') as ALT_Per, Has_Perms_By_Name(N'dbo.trans_oc_servicios', 'Object', 'VIEW DEFINITION') as View_def_Per, Has_Perms_By_Name(N'dbo.trans_oc_servicios', 'Object', 'CONTROL') as Contr_Per 
