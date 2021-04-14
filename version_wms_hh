@@ -1,0 +1,12 @@
+CREATE TABLE [dbo].[version_wms_hh](
+	[IdEmpresaVersion] [int] NOT NULL,
+	[IdEmpresa] [int] NOT NULL,
+    [version] [nvarchar](50) NULL,
+	[notas] [nvarchar](150) NULL,
+	[fecha] [datetime] NULL,
+ CONSTRAINT [PK_P_EMPRESA_VERSION] PRIMARY KEY CLUSTERED
+(
+    [IdEmpresaVersion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
