@@ -1,0 +1,14 @@
+
+ALTER TABLE [dbo].[stock]  WITH CHECK ADD  CONSTRAINT [FK_stock_bodega_ubicacion] FOREIGN KEY([IdUbicacion], [IdBodega])
+REFERENCES [dbo].[bodega_ubicacion] ([IdUbicacion], [IdBodega])
+GO
+
+ALTER TABLE [dbo].[stock] CHECK CONSTRAINT [FK_stock_bodega_ubicacion]
+GO
+
+ALTER TABLE [dbo].[stock]  WITH CHECK ADD  CONSTRAINT [FK_stock_bodega_ubicacion1] FOREIGN KEY([IdUbicacion_anterior], [IdBodega])
+REFERENCES [dbo].[bodega_ubicacion] ([IdUbicacion], [IdBodega])
+GO
+
+ALTER TABLE [dbo].[stock] CHECK CONSTRAINT [FK_stock_bodega_ubicacion1]
+GO
