@@ -1,0 +1,1 @@
+ALTER TABLE trans_re_det ADD IdOperadorBodega int NULL
