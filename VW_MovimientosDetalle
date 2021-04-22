@@ -1,4 +1,4 @@
-create View VW_MovimientosDetalle as
+ALTER View VW_MovimientosDetalle as
 SELECT        pr.nombre_comercial AS Propietario, p.nombre AS Producto, pp.nombre AS Presentación, 
 			  pe1.nombre AS [Estado Origen],pe2.nombre AS [Estado Destino], 
 			  u.Nombre AS [Unidad de Medida], 
