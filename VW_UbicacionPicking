@@ -1,0 +1,52 @@
+Create View  VW_UbicacionPicking as
+SELECT        c.IdCliente, c.nombre_comercial AS NombreCliente, penc.IdPedidoEnc, d.IdPickingEnc, penc.Fecha_Pedido AS FechaPedido, enc.fecha_picking AS FechaPicking, p.codigo AS CodigoProducto, p.nombre AS NombreProducto, 
+                         u.fecha_vence AS Vence, pe.nombre AS Estado, b.descripcion AS Ubicacion, pp.nombre AS Presentación, ISNULL(pd.nombres, '') + ' ' + ISNULL(pd.apellidos, '') AS Operador, u.lote, u.cantidad_solicitada AS Solicitado, 
+                         u.cantidad_recibida AS Picking, u.cantidad_verificada AS Verificado
+FROM            dbo.trans_picking_op INNER JOIN
+                         dbo.trans_picking_ubic AS u INNER JOIN
+                         dbo.trans_picking_det AS d ON u.IdPickingDet = d.IdPickingDet INNER JOIN
+                         dbo.bodega_ubicacion AS b ON u.IdUbicacion = b.IdUbicacion INNER JOIN
+                         dbo.trans_picking_enc AS enc ON d.IdPickingEnc = enc.IdPickingEnc AND b.IdBodega = enc.IdBodega INNER JOIN
+                         dbo.propietario_bodega AS prb ON enc.IdPropietarioBodega = prb.IdPropietarioBodega INNER JOIN
+                         dbo.propietarios AS pr ON prb.IdPropietario = pr.IdPropietario INNER JOIN
+                         dbo.trans_pe_det AS pdet ON d.IdPedidoDet = pdet.IdPedidoDet INNER JOIN
+                         dbo.trans_pe_enc AS penc ON pdet.IdPedidoEnc = penc.IdPedidoEnc INNER JOIN
+                         dbo.cliente AS c ON penc.IdCliente = c.IdCliente INNER JOIN
+                         dbo.producto_bodega AS pb ON pdet.IdProductoBodega = pb.IdProductoBodega INNER JOIN
+                         dbo.producto AS p ON pb.IdProducto = p.IdProducto LEFT OUTER JOIN
+                         dbo.producto_presentacion AS pp ON pdet.IdPresentacion = pp.IdPresentacion AND p.IdProducto = pp.IdProducto LEFT OUTER JOIN
+                         dbo.producto_estado AS pe ON pdet.IdEstado = pe.IdEstado ON dbo.trans_picking_op.IdPickingEnc = enc.IdPickingEnc INNER JOIN
+                         dbo.operador AS pd INNER JOIN
+                         dbo.operador_bodega AS op ON pd.IdOperador = op.IdOperador ON dbo.trans_picking_op.IdOperadorBodega = op.IdOperadorBodega
+WHERE        (u.dañado_picking = 0) AND (u.dañado_verificacion = 0)
+
+
+
+/*********** GT 26042021 se actualiza campo para evitar duplicados ******************************/
+
+
+Alter View VW_UbicacionPicking as
+SELECT      
+c.IdCliente, c.nombre_comercial AS NombreCliente, penc.IdPedidoEnc, d.IdPickingEnc, penc.Fecha_Pedido AS FechaPedido, enc.fecha_picking AS FechaPicking, 
+p.codigo AS CodigoProducto, p.nombre AS NombreProducto, 
+u.fecha_vence AS Vence, pe.nombre AS Estado, b.descripcion AS Ubicacion, pp.nombre AS Presentación, 
+ISNULL(pd.nombres, '') + ' ' + ISNULL(pd.apellidos, '') AS Operador, 
+u.lote, u.cantidad_solicitada AS Solicitado, 
+u.cantidad_recibida AS Picking, u.cantidad_verificada AS Verificado,
+pd.IdOperador as IdOperadorBodega
+from trans_picking_ubic as u INNER JOIN  
+dbo.trans_picking_det AS d ON u.IdPickingDet = d.IdPickingDet INNER JOIN
+                         dbo.bodega_ubicacion AS b ON u.IdUbicacion = b.IdUbicacion INNER JOIN
+                         dbo.trans_picking_enc AS enc ON d.IdPickingEnc = enc.IdPickingEnc AND b.IdBodega = enc.IdBodega INNER JOIN
+                         dbo.propietario_bodega AS prb ON enc.IdPropietarioBodega = prb.IdPropietarioBodega INNER JOIN
+                         dbo.propietarios AS pr ON prb.IdPropietario = pr.IdPropietario INNER JOIN
+                         dbo.trans_pe_det AS pdet ON d.IdPedidoDet = pdet.IdPedidoDet INNER JOIN
+                         dbo.trans_pe_enc AS penc ON pdet.IdPedidoEnc = penc.IdPedidoEnc INNER JOIN
+                         dbo.cliente AS c ON penc.IdCliente = c.IdCliente INNER JOIN
+                         dbo.producto_bodega AS pb ON pdet.IdProductoBodega = pb.IdProductoBodega INNER JOIN
+                         dbo.producto AS p ON pb.IdProducto = p.IdProducto LEFT OUTER JOIN
+                         dbo.producto_presentacion AS pp ON pdet.IdPresentacion = pp.IdPresentacion AND p.IdProducto = pp.IdProducto LEFT OUTER JOIN
+                         dbo.producto_estado AS pe ON pdet.IdEstado = pe.IdEstado INNER JOIN
+                         dbo.operador AS pd on pd.IdOperador = u.IdOperadorBodega_Pickeo 
+						
+WHERE        (u.dañado_picking = 0) AND (u.dañado_verificacion = 0)
