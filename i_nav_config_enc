@@ -11,3 +11,5 @@ ADD idFamilia int NULL,
 	
 ALTER TABLE i_nav_config_enc
 ADD nombre_ejecutable NVARCHAR(50) NULL
+
+alter table i_nav_config_enc add IdTipoDocumentoTransferenciasIngreso int default 3
