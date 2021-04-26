@@ -19,3 +19,6 @@ INSERT INTO trans_oc_ti VALUES(7,'Ingreso consolidado',0,1,GETDATE(),1,GETDATE()
 5	Poliza/DUCA
 6	Orden de Producción
 7	Ingreso consolidado
+8	Transferencia de Ingreso.
+
+INSERT INTO TRANS_OC_TI VALUES(8,'Transferencia de Ingreso',0,1,GETDATE(),1,GETDATE(),1,0,0,0)
