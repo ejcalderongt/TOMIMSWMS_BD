@@ -4,3 +4,4 @@ alter table trans_oc_enc add idacuerdocomercial int null
 alter table trans_oc_enc alter column No_Ticket_TMS int 
 ALTER TABLE trans_oc_enc ADD IdOperadorBodegaDefecto INT NULL
 alter table trans_oc_enc add IdBodega int 
+alter table trans_oc_enc add no_documento_recepcion_erp nvarchar(50) 
