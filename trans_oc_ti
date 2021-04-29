@@ -20,5 +20,7 @@ INSERT INTO trans_oc_ti VALUES(7,'Ingreso consolidado',0,1,GETDATE(),1,GETDATE()
 6	Orden de Producción
 7	Ingreso consolidado
 8	Transferencia de Ingreso.
+9	Orden de Compra Interna
 
 INSERT INTO TRANS_OC_TI VALUES(8,'Transferencia de Ingreso',0,1,GETDATE(),1,GETDATE(),1,0,0,0)
+INSERT INTO TRANS_OC_TI VALUES(9,'Transferencia de Ingreso Interna',0,1,GETDATE(),1,GETDATE(),1,0,0,0)
