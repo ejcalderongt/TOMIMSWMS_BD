@@ -1,0 +1,2 @@
+alter table unidad_medida add es_um_cobro bit default 0
+alter table unidad_medida add factor float default 1
