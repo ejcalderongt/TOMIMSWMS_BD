@@ -1,0 +1,8 @@
+ALTER VIEW [dbo].[VW_UnidadMedida]
+AS
+SELECT        p.nombre_comercial AS Propietario, e.IdUnidadMedida, e.IdPropietario, e.Nombre, e.activo, e.fec_agr, e.user_mod, e.fec_mod, e.user_agr, e.codigo, e.es_um_cobro, e.factor
+FROM            dbo.unidad_medida AS e INNER JOIN
+                         dbo.propietarios AS p ON e.IdPropietario = p.IdPropietario
+GO
+
+
