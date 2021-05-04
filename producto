@@ -1,1 +1,7 @@
 alter table producto add IdUnidadMedidaCobro int null
+
+--CKFK 20210504
+ALTER TABLE producto ADD IdTipoEtiqueta INT NULL;
+
+--Esto solo para CEALSA
+UPDATE producto SET IdTipoEtiqueta = 2;
