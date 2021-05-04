@@ -25,3 +25,8 @@ CREATE TABLE [dbo].[i_nav_acuerdo_det](
 ) ON [PRIMARY]
 GO
 
+ALTER TABLE i_nav_acuerdo_det 
+ALTER COLUMN servicio NVARCHAR(500)
+
+ALTER TABLE i_nav_acuerdo_det 
+ALTER COLUMN nombre_unidad NVARCHAR(100)
