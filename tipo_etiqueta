@@ -1,3 +1,3 @@
 INSERT INTO tipo_etiqueta
-SELECT 2 IdTipoEtiqueta, 'CEALSA' Nombre, 3 Alto, 3 Ancho, MargenIzq, MagenDer, MargenSup, MargenInf, user_agr,getdate() fec_agr, user_mod, getdate()fec_mod, activo
+SELECT 2 IdTipoEtiqueta, 'CEALSA' Nombre, 2.75 Alto, 3 Ancho, MargenIzq, MagenDer, MargenSup, MargenInf, user_agr,getdate() fec_agr, user_mod, getdate()fec_mod, activo
 FROM Tipo_etiqueta WHERE IdTipoEtiqueta = 1;
