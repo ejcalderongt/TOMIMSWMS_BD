@@ -1,0 +1,17 @@
+/****** Object:  View [dbo].[VW_Configuracioninv]    Script Date: 6/05/2021 12:26:15 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER VIEW [dbo].[VW_Configuracioninv]
+AS
+SELECT        dbo.i_nav_config_enc.idnavconfigenc AS Correlativo, dbo.i_nav_config_enc.nombre, dbo.empresa.nombre AS Empresa, dbo.bodega.nombre AS Bodega, dbo.i_nav_config_enc.idempresa, dbo.i_nav_config_enc.idbodega, 
+                         dbo.propietarios.nombre_comercial AS Propietario, dbo.i_nav_config_enc.idPropietario
+FROM            dbo.bodega INNER JOIN
+                         dbo.empresa ON dbo.bodega.IdEmpresa = dbo.empresa.IdEmpresa INNER JOIN
+                         dbo.i_nav_config_enc ON dbo.bodega.IdBodega = dbo.i_nav_config_enc.idbodega AND dbo.empresa.IdEmpresa = dbo.i_nav_config_enc.idempresa LEFT OUTER JOIN
+                         dbo.propietarios ON dbo.empresa.IdEmpresa = dbo.propietarios.IdEmpresa AND dbo.i_nav_config_enc.idPropietario = dbo.propietarios.IdPropietario
+GO
+
