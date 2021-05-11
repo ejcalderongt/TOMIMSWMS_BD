@@ -10,7 +10,7 @@ INSERT INTO trans_oc_ti VALUES(7,'Ingreso consolidado',0,1,GETDATE(),1,GETDATE()
 
 
 #EJC20210323: Lista detipo de documentos actuales.
-1	Ingreso
+1	Ingreso Almacén General
 2	Devolución
 3	Transferencia
 4	Transferencia WMS
@@ -19,12 +19,14 @@ INSERT INTO trans_oc_ti VALUES(7,'Ingreso consolidado',0,1,GETDATE(),1,GETDATE()
 7	Ingreso consolidado
 8	Transferencia de Ingreso.
 9	Orden de Compra Interna
+10 Ingreso Almacén General con Póliza
 
 --Las coloqué aquí del 5 a a 9 porque en mis bases de datos solo tenía las 4 primeras
-INSERT INTO trans_oc_ti VALUES(5,'Ingreso Almacén Fiscal',          0,1,GETDATE(),1,GETDATE(), 1,1,0,0)
-INSERT INTO trans_oc_ti VALUES(6,'Orden de Producción',             0,1,GETDATE(),1,GETDATE(), 1,0,0,0)
-INSERT INTO trans_oc_ti VALUES(7,'Ingreso consolidado',             0,1,GETDATE(),1,GETDATE(), 1,1,0,1)
-INSERT INTO TRANS_OC_TI VALUES(8,'Transferencia de Ingreso',        0,1,GETDATE(),1,GETDATE(), 1,0,0,0)
-INSERT INTO TRANS_OC_TI VALUES(9,'Transferencia de Ingreso Interna',0,1,GETDATE(),1,GETDATE(), 1,0,0,0)
+INSERT INTO trans_oc_ti VALUES(5,'Ingreso Almacén Fiscal',             0,1,GETDATE(),1,GETDATE(), 1,1,0,0)
+INSERT INTO trans_oc_ti VALUES(6,'Orden de Producción',                0,1,GETDATE(),1,GETDATE(), 1,0,0,0)
+INSERT INTO trans_oc_ti VALUES(7,'Ingreso consolidado',                0,1,GETDATE(),1,GETDATE(), 1,1,0,1)
+INSERT INTO TRANS_OC_TI VALUES(8,'Transferencia de Ingreso',           0,1,GETDATE(),1,GETDATE(), 1,0,0,0)
+INSERT INTO TRANS_OC_TI VALUES(9,'Transferencia de Ingreso Interna',   0,1,GETDATE(),1,GETDATE(), 1,0,0,0)
+INSERT INTO TRANS_OC_TI VALUES(10,'Ingreso Almacén General con Póliza',0,1,GETDATE(),1,GETDATE(), 1,1,0,0)
 
 
