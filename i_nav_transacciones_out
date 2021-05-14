@@ -31,4 +31,6 @@ add lic_plate nvarchar(50)
 ALTER TABLE i_nav_transacciones_out
 add uds_lic_plate float
 
+ALTER TABLE i_nav_transacciones_out
+add cantidad_presentacion float
 
