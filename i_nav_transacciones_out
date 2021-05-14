@@ -24,3 +24,11 @@ fecha_despacho datetime null
 
 ALTER TABLE i_nav_transacciones_out
 ALTER COLUMN fecha_despacho date;
+
+ALTER TABLE i_nav_transacciones_out
+add lic_plate nvarchar(50)
+
+ALTER TABLE i_nav_transacciones_out
+add uds_lic_plate float
+
+
