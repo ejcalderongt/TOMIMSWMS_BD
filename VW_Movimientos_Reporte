@@ -1,3 +1,4 @@
+CREATE VIEW VW_Movimientos_Reporte AS
 SELECT        pr.nombre_comercial AS Propietario, p.nombre AS Producto, pp.nombre AS Presentación, pe1.nombre AS EstadoOrigen, pe2.nombre AS EstadoDestino, u.Nombre AS UMBas, m.cantidad, m.peso, m.lote, 
                          u1.descripcion AS UbicOrigen, u2.descripcion AS UbicDestino, stt.Nombre AS TipoTarea, CASE WHEN tm.Fecha_Ingreso IS NULL THEN m.fecha ELSE CASE WHEN CONVERT(date, tm.Fecha_Ingreso) < CONVERT(date, m.fecha) 
                          THEN tm.Fecha_Ingreso ELSE m.fecha END END AS fecha, ISNULL(oc_enc.no_ticket_tms, 0) AS tms_ticket, p.IdProducto, p.codigo, p.codigo_barra AS CodigoBarra, stt.IdTipoTarea, stt.Contabilizar, m.fecha_vence, 
@@ -24,3 +25,4 @@ FROM            dbo.trans_movimientos AS m LEFT OUTER JOIN
                          dbo.trans_oc_enc AS oc_enc ON re_oc.IdOrdenCompraEnc = oc_enc.IdOrdenCompraEnc LEFT OUTER JOIN
                          dbo.tms_ticket AS tm ON oc_enc.no_ticket_tms = tm.IdTicket AND CONVERT(date, m.fecha) > CONVERT(date, tm.Fecha_Ingreso)
 WHERE        (stt.IdTipoTarea = 1) AND (oc_enc.no_ticket_tms > 0)
+GO
