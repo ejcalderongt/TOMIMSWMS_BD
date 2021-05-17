@@ -71,3 +71,7 @@ CREATE TABLE [dbo].[stock_jornada](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+
+alter table stock_jornada add fecha_ingreso_ticket_tms datetime default getdate()
+alter table stock_jornada add es_retroactivo bit default 0
