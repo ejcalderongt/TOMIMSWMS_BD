@@ -1,0 +1,5 @@
+/*********** Parametros MULTIPROPIETARIO ******************************************/
+ALTER TABLE trans_inv_enc add  multi_propietario BIT null
+ALTER TABLE trans_inv_detalle add IdPropietarioBodega Integer null
+ALTER TABLE trans_inv_detalle add nombre_propietario nvarchar(150) null
+
