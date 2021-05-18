@@ -65,9 +65,15 @@ insert into menu_rol values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'2.5.1.5',
 --GT 30042021 --
 
 insert into menu_sistema values ('6.1.1.14','Existencias Consolidador','cmdExistConsolidador',4,'6.1.1',0)
-insert into menu_sistema values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'6.1.1.14',1,'Erik Calderón',getdate(),'DTS',getdate(),1,1)
+insert into menu_rol values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'6.1.1.14',1,'Erik Calderón',getdate(),'DTS',getdate(),1,1)
 
 
+--GT 18052021 --
 
+insert into menu_sistema
+values ('6.1.1.15','Existencia con valor Fiscal','cmdExistFiscal',4,'6.1.1',0)
+
+insert into menu_rol
+values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'6.1.1.15',1,'Erik Calderón',getdate(),'DTS ',getdate(),1,1)
 
 
