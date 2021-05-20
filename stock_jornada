@@ -75,3 +75,8 @@ GO
 
 alter table stock_jornada add fecha_ingreso_ticket_tms datetime default getdate()
 alter table stock_jornada add es_retroactivo bit default 0
+
+
+alter table stock_jornada add factor float default 0,
+CamasPorTarima float default 0, 
+CajasPorCama float default 0
