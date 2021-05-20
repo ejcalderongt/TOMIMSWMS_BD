@@ -16,3 +16,6 @@ alter table i_nav_config_enc add IdTipoDocumentoTransferenciasIngreso int defaul
 
 --#EJC20210428: byb
 alter table i_nav_config_enc add crear_recepcion_de_transferencia_nav bit default 0
+
+--#CKFK 20210519 CEALSA
+alter table i_nav_config_enc add control_peso bit default 1
