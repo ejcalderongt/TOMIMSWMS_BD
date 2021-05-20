@@ -84,3 +84,6 @@ CajasPorCama float default 0
 alter table stock_jornada add Cantidad_Ingreso_Afecta_A_Salida float default 0
 
 alter table stock_jornada add Stock_Jornada_Hash nvarchar(150) default ''
+
+alter table stock_jornada add IdTicketTMS int default 0
+
