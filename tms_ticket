@@ -58,3 +58,4 @@ fecha_procesado datetime
 alter table tms_ticket add 
 fecha_asignado datetime
 
+alter table tms_ticket add procesado_stock_jornada bit default 0
