@@ -1,3 +1,4 @@
+ALTER VIEW VW_STOCK_JORNADA AS
 SELECT        dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBodega, dbo.stock.IdProductoBodega, dbo.stock.IdProductoEstado, dbo.stock.IdPresentacion, dbo.stock.IdUnidadMedida, dbo.stock.IdUbicacion, 
                          dbo.stock.IdUbicacion_anterior, dbo.stock.IdRecepcionEnc, dbo.stock.IdRecepcionDet, dbo.stock.IdPedidoEnc, dbo.stock.IdPickingEnc, dbo.stock.IdDespachoEnc, dbo.stock.lote, dbo.stock.lic_plate, dbo.stock.serial, 
                          dbo.stock.cantidad, dbo.stock.fecha_ingreso, dbo.stock.fecha_vence, dbo.stock.uds_lic_plate, dbo.stock.no_bulto, dbo.stock.fecha_manufactura, dbo.stock.añada, dbo.stock.user_agr, dbo.stock.fec_agr, dbo.stock.user_mod, 
