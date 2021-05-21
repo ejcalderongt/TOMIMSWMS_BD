@@ -1,3 +1,10 @@
+/****** Object:  View [dbo].[VW_Stock_Jornada]    Script Date: 21/05/2021 13:06:48 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 ALTER VIEW [dbo].[VW_Stock_Jornada]
 AS
 SELECT        dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBodega, dbo.stock.IdProductoBodega, dbo.stock.IdProductoEstado, dbo.stock.IdPresentacion, dbo.stock.IdUnidadMedida, dbo.stock.IdUbicacion, 
