@@ -11,7 +11,7 @@ SELECT        dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBode
                          dbo.Nombre_Completo_Ubicacion(dbo.stock.IdUbicacion, dbo.stock.IdBodega) AS Ubicacion_Origen, dbo.trans_oc_pol.NoPoliza AS No_Poliza, dbo.trans_oc_det.valor_aduana, dbo.trans_oc_det.valor_fob, 
                          dbo.trans_oc_det.valor_iva, dbo.trans_oc_det.valor_dai, dbo.trans_oc_det.valor_seguro, dbo.trans_oc_det.valor_flete, dbo.trans_oc_det.peso_neto, dbo.trans_oc_det.peso_bruto, dbo.trans_oc_pol.numero_orden, 
                          dbo.regimen_fiscal.codigo_regimen, dbo.regimen_fiscal.descripcion AS nombre_regimen, dbo.regimen_fiscal.dias_vencimiento AS dias_vencimiento_regimen, dbo.tms_ticket.Fecha_Ingreso AS Fecha_Ingreso_Ticket_TMS, 
-                         dbo.trans_re_enc.fec_agr AS Fecha_Agrego, dbo.producto_estado.nombre AS nom_estado_producto, dbo.trans_oc_enc.No_Ticket_TMS
+                         dbo.trans_re_enc.fec_agr AS Fecha_Agrego, dbo.producto_estado.nombre AS nom_estado_producto, dbo.trans_oc_enc.No_Ticket_TMS as IdTicketTMS
 FROM            dbo.propietarios INNER JOIN
                          dbo.propietario_bodega ON dbo.propietarios.IdPropietario = dbo.propietario_bodega.IdPropietario RIGHT OUTER JOIN
                          dbo.tms_ticket RIGHT OUTER JOIN
