@@ -19,3 +19,6 @@ alter table i_nav_config_enc add crear_recepcion_de_transferencia_nav bit defaul
 
 --#CKFK 20210519 CEALSA
 alter table i_nav_config_enc add control_peso bit default 1
+
+--#EJC20210524: byb
+alter table i_nav_config_enc add crear_recepcion_de_compra_nav bit default 0
