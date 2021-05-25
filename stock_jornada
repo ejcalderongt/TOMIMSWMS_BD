@@ -87,3 +87,8 @@ alter table stock_jornada add Stock_Jornada_Hash nvarchar(150) default ''
 
 alter table stock_jornada add IdTicketTMS int default 0
 
+ALTER TABLE stock_jornada 
+ADD IdPropietario INT NULL,
+IdClasificacion INT NULL,
+Clasificacion NVARCHAR(100)NULL
+
