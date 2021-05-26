@@ -1,3 +1,10 @@
+/****** Object:  View [dbo].[VW_Stock_Jornada]    Script Date: 25/05/2021 23:19:56 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 ALTER VIEW [dbo].[VW_Stock_Jornada] AS
 SELECT        dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBodega, dbo.stock.IdProductoBodega, dbo.stock.IdProductoEstado, dbo.stock.IdPresentacion, dbo.stock.IdUnidadMedida, dbo.stock.IdUbicacion, 
                          dbo.stock.IdUbicacion_anterior, dbo.stock.IdRecepcionEnc, dbo.stock.IdRecepcionDet, dbo.stock.IdPedidoEnc, dbo.stock.IdPickingEnc, dbo.stock.IdDespachoEnc, dbo.stock.lote, dbo.stock.lic_plate, dbo.stock.serial, 
@@ -52,4 +59,7 @@ GROUP BY dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBodega, d
                          dbo.trans_oc_det.valor_iva, dbo.trans_oc_det.valor_dai, dbo.trans_oc_det.valor_seguro, dbo.trans_oc_det.valor_flete, dbo.trans_oc_det.peso_neto, dbo.trans_oc_det.peso_bruto, dbo.trans_oc_pol.numero_orden, 
                          dbo.regimen_fiscal.codigo_regimen, dbo.regimen_fiscal.descripcion, dbo.regimen_fiscal.dias_vencimiento, dbo.tms_ticket.Fecha_Ingreso, dbo.trans_re_enc.fec_agr, dbo.producto_estado.nombre, dbo.stock.activo, 
                          dbo.stock.pallet_no_estandar, dbo.producto_presentacion.factor, dbo.trans_oc_enc.No_Ticket_TMS, dbo.propietarios.IdPropietario, dbo.producto_clasificacion.IdClasificacion, dbo.producto_clasificacion.nombre, dbo.bodega.es_bodega_fiscal
+
 GO
+
+
