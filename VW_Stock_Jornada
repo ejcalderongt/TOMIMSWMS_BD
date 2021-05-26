@@ -1,12 +1,12 @@
-/****** Object:  View [dbo].[VW_Stock_Jornada]    Script Date: 21/05/2021 13:06:48 ******/
+/****** Object:  View [dbo].[VW_Stock_Jornada]    Script Date: 25/05/2021 17:54:33 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER VIEW [dbo].[VW_Stock_Jornada]
-AS
+
+ALTER VIEW [dbo].[VW_Stock_Jornada] AS
 SELECT        dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBodega, dbo.stock.IdProductoBodega, dbo.stock.IdProductoEstado, dbo.stock.IdPresentacion, dbo.stock.IdUnidadMedida, dbo.stock.IdUbicacion, 
                          dbo.stock.IdUbicacion_anterior, dbo.stock.IdRecepcionEnc, dbo.stock.IdRecepcionDet, dbo.stock.IdPedidoEnc, dbo.stock.IdPickingEnc, dbo.stock.IdDespachoEnc, dbo.stock.lote, dbo.stock.lic_plate, dbo.stock.serial, 
                          dbo.stock.cantidad, dbo.stock.fecha_ingreso, dbo.stock.fecha_vence, dbo.stock.uds_lic_plate, dbo.stock.no_bulto, dbo.stock.fecha_manufactura, dbo.stock.añada, dbo.stock.user_agr, dbo.stock.fec_agr, dbo.stock.user_mod, 
@@ -19,7 +19,8 @@ SELECT        dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBode
                          dbo.Nombre_Completo_Ubicacion(dbo.stock.IdUbicacion, dbo.stock.IdBodega) AS Ubicacion_Origen, dbo.trans_oc_pol.NoPoliza AS No_Poliza, dbo.trans_oc_det.valor_aduana, dbo.trans_oc_det.valor_fob, 
                          dbo.trans_oc_det.valor_iva, dbo.trans_oc_det.valor_dai, dbo.trans_oc_det.valor_seguro, dbo.trans_oc_det.valor_flete, dbo.trans_oc_det.peso_neto, dbo.trans_oc_det.peso_bruto, dbo.trans_oc_pol.numero_orden, 
                          dbo.regimen_fiscal.codigo_regimen, dbo.regimen_fiscal.descripcion AS nombre_regimen, dbo.regimen_fiscal.dias_vencimiento AS dias_vencimiento_regimen, dbo.tms_ticket.Fecha_Ingreso AS Fecha_Ingreso_Ticket_TMS, 
-                         dbo.trans_re_enc.fec_agr AS Fecha_Agrego, dbo.producto_estado.nombre AS nom_estado_producto, dbo.trans_oc_enc.No_Ticket_TMS AS IdTicketTMS, dbo.propietario_bodega.IdPropietario
+                         dbo.trans_re_enc.fec_agr AS Fecha_Agrego, dbo.producto_estado.nombre AS nom_estado_producto, dbo.trans_oc_enc.No_Ticket_TMS as IdTicketTMS,
+						 dbo.propietarios.IdPropietario, dbo.producto_clasificacion.IdClasificacion, dbo.producto_clasificacion.Nombre AS Clasificacion 
 FROM            dbo.propietarios INNER JOIN
                          dbo.propietario_bodega ON dbo.propietarios.IdPropietario = dbo.propietario_bodega.IdPropietario RIGHT OUTER JOIN
                          dbo.tms_ticket RIGHT OUTER JOIN
@@ -47,6 +48,7 @@ FROM            dbo.propietarios INNER JOIN
                          dbo.trans_oc_pol ON dbo.regimen_fiscal.IdRegimen = dbo.trans_oc_pol.IdRegimen ON dbo.trans_oc_enc.IdOrdenCompraEnc = dbo.trans_oc_pol.IdOrdenCompraEnc LEFT OUTER JOIN
                          dbo.proveedor INNER JOIN
                          dbo.proveedor_bodega ON dbo.proveedor.IdProveedor = dbo.proveedor_bodega.IdProveedor ON dbo.trans_oc_enc.IdProveedorBodega = dbo.proveedor_bodega.IdAsignacion
+						 LEFT OUTER JOIN dbo.producto_clasificacion ON dbo.producto.IdClasificacion = producto_clasificacion.IdClasificacion
 GROUP BY dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBodega, dbo.stock.IdProductoBodega, dbo.stock.IdProductoEstado, dbo.stock.IdPresentacion, dbo.stock.IdUnidadMedida, dbo.stock.IdUbicacion, 
                          dbo.stock.IdUbicacion_anterior, dbo.stock.IdRecepcionEnc, dbo.stock.IdRecepcionDet, dbo.stock.IdPedidoEnc, dbo.stock.IdPickingEnc, dbo.stock.IdDespachoEnc, dbo.stock.lote, dbo.stock.lic_plate, dbo.stock.serial, 
                          dbo.stock.cantidad, dbo.stock.fecha_ingreso, dbo.stock.fecha_vence, dbo.stock.uds_lic_plate, dbo.stock.no_bulto, dbo.stock.fecha_manufactura, dbo.stock.añada, dbo.stock.user_agr, dbo.stock.fec_agr, dbo.stock.user_mod, 
@@ -56,7 +58,8 @@ GROUP BY dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBodega, d
                          dbo.producto_presentacion.nombre, dbo.Nombre_Completo_Ubicacion(dbo.stock.IdUbicacion, dbo.stock.IdBodega), dbo.trans_oc_pol.NoPoliza, dbo.trans_oc_det.valor_aduana, dbo.trans_oc_det.valor_fob, 
                          dbo.trans_oc_det.valor_iva, dbo.trans_oc_det.valor_dai, dbo.trans_oc_det.valor_seguro, dbo.trans_oc_det.valor_flete, dbo.trans_oc_det.peso_neto, dbo.trans_oc_det.peso_bruto, dbo.trans_oc_pol.numero_orden, 
                          dbo.regimen_fiscal.codigo_regimen, dbo.regimen_fiscal.descripcion, dbo.regimen_fiscal.dias_vencimiento, dbo.tms_ticket.Fecha_Ingreso, dbo.trans_re_enc.fec_agr, dbo.producto_estado.nombre, dbo.stock.activo, 
-                         dbo.stock.pallet_no_estandar, dbo.producto_presentacion.factor, dbo.trans_oc_enc.No_Ticket_TMS, dbo.propietario_bodega.IdPropietario
+                         dbo.stock.pallet_no_estandar, dbo.producto_presentacion.factor, dbo.trans_oc_enc.No_Ticket_TMS, dbo.propietarios.IdPropietario, dbo.producto_clasificacion.IdClasificacion, dbo.producto_clasificacion.nombre
 GO
+
 
 
