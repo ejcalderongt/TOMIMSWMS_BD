@@ -20,3 +20,7 @@ alter table bodega add es_bodega_fiscal bit default 0
 
 --#EJC20210316_1339PM
 ALTER TABLE BODEGA ADD habilitar_ingreso_consolidado BIT DEFAULT 0
+
+--#CKFK20210526 
+ALTER TABLE bodega ADD captura_estiba_ingreso BIT NOT NULL DEFAULT 0,
+captura_pallet_no_estandar BIT NOT NULL DEFAULT 0;
