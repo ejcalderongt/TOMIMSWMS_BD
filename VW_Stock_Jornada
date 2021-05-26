@@ -16,7 +16,7 @@ SELECT        dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBode
                          dbo.producto.nombre AS Nombre_Producto, dbo.producto.codigo_barra AS Codigo_Barra_Producto, 
                          CASE WHEN dbo.stock.IdPresentacion <> 0 THEN dbo.stock.cantidad / dbo.producto_presentacion.factor ELSE dbo.stock.cantidad END AS Existencia, ISNULL(dbo.producto_presentacion.factor, 0) AS Factor, 
                          ISNULL(dbo.producto_presentacion.CamasPorTarima, 0) AS CamasPorTarima, ISNULL(dbo.producto_presentacion.CajasPorCama, 0) AS CajasPorCama, dbo.producto_presentacion.nombre AS Presentacion_Producto, 
-                         dbo.Nombre_Completo_Ubicacion(dbo.stock.IdUbicacion, dbo.stock.IdBodega) AS Ubicacion_Origen, dbo.trans_oc_pol.NoPoliza AS No_Poliza, dbo.trans_oc_det.valor_aduana, dbo.trans_oc_det.valor_fob, 
+                         dbo.Nombre_Completo_Ubicacion(dbo.stock.IdUbicacion, dbo.stock.IdBodega) AS Ubicacion_Origen, dbo.trans_oc_pol.codigo_poliza AS No_Poliza, dbo.trans_oc_det.valor_aduana, dbo.trans_oc_det.valor_fob, 
                          dbo.trans_oc_det.valor_iva, dbo.trans_oc_det.valor_dai, dbo.trans_oc_det.valor_seguro, dbo.trans_oc_det.valor_flete, dbo.trans_oc_det.peso_neto, dbo.trans_oc_det.peso_bruto, dbo.trans_oc_pol.numero_orden, 
                          dbo.regimen_fiscal.codigo_regimen, dbo.regimen_fiscal.descripcion AS nombre_regimen, dbo.regimen_fiscal.dias_vencimiento AS dias_vencimiento_regimen, dbo.tms_ticket.Fecha_Ingreso AS Fecha_Ingreso_Ticket_TMS, 
                          dbo.trans_re_enc.fec_agr AS Fecha_Agrego, dbo.producto_estado.nombre AS nom_estado_producto, dbo.trans_oc_enc.No_Ticket_TMS as IdTicketTMS,
@@ -55,11 +55,8 @@ GROUP BY dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBodega, d
                          dbo.stock.fec_mod, dbo.stock.peso, dbo.stock.temperatura, dbo.stock.atributo_variante_1, dbo.propietarios.nombre_comercial, dbo.proveedor.nombre, dbo.bodega.nombre, dbo.trans_oc_enc.IdOrdenCompraEnc, 
                          dbo.trans_oc_enc.No_Documento, dbo.trans_oc_enc.Referencia, dbo.trans_re_oc.no_docto, dbo.trans_re_enc.fecha_recepcion, dbo.trans_re_tr.TipoTrans, dbo.unidad_medida.Nombre, dbo.producto.codigo, 
                          dbo.producto.nombre, dbo.producto.codigo_barra, ISNULL(dbo.producto_presentacion.factor, 0), ISNULL(dbo.producto_presentacion.CamasPorTarima, 0), ISNULL(dbo.producto_presentacion.CajasPorCama, 0), 
-                         dbo.producto_presentacion.nombre, dbo.Nombre_Completo_Ubicacion(dbo.stock.IdUbicacion, dbo.stock.IdBodega), dbo.trans_oc_pol.NoPoliza, dbo.trans_oc_det.valor_aduana, dbo.trans_oc_det.valor_fob, 
+                         dbo.producto_presentacion.nombre, dbo.Nombre_Completo_Ubicacion(dbo.stock.IdUbicacion, dbo.stock.IdBodega), dbo.trans_oc_pol.codigo_poliza, dbo.trans_oc_det.valor_aduana, dbo.trans_oc_det.valor_fob, 
                          dbo.trans_oc_det.valor_iva, dbo.trans_oc_det.valor_dai, dbo.trans_oc_det.valor_seguro, dbo.trans_oc_det.valor_flete, dbo.trans_oc_det.peso_neto, dbo.trans_oc_det.peso_bruto, dbo.trans_oc_pol.numero_orden, 
                          dbo.regimen_fiscal.codigo_regimen, dbo.regimen_fiscal.descripcion, dbo.regimen_fiscal.dias_vencimiento, dbo.tms_ticket.Fecha_Ingreso, dbo.trans_re_enc.fec_agr, dbo.producto_estado.nombre, dbo.stock.activo, 
                          dbo.stock.pallet_no_estandar, dbo.producto_presentacion.factor, dbo.trans_oc_enc.No_Ticket_TMS, dbo.propietarios.IdPropietario, dbo.producto_clasificacion.IdClasificacion, dbo.producto_clasificacion.nombre
 GO
-
-
-
