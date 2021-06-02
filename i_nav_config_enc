@@ -22,3 +22,6 @@ alter table i_nav_config_enc add control_peso bit default 1
 
 --#EJC20210524: byb
 alter table i_nav_config_enc add crear_recepcion_de_compra_nav bit default 0
+
+--#EJC20210602: cealsa
+alter table i_nav_config_enc add IdAcuerdoEnc int null default 0
