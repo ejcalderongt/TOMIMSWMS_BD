@@ -1,12 +1,3 @@
-/*
-   miércoles, 2 de junio de 202100:49:59
-   User: sa
-   Server: PROGRAX\SQLEXPRESS
-   Database: IMS4MB_BYB_QA
-   Application: 
-*/
-
-/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
 BEGIN TRANSACTION
 SET QUOTED_IDENTIFIER ON
 SET ARITHABORT ON
@@ -18,13 +9,16 @@ SET ANSI_WARNINGS ON
 COMMIT
 BEGIN TRANSACTION
 GO
+
+drop table log_error_wms
+
 CREATE TABLE dbo.log_error_wms
 	(
 	IdError int NOT NULL,
 	IdEmpresa int NULL,
 	IdBodega int NULL,
 	Fecha date NULL,
-	Error nvarchar(500) NULL
+	MensajeError nvarchar(500) NULL
 	)  ON [PRIMARY]
 GO
 ALTER TABLE dbo.log_error_wms ADD CONSTRAINT
