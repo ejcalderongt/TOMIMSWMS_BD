@@ -1,4 +1,4 @@
-/****** Object:  View [dbo].[VW_Stock_Jornada]    Script Date: 26/05/2021 16:18:42 ******/
+/****** Object:  View [dbo].[VW_Stock_Jornada]    Script Date: 03/06/2021 16:18:42 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -21,7 +21,7 @@ SELECT        dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBode
                          dbo.regimen_fiscal.codigo_regimen, dbo.regimen_fiscal.descripcion AS nombre_regimen, dbo.regimen_fiscal.dias_vencimiento AS dias_vencimiento_regimen, dbo.tms_ticket.Fecha_Ingreso AS Fecha_Ingreso_Ticket_TMS, 
                          dbo.trans_re_enc.fec_agr AS Fecha_Agrego, dbo.producto_estado.nombre AS nom_estado_producto, dbo.trans_oc_enc.No_Ticket_TMS as IdTicketTMS,
 			dbo.propietarios.IdPropietario, dbo.producto_clasificacion.IdClasificacion, dbo.producto_clasificacion.Nombre AS Clasificacion, 
-			iif(dbo.bodega.es_bodega_fiscal = 1, 'Fiscal','General') AS Regimen, ISNULL(dbo.stock_det.posiciones, 0) AS Posiciones
+			iif(dbo.bodega.es_bodega_fiscal = 1, 'Fiscal','General') AS Regimen, ISNULL(dbo.stock_det.posiciones, 1) AS Posiciones
 FROM            dbo.propietarios INNER JOIN
                          dbo.propietario_bodega ON dbo.propietarios.IdPropietario = dbo.propietario_bodega.IdPropietario RIGHT OUTER JOIN
                          dbo.tms_ticket RIGHT OUTER JOIN
@@ -64,3 +64,5 @@ GROUP BY dbo.stock.IdBodega, dbo.stock.IdStock, dbo.stock.IdPropietarioBodega, d
 						 dbo.bodega.es_bodega_fiscal, dbo.stock_det.posiciones
 
 GO
+
+
