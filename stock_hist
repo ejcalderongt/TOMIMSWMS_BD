@@ -1,0 +1,1 @@
+alter table stock_hist add posiciones int null default 0 
