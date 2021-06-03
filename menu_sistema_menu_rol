@@ -84,6 +84,11 @@ values ('6.1.1.18','Existencia por Propietario','cmdExistenciasPropietario',4,'6
 insert into menu_rol
 values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'6.1.1.18',1,'Erik Calderón',getdate(),'DTS ',getdate(),1,1)
 
+insert into menu_sistema
+values ('6.1.1.19','Existencia por Lote y Posición','cmdExistenciasPorLote_Posicion',4,'6.1.1',0)
+
+insert into menu_rol
+values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'6.1.1.19',1,'Erik Calderón',getdate(),'DTS ',getdate(),1,1)
 
 
 
