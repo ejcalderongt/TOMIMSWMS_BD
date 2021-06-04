@@ -1,7 +1,23 @@
-CREATE VIEW [dbo].[VW_Costo_Linea_Documento_Ingreso]
+/****** Object:  View [dbo].[VW_Costo_Linea_Documento_Ingreso]    Script Date: 4/06/2021 13:42:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER VIEW [dbo].[VW_Costo_Linea_Documento_Ingreso]
 AS
-SELECT        e.IdOrdenCompraEnc, d.IdOrdenCompraDet, re.IdRecepcionEnc, de.IdRecepcionDet, d.IdProductoBodega, d.No_Linea, d.IdPresentacion, d.cantidad, d.cantidad_recibida, d.costo AS costo_unitario, SUM(d.valor_aduana) 
-                         AS costo_total
+SELECT e.IdOrdenCompraEnc, d.IdOrdenCompraDet, 
+re.IdRecepcionEnc, 
+de.IdRecepcionDet, 
+d.IdProductoBodega, 
+d.No_Linea, 
+d.IdPresentacion, 
+d.cantidad, 
+d.cantidad_recibida, 
+d.costo AS costo_unitario, SUM(d.valor_aduana + d.valor_dai + d.valor_iva) AS costo_total,
+(d.costo * d.cantidad) as Total_Calculado
+                         
 FROM            dbo.trans_oc_enc AS e INNER JOIN
                          dbo.trans_oc_det AS d ON e.IdOrdenCompraEnc = d.IdOrdenCompraEnc INNER JOIN
                          dbo.trans_re_oc AS r ON r.IdOrdenCompraEnc = e.IdOrdenCompraEnc LEFT OUTER JOIN
@@ -10,3 +26,5 @@ FROM            dbo.trans_oc_enc AS e INNER JOIN
                          d.No_Linea = de.No_Linea
 GROUP BY d.IdProductoBodega, e.IdOrdenCompraEnc, re.IdRecepcionEnc, de.IdRecepcionDet, d.IdOrdenCompraDet, d.No_Linea, d.IdPresentacion, d.cantidad, d.cantidad_recibida, d.costo
 GO
+
+
