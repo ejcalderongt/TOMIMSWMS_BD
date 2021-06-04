@@ -1,0 +1,70 @@
+/****** Object:  Table [dbo].[trans_servicio_enc]    Script Date: 4/06/2021 00:41:33 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[trans_servicio_enc](
+	[IdServicioEnc] [int] NOT NULL,
+	[IdOrdenCompraEnc] [int] NOT NULL,
+	[IdEmpresa] [int] NOT NULL,
+	[IdBodega] [int] NOT NULL,
+	[no_poliza] [nvarchar](50) NULL,
+	[no_orden] [nvarchar](50) NULL,
+	[fecha_doc_ingreso] [datetime] NULL,
+	[fecha_servicio] [datetime] NULL,
+	[enviado_a_erp] [bit] NOT NULL,
+	[activo] [bit] NOT NULL,
+	[IdPropietario] [int] NOT NULL,
+	[user_agr] [nvarchar](50) NULL,
+	[fec_agr] [datetime] NULL,
+	[user_mod] [nvarchar](50) NULL,
+	[fec_mod] [datetime] NULL,
+ CONSTRAINT [PK_servicio_enc] PRIMARY KEY CLUSTERED 
+(
+	[IdServicioEnc] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc] ADD  DEFAULT (getdate()) FOR [fecha_doc_ingreso]
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc] ADD  DEFAULT (getdate()) FOR [fecha_servicio]
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc] ADD  DEFAULT ((0)) FOR [enviado_a_erp]
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc] ADD  DEFAULT ((1)) FOR [activo]
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc]  WITH CHECK ADD  CONSTRAINT [FK_servicio_enc_trans_oc_enc] FOREIGN KEY([IdOrdenCompraEnc])
+REFERENCES [dbo].[trans_oc_enc] ([IdOrdenCompraEnc])
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc] CHECK CONSTRAINT [FK_servicio_enc_trans_oc_enc]
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_servicio_enc_bodega] FOREIGN KEY([IdBodega])
+REFERENCES [dbo].[bodega] ([IdBodega])
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc] CHECK CONSTRAINT [FK_trans_servicio_enc_bodega]
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_servicio_enc_empresa] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[empresa] ([IdEmpresa])
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc] CHECK CONSTRAINT [FK_trans_servicio_enc_empresa]
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_servicio_enc_propietarios] FOREIGN KEY([IdPropietario])
+REFERENCES [dbo].[propietarios] ([IdPropietario])
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc] CHECK CONSTRAINT [FK_trans_servicio_enc_propietarios]
+GO
+
