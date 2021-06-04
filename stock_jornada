@@ -96,3 +96,6 @@ ALTER TABLE stock_jornada
 ADD Regimen NVARCHAR(20)NULL
 
 ALTER TABLE stock_jornada ADD posiciones INT NOT NULL DEFAULT 0
+
+alter table stock_jornada add costo_unitario float null default 0
+
