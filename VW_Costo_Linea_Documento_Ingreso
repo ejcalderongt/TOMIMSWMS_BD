@@ -1,0 +1,12 @@
+CREATE VIEW [dbo].[VW_Costo_Linea_Documento_Ingreso]
+AS
+SELECT        e.IdOrdenCompraEnc, d.IdOrdenCompraDet, re.IdRecepcionEnc, de.IdRecepcionDet, d.IdProductoBodega, d.No_Linea, d.IdPresentacion, d.cantidad, d.cantidad_recibida, d.costo AS costo_unitario, SUM(d.valor_aduana) 
+                         AS costo_total
+FROM            dbo.trans_oc_enc AS e INNER JOIN
+                         dbo.trans_oc_det AS d ON e.IdOrdenCompraEnc = d.IdOrdenCompraEnc INNER JOIN
+                         dbo.trans_re_oc AS r ON r.IdOrdenCompraEnc = e.IdOrdenCompraEnc LEFT OUTER JOIN
+                         dbo.trans_re_enc AS re ON re.IdRecepcionEnc = r.IdRecepcionEnc LEFT OUTER JOIN
+                         dbo.trans_re_det AS de ON de.IdRecepcionEnc = re.IdRecepcionEnc AND d.IdProductoBodega = de.IdProductoBodega AND d.IdPresentacion = de.IdPresentacion AND d.IdUnidadMedidaBasica = de.IdUnidadMedida AND 
+                         d.No_Linea = de.No_Linea
+GROUP BY d.IdProductoBodega, e.IdOrdenCompraEnc, re.IdRecepcionEnc, de.IdRecepcionDet, d.IdOrdenCompraDet, d.No_Linea, d.IdPresentacion, d.cantidad, d.cantidad_recibida, d.costo
+GO
