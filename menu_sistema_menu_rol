@@ -90,5 +90,17 @@ values ('6.1.1.19','Existencia por Lote y Posición','cmdExistenciasPorLote_Posi
 insert into menu_rol
 values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'6.1.1.19',1,'Erik Calderón',getdate(),'DTS ',getdate(),1,1)
 
+--#CKFK 20210605
+insert into menu_sistema
+values ('3.9.1','Stock Jornada CEALSA','mnuStockJornadaCealsa',3,'3.9',0)
+insert into menu_rol
+values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'3.9.1',1,'Erik Calderón',getdate(),'DTS ',getdate(),1,1)
+
+insert into menu_sistema
+values ('3.9','Stock Jornada Principal','grpStockJornadaCEALSA',2,'3',0)
+
+insert into menu_rol
+values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'3.9',1,'Erik Calderón',getdate(),'DTS ',getdate(),1,1)
+
 
 
