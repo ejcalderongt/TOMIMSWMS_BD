@@ -1,0 +1,1 @@
+alter table i_nav_ped_traslado_det add price float null default 0
