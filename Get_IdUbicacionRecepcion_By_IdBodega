@@ -1,0 +1,23 @@
+/****** Object:  UserDefinedFunction [dbo].[Nombre_Completo_Ubicacion]    Script Date: 13/06/2021 15:44:20 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE FUNCTION [dbo].[Get_IdUbicacionRecepcion_By_IdBodega] 
+(
+	@IdBodega INT
+)
+RETURNS int
+AS
+BEGIN
+	
+	DECLARE @resultado INT
+	SELECT @resultado = (SELECT ubic_recepcion FROM bodega)
+	RETURN @resultado;
+
+END
+GO
+
+
