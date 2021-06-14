@@ -1,0 +1,27 @@
+CREATE TABLE [dbo].[menu_opcion](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[nombre] [nchar](250) NOT NULL,
+	[enlace] [nchar](250) NULL,
+	[icono] [nchar](150) NULL,
+	[padre] [int] NULL,
+	[activo] [bit] NOT NULL,
+ CONSTRAINT [PK_menu_opcion] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[menu_opcion] ADD  CONSTRAINT [DF_menu_opcion_activo]  DEFAULT ((1)) FOR [activo]
+GO
+
+ALTER TABLE [dbo].[menu_opcion]  WITH CHECK ADD  CONSTRAINT [FK_menu_opcion_menu_opcion1] FOREIGN KEY([padre])
+REFERENCES [dbo].[menu_opcion] ([id])
+GO
+
+ALTER TABLE [dbo].[menu_opcion] CHECK CONSTRAINT [FK_menu_opcion_menu_opcion1]
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Menu para portal web' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'menu_opcion'
+GO
+
