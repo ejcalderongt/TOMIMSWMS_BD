@@ -1,0 +1,11 @@
+CREATE FUNCTION [dbo].[Get_Existencia_By_CodigoProducto] 
+(
+	@CodigoProducto NVARCHAR(50)
+)
+RETURNS table
+AS
+RETURN 
+	
+SELECT p.* FROM VW_Stock_Res p where p.codigo = @CodigoProducto
+
+GO
