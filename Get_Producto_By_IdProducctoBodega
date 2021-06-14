@@ -1,0 +1,11 @@
+
+CREATE FUNCTION [dbo].[Get_Producto_By_IdProducctoBodega] 
+(
+	@IdProductoBodega INT
+)
+RETURNS table
+AS
+RETURN 
+	
+SELECT p.* FROM producto p INNER JOIN producto_bodega pb on p.IdProducto = pb.IdProducto
+WHERE pb.IdProductoBodega = @IdProductoBodega
