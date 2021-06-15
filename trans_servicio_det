@@ -1,4 +1,14 @@
-/****** Object:  Table [dbo].[trans_servicio_det]    Script Date: 8/06/2021 18:41:42 ******/
+ALTER TABLE [dbo].[trans_servicio_det] DROP CONSTRAINT [FK_trans_servicio_det_trans_servicio_det]
+GO
+
+ALTER TABLE [dbo].[trans_servicio_det] DROP CONSTRAINT [FK_trans_servicio_det_propietarios]
+GO
+
+/****** Object:  Table [dbo].[trans_servicio_det]    Script Date: 15/06/2021 02:30:54 ******/
+DROP TABLE [dbo].[trans_servicio_det]
+GO
+
+/****** Object:  Table [dbo].[trans_servicio_det]    Script Date: 15/06/2021 02:30:54 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -7,7 +17,7 @@ GO
 
 CREATE TABLE [dbo].[trans_servicio_det](
 	[IdServicioEnc] [int] NOT NULL,
-	[IdOrdenCompraEnc] [int] NOT NULL,
+	[IdServicioDet] [int] NOT NULL,
 	[IdAcuerdo] [int] NULL,
 	[IdAcuerdoDet] [int] NOT NULL,
 	[observacion] [nvarchar](150) NULL,
