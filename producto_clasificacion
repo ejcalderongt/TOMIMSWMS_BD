@@ -1,0 +1,3 @@
+/****** GT 15062021 ***********************/
+ALTER TABLE producto_clasificacion
+ALTER COLUMN nombre nvarchar(100)  NULL
