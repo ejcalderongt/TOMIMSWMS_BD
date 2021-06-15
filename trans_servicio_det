@@ -18,8 +18,6 @@ GO
 CREATE TABLE [dbo].[trans_servicio_det](
 	[IdServicioEnc] [int] NOT NULL,
 	[IdServicioDet] [int] NOT NULL,
-	[IdAcuerdo] [int] NULL,
-	[IdAcuerdoDet] [int] NOT NULL,
 	[observacion] [nvarchar](150) NULL,
 	[codigo_producto] [nvarchar](50) NULL,
 	[nombre_servicio] [nvarchar](150) NULL,
