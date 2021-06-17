@@ -1,6 +1,7 @@
 CREATE VIEW [dbo].[VW_Trans_Servicios]
 AS
-SELECT        b.nombre AS Bodega, o.No_Documento AS Documento_Ingreso, p.nombre_comercial AS Propietario, t.no_orden, t.no_poliza, t.fecha_servicio AS Fecha, t.enviado_a_erp AS MI3_Estatus
+SELECT        b.nombre AS Bodega, o.No_Documento AS Documento_Ingreso, p.nombre_comercial AS Propietario, t.no_orden, t.no_poliza, t.fecha_servicio AS Fecha,b.Activo, 
+t.enviado_a_erp AS MI3_Estatus
 FROM            dbo.trans_servicio_enc AS t INNER JOIN
                          dbo.bodega AS b ON t.IdBodega = b.IdBodega AND t.IdEmpresa = b.IdEmpresa INNER JOIN
                          dbo.trans_oc_enc AS o ON o.IdOrdenCompraEnc = t.IdOrdenCompraEnc INNER JOIN
