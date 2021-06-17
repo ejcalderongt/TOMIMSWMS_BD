@@ -34,6 +34,8 @@ GO
 ALTER TABLE [dbo].[trans_servicio_enc] ADD  DEFAULT (getdate()) FOR [fecha_servicio]
 GO
 
+ALTER TABLE TRANS_SERVICIO_ENC ADD Estado nvarchar(50) null default 'Abierto'
+
 ALTER TABLE [dbo].[trans_servicio_enc] ADD  DEFAULT ((0)) FOR [enviado_a_erp]
 GO
 
