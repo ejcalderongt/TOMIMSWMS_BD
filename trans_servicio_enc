@@ -68,4 +68,5 @@ GO
 ALTER TABLE [dbo].[trans_servicio_enc] CHECK CONSTRAINT [FK_trans_servicio_enc_propietarios]
 GO
 
-
+--#EJC20210614: Estado
+ALTER TABLE TRANS_SERVICIO_ENC ADD Estado nvarchar(50) null default 'Abierto'
