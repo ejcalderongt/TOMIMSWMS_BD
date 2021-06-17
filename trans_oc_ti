@@ -20,6 +20,7 @@ INSERT INTO trans_oc_ti VALUES(7,'Ingreso consolidado',0,1,GETDATE(),1,GETDATE()
 8	Transferencia de Ingreso.
 9	Orden de Compra Interna
 10 Ingreso Almacén General con Póliza
+11 Liquidación de ruta
 
 --Las coloqué aquí del 5 a a 9 porque en mis bases de datos solo tenía las 4 primeras
 INSERT INTO trans_oc_ti VALUES(5,'Ingreso Almacén Fiscal',             0,1,GETDATE(),1,GETDATE(), 1,1,0,0)
@@ -28,5 +29,6 @@ INSERT INTO trans_oc_ti VALUES(7,'Ingreso consolidado',                0,1,GETDA
 INSERT INTO TRANS_OC_TI VALUES(8,'Transferencia de Ingreso',           0,1,GETDATE(),1,GETDATE(), 1,0,0,0)
 INSERT INTO TRANS_OC_TI VALUES(9,'Transferencia de Ingreso Interna',   0,1,GETDATE(),1,GETDATE(), 1,0,0,0)
 INSERT INTO TRANS_OC_TI VALUES(10,'Ingreso Almacén General con Póliza',0,1,GETDATE(),1,GETDATE(), 1,1,0,0)
+INSERT INTO TRANS_OC_TI VALUES(11,'Liquidación de ruta (Devolución)',0,1,GETDATE(),1,GETDATE(), 1,1,0,0)
 
 
