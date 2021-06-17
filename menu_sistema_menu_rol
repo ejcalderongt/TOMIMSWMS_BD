@@ -104,3 +104,8 @@ values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'3.9',1,'Erik Calderón',getdat
 
 
 
+--#EJC20210616: Registro de Servicios para CEALSA.
+insert into menu_sistema values
+('2.6',	'Registro Servicios',	'pgRegistroServicios',2	,2,	0)
+insert into menu_sistema values ('2.6.1', 'Registro de servicios', 'mnuRegistroServicios','3', '2.6',0)
+insert into menu_rol  values((select Max(IdMenuRol)+1 from menu_rol),'2.6.1',1,'Erik Calderón',getdate(),'DTS',GETDATE(),1,1)
