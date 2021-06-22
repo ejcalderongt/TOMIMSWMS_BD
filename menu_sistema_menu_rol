@@ -102,11 +102,17 @@ values ('3.9','Stock Jornada Principal','grpStockJornadaCEALSA',2,'3',0)
 insert into menu_rol
 values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'3.9',1,'Erik Calderón',getdate(),'DTS ',getdate(),1,1)
 
-
-
 --#EJC20210616: Registro de Servicios para CEALSA.
 insert into menu_sistema values('2.6',	'Registro Servicios',	'pgRegistroServicios',2	,2,	0)
 insert into menu_sistema values ('2.6.1', 'Registro de servicios', 'mnuRegistroServicios','3', '2.6',0)
 insert into menu_rol  values((select Max(IdMenuRol)+1 from menu_rol),'2.6.1',1,'Erik Calderón',getdate(),'DTS',GETDATE(),1,1)
 insert into menu_rol  values((select Max(IdMenuRol)+1 from menu_rol),'2.6',1,'Erik Calderón',getdate(),'DTS',GETDATE(),1,1)
+
+--#CKFK 20210622 Eliminación de Stock Jornada CEALSA y creación de la nueva opcion
+DELETE from menu_sistema WHERE IdMenu IN( '3.9', '3.9.1')
+DELETE from menu_rol WHERE IdMenu IN( '3.9', '3.9.1')
+
+insert into menu_sistema values ('6.1.1.20','Stock Jornada Resumen','cmdStockJornadaSistema',4,'6.1.1',0)
+insert into menu_rol values ((SELECT MAX(IDMENUROL) +1 FROM menu_rol),'6.1.1.20',1,'Erik Calderón',getdate(),'DTS ',getdate(),1,1)
+
 
