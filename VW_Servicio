@@ -18,7 +18,6 @@ FROM            dbo.trans_servicio_enc AS e INNER JOIN
 GROUP BY e.IdBodega, b.es_bodega_fiscal, e.IdPropietario, p.nombre_comercial, e.no_orden, d.IdServicioDet, d.codigo_producto, d.nombre_servicio, CONVERT(Date, e.fecha_servicio) 
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'VW_Servicio'
 GO
 
 
