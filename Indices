@@ -34,3 +34,7 @@ INCLUDE ([IdTramo],[descripcion],[nivel],[indice_x],[codigo_barra],[bloqueada],[
 
 CREATE NONCLUSTERED INDEX NCLI_Trans_Oc_Det_IdProductoBodega_20210601EJC
 ON [dbo].[trans_oc_det] ([IdProductoBodega])
+
+CREATE NONCLUSTERED INDEX NCLI_TRANS_OC_ENC_20210623_EJC
+ON [dbo].[trans_oc_enc] ([IdTipoIngresoOC])
+INCLUDE ([IdOrdenCompraEnc],[IdPropietarioBodega],[IdProveedorBodega],[IdEstadoOC],[Fecha_Creacion],[No_Documento])
