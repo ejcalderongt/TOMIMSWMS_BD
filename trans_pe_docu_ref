@@ -1,0 +1,20 @@
+CREATE TABLE dbo.trans_pe_docu_ref
+	(
+	IdDocumentoRef int NOT NULL,
+	Codigo nvarchar(50) NULL,
+	Nombre nvarchar(50) NULL,
+	Descripcion nvarchar(150) NULL,
+	FechaDocumento datetime NULL,
+	FechaAsignacion datetime NULL,
+	FechaAgregado datetime NULL,
+	Asignado bit NULL,
+	Activo bit NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.trans_pe_docu_ref ADD CONSTRAINT
+	PK_trans_pe_docu_ref PRIMARY KEY CLUSTERED 
+	(
+	IdDocumentoRef
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+	
