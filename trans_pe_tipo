@@ -1,2 +1,7 @@
 alter table trans_pe_tipo add control_poliza bit default 0
 update trans_pe_tipo set control_poliza = 0
+
+
+--#EJC20210629:
+alter table trans_pe_tipo add requerir_documento_ref bit default 0
+update trans_pe_tipo set requerir_documento_ref = 0
