@@ -16,5 +16,9 @@ ALTER TABLE dbo.trans_pe_docu_ref ADD CONSTRAINT
 	(
 	IdDocumentoRef
 	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	
+	
+--#EJC20210629: Idealsa.	
+alter table trans_pe_docu_ref add Empresa nvarchar(50), Bodega nvarchar(50)
 
 	
