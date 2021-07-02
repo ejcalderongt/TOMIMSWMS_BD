@@ -5,3 +5,12 @@ update trans_pe_tipo set control_poliza = 0
 --#EJC20210629:
 alter table trans_pe_tipo add requerir_documento_ref bit default 0
 update trans_pe_tipo set requerir_documento_ref = 0
+
+
+--#EJC20210702
+alter table trans_pe_tipo Generar_pedido_ingreso_bodega_destino bit default 0
+
+--#EJC20210702A
+alter table trans_pe_tipo IdTipoIngresoOC int null default 1
+
+
