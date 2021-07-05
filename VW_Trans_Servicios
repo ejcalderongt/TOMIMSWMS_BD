@@ -23,14 +23,11 @@ FROM            dbo.trans_servicio_enc AS t INNER JOIN
                          dbo.propietarios AS p ON p.IdPropietario = t.IdPropietario
 GO
 
-/****** GT 01072021 **************************/
+/****** GT 02072021 **************************/
 
 Alter View VW_Trans_Servicios as
-SELECT        t.IdServicioEnc AS Correlativo, b.nombre AS Bodega, b.IdBodega,p.IdPropietario, 
-o.No_Documento as Documento_ingreso
-o.IdOrdenCompraEnc as Codigo, 
-p.nombre_comercial AS Propietario, t.no_orden, t.no_poliza, t.fecha_servicio AS Fecha, b.activo as Activo, 
-                         t.Estado, t.Enviado_A_ERP
+SELECT        t.IdServicioEnc AS Correlativo, b.nombre AS Bodega, b.IdBodega, p.IdPropietario, o.IdOrdenCompraEnc AS Documento_Ingreso, p.nombre_comercial AS Propietario, t.no_orden, t.no_poliza, t.fecha_servicio AS Fecha, b.activo, 
+                         t.Estado, t.enviado_a_erp 
 FROM            dbo.trans_servicio_enc AS t INNER JOIN
                          dbo.bodega AS b ON t.IdBodega = b.IdBodega AND t.IdEmpresa = b.IdEmpresa INNER JOIN
                          dbo.trans_oc_enc AS o ON o.IdOrdenCompraEnc = t.IdOrdenCompraEnc INNER JOIN
