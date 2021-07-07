@@ -1,1 +1,4 @@
 alter table i_nav_ped_traslado_det add price float null default 0
+
+--#EJC20210707: BYB. NAV.
+alter table i_nav_ped_traslado_det add source_id nvarchar(50) null default ''
