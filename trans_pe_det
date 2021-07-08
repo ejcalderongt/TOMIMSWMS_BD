@@ -1,0 +1,13 @@
+--#EJC20210708: Cealsa fiscal:
+
+alter table trans_pe_det 
+add Peso_Bruto float null default 0, 
+Peso_Neto float null default 0,
+Costo float null default 0,
+valor_aduana float null default 0,
+valor_fob float null default 0,
+valor_iva float null default 0,
+valor_dai float null default 0,
+valor_seguro float null default 0,
+valor_flete float null default 0,
+Total_linea float null default 0
