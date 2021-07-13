@@ -123,6 +123,9 @@ insert into menu_rol  values((select Max(IdMenuRol)+1 from menu_rol),'3.9',1,'Er
 insert into menu_rol  values((select Max(IdMenuRol)+1 from menu_rol),'3.9.1',1,'Erik Calderón',getdate(),'DTS',GETDATE(),1,1)
 insert into menu_rol  values((select Max(IdMenuRol)+1 from menu_rol),'3.9.1.1',1,'Erik Calderón',getdate(),'DTS',GETDATE(),1,1)
 
+--#EJC20210713: Para join entre padre e IdMenu
+ALTER TABLE MENU_SISTEMA
+ALTER COLUMN PADRE NVARCHAR(50) COLLATE Modern_Spanish_CI_AS
 
 
 
