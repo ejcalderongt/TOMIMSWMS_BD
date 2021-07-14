@@ -1,23 +1,26 @@
-/****** Object:  Table [dbo].[version_wms_bof_enc]    Script Date: 14/07/2021 09:36:29 ******/
+/****** Object:  Table [dbo].[version_wms_bof_enc]    Script Date: 14/07/2021 09:45:41 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-
 CREATE TABLE [dbo].[version_wms_bof_enc](
 	[IdVersionBof] [int] NOT NULL,
 	[IdEmpresa] [int] NOT NULL,
 	[version] [nvarchar](50) NULL,
+	[rama] [nvarchar](50) NULL,
 	[notas] [nvarchar](150) NULL,
-	[fecha_version] [datetime] NULL,	
-	[fecha_publicacion] [datetime] NULL DEFAULT GETDATE(),
+	[fecha_version] [datetime] NULL,
+	[fecha_publicacion] [datetime] NULL,
  CONSTRAINT [PK_P_EMPRESA_VERSION_BOF] PRIMARY KEY CLUSTERED 
 (
 	[IdVersionBof] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[version_wms_bof_enc] ADD  CONSTRAINT [DF__version_w__fecha__4F35E4A6]  DEFAULT (getdate()) FOR [fecha_publicacion]
 GO
 
 /****** Object:  Table [dbo].[version_wms_bof_det]    Script Date: 14/07/2021 09:42:15 ******/
