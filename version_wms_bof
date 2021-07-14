@@ -51,3 +51,5 @@ GO
 ALTER TABLE [dbo].[version_wms_bof_det] ADD  CONSTRAINT [DF__version_w__EsMej__5306758A]  DEFAULT ((1)) FOR [EsMejora]
 GO
 
+
+
