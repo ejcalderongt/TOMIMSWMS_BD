@@ -20,7 +20,7 @@ CREATE TABLE [dbo].[version_wms_bof_enc](
 ) ON [PRIMARY]
 GO
 
-/****** Object:  Table [dbo].[version_wms_bof]    Script Date: 14/07/2021 09:35:21 ******/
+/****** Object:  Table [dbo].[version_wms_bof_det]    Script Date: 14/07/2021 09:42:15 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -30,11 +30,11 @@ GO
 CREATE TABLE [dbo].[version_wms_bof_det](
 	[IdVersionDet] [int] NOT NULL,
 	[IdVersionBof] [int] NOT NULL,
-	[notas] [nvarchar](150) NULL,
+	[notas] [nvarchar](500) NULL,
 	[fecha] [datetime] NULL,
 	[autor] [nvarchar](50) NULL,
-	[EsCorreccion] [bit] NULL default 0,
-	[EsMejora] [bit] NULL default 1,
+	[EsCorreccion] [bit] NULL,
+	[EsMejora] [bit] NULL,
  CONSTRAINT [PK_P_EMPRESA_VERSION_BOF_DET] PRIMARY KEY CLUSTERED 
 (
 	[IdVersionDet] ASC
@@ -42,5 +42,9 @@ CREATE TABLE [dbo].[version_wms_bof_det](
 ) ON [PRIMARY]
 GO
 
+ALTER TABLE [dbo].[version_wms_bof_det] ADD  CONSTRAINT [DF__version_w__EsCor__52125151]  DEFAULT ((0)) FOR [EsCorreccion]
+GO
 
+ALTER TABLE [dbo].[version_wms_bof_det] ADD  CONSTRAINT [DF__version_w__EsMej__5306758A]  DEFAULT ((1)) FOR [EsMejora]
+GO
 
