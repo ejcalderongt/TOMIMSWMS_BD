@@ -1,13 +1,46 @@
-CREATE TABLE [dbo].[version_wms_bof](
+/****** Object:  Table [dbo].[version_wms_bof_enc]    Script Date: 14/07/2021 09:36:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE TABLE [dbo].[version_wms_bof_enc](
 	[IdVersionBof] [int] NOT NULL,
 	[IdEmpresa] [int] NOT NULL,
 	[version] [nvarchar](50) NULL,
 	[notas] [nvarchar](150) NULL,
-	[fecha] [datetime] NULL,
-	[autor] [nvarchar](50) NULL,
+	[fecha_version] [datetime] NULL,	
+	[fecha_publicacion] [datetime] NULL DEFAULT GETDATE(),
  CONSTRAINT [PK_P_EMPRESA_VERSION_BOF] PRIMARY KEY CLUSTERED 
 (
 	[IdVersionBof] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+/****** Object:  Table [dbo].[version_wms_bof]    Script Date: 14/07/2021 09:35:21 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[version_wms_bof_det](
+	[IdVersionDet] [int] NOT NULL,
+	[IdVersionBof] [int] NOT NULL,
+	[notas] [nvarchar](150) NULL,
+	[fecha] [datetime] NULL,
+	[autor] [nvarchar](50) NULL,
+	[EsCorreccion] [bit] NULL default 0,
+	[EsMejora] [bit] NULL default 1,
+ CONSTRAINT [PK_P_EMPRESA_VERSION_BOF_DET] PRIMARY KEY CLUSTERED 
+(
+	[IdVersionDet] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
