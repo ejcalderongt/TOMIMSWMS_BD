@@ -37,12 +37,15 @@ FROM            dbo.trans_servicio_enc AS t INNER JOIN
 --IdServicioEnc AS Correlativo.
 ALTER VIEW [dbo].[VW_Trans_Servicios]
 AS
-SELECT        t.IdBodega, t.IdServicioEnc AS Correlativo, b.codigo, b.nombre AS Bodega, o.No_Documento AS Documento_Ingreso, p.nombre_comercial AS Propietario, t.no_orden, t.no_poliza, t.fecha_servicio AS Fecha, b.activo, 
-                         t.Estado AS Estado_Servicio, t.enviado_a_erp AS MI3_Estatus
+SELECT        t.IdBodega, t.IdServicioEnc AS Correlativo, t.IdPropietario, b.codigo, b.nombre AS Bodega, o.No_Documento AS Documento_Ingreso, 
+p.nombre_comercial AS Propietario, t.no_orden, t.no_poliza, t.fecha_servicio AS Fecha, 
+                         b.activo AS Activo, t.Estado AS Estado, t.enviado_a_erp AS Enviado_A_ERP
 FROM            dbo.trans_servicio_enc AS t INNER JOIN
                          dbo.bodega AS b ON t.IdBodega = b.IdBodega AND t.IdEmpresa = b.IdEmpresa INNER JOIN
                          dbo.trans_oc_enc AS o ON o.IdOrdenCompraEnc = t.IdOrdenCompraEnc INNER JOIN
                          dbo.propietarios AS p ON p.IdPropietario = t.IdPropietario
+GO
+
 
 
 
