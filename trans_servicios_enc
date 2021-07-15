@@ -74,4 +74,8 @@ GO
 
 
 
+/**********GT 15072021 se agregan campos y se quita la llave primaria que no corresponde ****************/
 
+
+Alter Table trans_servicio_det DROP constraint PK_trans_servicio_det
+ALTER TABLE trans_servicio_det ADD PRIMARY KEY (IdServicioDet)
