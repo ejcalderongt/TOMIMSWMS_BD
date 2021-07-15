@@ -1,98 +1,77 @@
-/****** Object:  Table [dbo].[trans_tras_enc]    Script Date: 15/07/2021 15:51:01 ******/
+/****** Object:  Table [dbo].[trans_servicio_enc]    Script Date: 15/07/2021 15:52:51 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[trans_tras_enc](
-	[IdTrasladoEnc] [int] NOT NULL,
-	[IdBodegaOrigen] [int] NULL,
-	[IdBodegaDestino] [int] NULL,
-	[IdPropietarioBodega] [int] NULL,
-	[IdMuelleOrigen] [int] NULL,
-	[IdPiloto] [int] NULL,
-	[IdVehiculo] [int] NULL,
-	[IdRuta] [int] NULL,
-	[FechaTraslado] [datetime] NULL,
-	[hora_ini] [datetime] NULL,
-	[hora_fin] [datetime] NULL,
-	[ubicacion] [nvarchar](35) NULL,
-	[estado] [nvarchar](20) NULL,
-	[activo] [bit] NULL,
-	[user_agr] [nvarchar](30) NULL,
+CREATE TABLE [dbo].[trans_servicio_enc](
+	[IdServicioEnc] [int] NOT NULL,
+	[IdOrdenCompraEnc] [int] NOT NULL,
+	[IdEmpresa] [int] NOT NULL,
+	[IdBodega] [int] NOT NULL,
+	[no_poliza] [nvarchar](50) NULL,
+	[no_orden] [nvarchar](50) NULL,
+	[fecha_doc_ingreso] [datetime] NULL,
+	[fecha_servicio] [datetime] NULL,
+	[enviado_a_erp] [bit] NOT NULL,
+	[activo] [bit] NOT NULL,
+	[IdPropietario] [int] NOT NULL,
+	[user_agr] [nvarchar](50) NULL,
 	[fec_agr] [datetime] NULL,
-	[user_mod] [nvarchar](30) NULL,
+	[user_mod] [nvarchar](50) NULL,
 	[fec_mod] [datetime] NULL,
-	[no_documento] [bigint] NULL,
-	[local] [bit] NULL,
-	[pallet_primero] [bit] NULL,
-	[anulado] [bit] NULL,
-	[FechaEntrega] [datetime] NULL,
-	[Observacion] [nvarchar](max) NULL,
-	[HoraEntregaDesde] [datetime] NULL,
-	[HoraEntregaHasta] [datetime] NULL,
-	[NoGuia] [nvarchar](50) NULL,
- CONSTRAINT [PK_trans_tras_enc] PRIMARY KEY CLUSTERED 
+	[Estado] [nvarchar](50) NULL,
+ CONSTRAINT [PK_servicio_enc] PRIMARY KEY CLUSTERED 
 (
-	[IdTrasladoEnc] ASC
+	[IdServicioEnc] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[trans_tras_enc] ADD  CONSTRAINT [DF_trans_tras_enc_hora_ini]  DEFAULT (getdate()) FOR [hora_ini]
+ALTER TABLE [dbo].[trans_servicio_enc] ADD  DEFAULT (getdate()) FOR [fecha_doc_ingreso]
 GO
 
-ALTER TABLE [dbo].[trans_tras_enc] ADD  CONSTRAINT [DF_trans_tras_enc_pallet_primero]  DEFAULT ((0)) FOR [pallet_primero]
+ALTER TABLE [dbo].[trans_servicio_enc] ADD  DEFAULT (getdate()) FOR [fecha_servicio]
 GO
 
-ALTER TABLE [dbo].[trans_tras_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_tras_enc_bodega] FOREIGN KEY([IdBodegaOrigen])
+ALTER TABLE [dbo].[trans_servicio_enc] ADD  DEFAULT ((0)) FOR [enviado_a_erp]
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc] ADD  DEFAULT ((1)) FOR [activo]
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc] ADD  DEFAULT ('Abierto') FOR [Estado]
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc]  WITH CHECK ADD  CONSTRAINT [FK_servicio_enc_trans_oc_enc] FOREIGN KEY([IdOrdenCompraEnc])
+REFERENCES [dbo].[trans_oc_enc] ([IdOrdenCompraEnc])
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc] CHECK CONSTRAINT [FK_servicio_enc_trans_oc_enc]
+GO
+
+ALTER TABLE [dbo].[trans_servicio_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_servicio_enc_bodega] FOREIGN KEY([IdBodega])
 REFERENCES [dbo].[bodega] ([IdBodega])
 GO
 
-ALTER TABLE [dbo].[trans_tras_enc] CHECK CONSTRAINT [FK_trans_tras_enc_bodega]
+ALTER TABLE [dbo].[trans_servicio_enc] CHECK CONSTRAINT [FK_trans_servicio_enc_bodega]
 GO
 
-ALTER TABLE [dbo].[trans_tras_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_tras_enc_bodega_muelles] FOREIGN KEY([IdMuelleOrigen])
-REFERENCES [dbo].[bodega_muelles] ([IdMuelle])
+ALTER TABLE [dbo].[trans_servicio_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_servicio_enc_empresa] FOREIGN KEY([IdEmpresa])
+REFERENCES [dbo].[empresa] ([IdEmpresa])
 GO
 
-ALTER TABLE [dbo].[trans_tras_enc] CHECK CONSTRAINT [FK_trans_tras_enc_bodega_muelles]
+ALTER TABLE [dbo].[trans_servicio_enc] CHECK CONSTRAINT [FK_trans_servicio_enc_empresa]
 GO
 
-ALTER TABLE [dbo].[trans_tras_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_tras_enc_bodega1] FOREIGN KEY([IdBodegaDestino])
-REFERENCES [dbo].[bodega] ([IdBodega])
+ALTER TABLE [dbo].[trans_servicio_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_servicio_enc_propietarios] FOREIGN KEY([IdPropietario])
+REFERENCES [dbo].[propietarios] ([IdPropietario])
 GO
 
-ALTER TABLE [dbo].[trans_tras_enc] CHECK CONSTRAINT [FK_trans_tras_enc_bodega1]
+ALTER TABLE [dbo].[trans_servicio_enc] CHECK CONSTRAINT [FK_trans_servicio_enc_propietarios]
 GO
 
-ALTER TABLE [dbo].[trans_tras_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_tras_enc_empresa_transporte_pilotos] FOREIGN KEY([IdPiloto])
-REFERENCES [dbo].[empresa_transporte_pilotos] ([IdPiloto])
-GO
 
-ALTER TABLE [dbo].[trans_tras_enc] CHECK CONSTRAINT [FK_trans_tras_enc_empresa_transporte_pilotos]
-GO
-
-ALTER TABLE [dbo].[trans_tras_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_tras_enc_empresa_transporte_vehiculos] FOREIGN KEY([IdVehiculo])
-REFERENCES [dbo].[empresa_transporte_vehiculos] ([IdVehiculo])
-GO
-
-ALTER TABLE [dbo].[trans_tras_enc] CHECK CONSTRAINT [FK_trans_tras_enc_empresa_transporte_vehiculos]
-GO
-
-ALTER TABLE [dbo].[trans_tras_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_tras_enc_propietario_bodega] FOREIGN KEY([IdPropietarioBodega])
-REFERENCES [dbo].[propietario_bodega] ([IdPropietarioBodega])
-GO
-
-ALTER TABLE [dbo].[trans_tras_enc] CHECK CONSTRAINT [FK_trans_tras_enc_propietario_bodega]
-GO
-
-ALTER TABLE [dbo].[trans_tras_enc]  WITH CHECK ADD  CONSTRAINT [FK_trans_tras_enc_road_ruta] FOREIGN KEY([IdRuta])
-REFERENCES [dbo].[road_ruta] ([IdRuta])
-GO
-
-ALTER TABLE [dbo].[trans_tras_enc] CHECK CONSTRAINT [FK_trans_tras_enc_road_ruta]
-GO
 
 
