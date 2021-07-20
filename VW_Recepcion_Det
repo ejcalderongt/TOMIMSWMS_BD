@@ -181,7 +181,7 @@ FROM            dbo.trans_oc_enc AS oc_enc INNER JOIN
                          dbo.producto_estado AS pr_estado ON re_det.IdProductoEstado = pr_estado.IdEstado INNER JOIN
                          dbo.producto AS prod ON pb.IdProducto = prod.IdProducto INNER JOIN
                          dbo.proveedor_bodega AS prov_b ON oc_enc.IdProveedorBodega = prov_b.IdAsignacion INNER JOIN
-                         dbo.proveedor AS prov ON prov_b.IdProveedor = prov.IdProveedor INNER JOIN
+                         dbo.proveedor AS prov ON prov_b.IdProveedor = prov.IdProveedor LEFT OUTER JOIN
                          dbo.producto_presentacion AS prod_pr ON prod_pr.IdPresentacion = re_det.IdPresentacion INNER JOIN
                          dbo.usuario AS usr ON re_enc.user_agr = usr.IdUsuario
 
